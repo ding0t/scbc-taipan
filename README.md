@@ -1,10 +1,20 @@
 # cyber-taipan
 preparation for cyber-taipan 2023
 
-# km
+# training
+* intro
+* windows
+* linux
+
+# labs
+## km
 * [gitbooks](https://app.gitbook.com/o/1CRVKK9o7IqKHgtXU7lJ/s/MRhAxIkwDZD6y5JQxxsQ/)
 * [O365]()
-* 
+
+## provisioning
+* vms on local hosts
+* ubuntu, centos, windows guests
+* preconfigured to download from share, packer, vagrant
 
 # resources
 * [archived trg material](https://www.uscyberpatriot.org/competition/training-materials/training-modules)
