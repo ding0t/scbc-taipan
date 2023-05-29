@@ -25,11 +25,11 @@ The cyber taipan at SCBC will (approx) cover
    1. what is nix (history, distros, releases, where/why)
    1. gui vs terminal
    1. gui orientation (desktop dependant)
-   1. terminal and useful commands
+   1. terminal and useful commands (wherew am I, how do I get help, tricks)
 1. Accounts
    1. Users (types, guest)
-   1. groups ()
-   1. priviliges ()
+   1. groups (why)
+   1. priviliges (gui, masks, terminal)
    1. elevating priviliges (sudo)
    1. password policies
 1. All the things that execute (what are they, finding, adding, removing, updating)
@@ -40,10 +40,10 @@ The cyber taipan at SCBC will (approx) cover
    1. services (what is a service, common services)
 1. Protecting the system
    1. know thy system (eliminate the unecesary)
-   1. audit
-   1. firewalls
-   1. anti-virus
-   1. secure defaults ()
+   1. audit (location, application settings, improving)
+   1. firewalls (gui and terminal and iptables)
+   1. anti-virus (purpose, gui and terminal)
+   1. secure defaults (sysctl sane defaults/reccomendations)
 1. Automate the system
    1. bash scripts
    1. python (maybe)
