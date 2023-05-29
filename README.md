@@ -33,9 +33,10 @@ The cyber taipan at SCBC will (approx) cover
    1. elevating priviliges (sudo)
    1. password policies
 1. All the things that execute (what are they, finding, adding, removing, updating)
+   1. executable vs process vs thread
    1. what runs and what can it do (privileges, network, file)
    1. operating system (basics, package manager)
-   1. applications 
+   1. applications (find, remove)
    1. services (what is a service, common services)
 1. Protecting the system
    1. know thy system (eliminate the unecesary)

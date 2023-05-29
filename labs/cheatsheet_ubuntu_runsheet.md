@@ -5,6 +5,9 @@ This is the start of a checklist
 1. check coverage
 1. check commands work
 
+# resources
+* [hardening](https://gist.github.com/hiqsociety/2a4c26123df181bcdd3f1a0d42c7ee03)
+
 # run sheet
 ## Install updates 
     apt-get update && apt-get upgrade && apt-get dist-upgrade
