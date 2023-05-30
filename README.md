@@ -11,9 +11,9 @@ This repository will contain files for training and competition. This repository
 
 # What is in the repository
 1. README.md this file
-1. [vagrant](vagrant) contains instructions and code to setup the virtual machines for labs
-1. [labs](labs) contains cheatsheets, and lab files
-1. [presentations](presentations) holds the instruction material for each week
+1. [vagrant](vagrant) For admins; contains instructions and code to setup the virtual machines for labs
+1. [labs](labs) For students; contains cheatsheets, and lab files
+1. [presentations](presentations) For all; holds the instruction material for each week
 
 # Course outline
 The cyber taipan at SCBC will (approx) cover
@@ -25,7 +25,7 @@ The cyber taipan at SCBC will (approx) cover
    1. what is nix (history, distros, releases, where/why)
    1. gui vs terminal
    1. gui orientation (desktop dependant)
-   1. terminal and useful commands (wherew am I, how do I get help, tricks)
+   1. terminal and useful commands (where am I, how do I get help, tricks)
 1. Accounts
    1. Users (types, guest)
    1. groups (why)
@@ -48,11 +48,18 @@ The cyber taipan at SCBC will (approx) cover
    1. bash scripts
    1. python (maybe)
 1. Intrusion detection and response
+   1. Logs
    1. forensics (collect and analyse)
 1. Preparation and strategy
 
 # Resources
-* tbc
+Some handy guides
+
+## week01
+* [Navigating Ubuntu](https://industrial-training-master.readthedocs.io/en/melodic/_source/prerequisites/Navigating-the-Ubuntu-GUI.html)
+* [Linux command line for beginners](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
+* [Essential Linux commands](https://itsfoss.com/essential-ubuntu-commands/)
+
 
 
 
