@@ -1,21 +1,8 @@
 # About
-In this lab we will get the Ubuntu virtual machine running, take it for a spion, and get familiar witrh the terminal.
+In this lab we will get the Ubuntu virtual machine running, take it for a spin, and get familiar with the terminal.
 
 # Requirements
-1. A lab host with 
-   1. virtualbox (virtualisation software)
-   1. vagrant (a virtual machine manager)
-1. an ubuntu `package.box` file
-
-# Setup
-We need to ensure the virtual machine is ready to go
-```sh
-vagrant box add ubuntu-2204-taipan Z:/vagrant-projects/ubuntu-2204-taipan/package.box
-vagrant init ubuntu-2204-taipan
-vagrant up
-```
-1. Open up `Oracle VM VirtualBox`
-1. `Show` the running virtual machine
+1. lab01
 
 # GUI
 Getting familiar with Ubuntu

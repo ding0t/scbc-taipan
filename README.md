@@ -56,7 +56,6 @@ The cyber taipan at SCBC will (approx) cover
 Some handy guides
 
 ## week01
-* [Navigating Ubuntu](https://industrial-training-master.readthedocs.io/en/melodic/_source/prerequisites/Navigating-the-Ubuntu-GUI.html)
 * [Linux command line for beginners](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
 * [Essential Linux commands](https://itsfoss.com/essential-ubuntu-commands/)
 
