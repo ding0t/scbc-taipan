@@ -1,18 +1,57 @@
 # about
-This is the start of a checklist
+Run sheet
 
 ## todo
-1. check coverage
+1. check coverage and order (reference labs)
 1. check commands work
 
 # resources
 * [hardening](https://gist.github.com/hiqsociety/2a4c26123df181bcdd3f1a0d42c7ee03)
+1. [](https://secscan.acron.pl/ubuntu1604/start)
 
-# run sheet
-## Install updates 
-    apt-get update && apt-get upgrade && apt-get dist-upgrade
-## Automatic updates in GUI
-## Firewall (Covered)
+# Check firewall status
+1. `sudo ufw status`
+
+# Forensics questions
+Read them and get an idea of what you need to know.
+1. Are there any files you will need from a user directory (ie dont delete if first)
+
+# Check update settings (finish)
+Looking to ensure auto updates are on etc..
+
+# Install updates 
+Kick off updates early, remember an apt command will lock the updating until completed.
+
+##  APT tracked updates in OS
+1. Kick off an update early `sudo apt update && sudo apt upgrade`
+   1. If no `apt` use `sudo apt-get update && sudo apt-get upgrade`
+   1. ? Will `sudo apt dist-upgrade` be required?
+
+## Snap
+1. Ensure auto snap updates are on `snap refresh --unhold`
+1. Update snap now `sudo snap refresh`
+
+# User management
+Note: Before deleting a user account, check if it has files that need to be saved off for forensics questions.
+
+## Audit each user
+Audit user accounts and document 
+1. all passwords
+1. User accounts checked for:
+   1. Should they exist?
+   1. Permission (admin or standard)
+   1. Password is ok (meets complexity, not same as username, etc)
+   1. Other group membership
+
+## Audit groups?
+
+## Set password policies
+
+
+# Malware scans
+
+#  --- Uncleared below ---
+# Firewall
     apt-get install ufw && ufw enable
 ## SSH settings
 Turn off root in sshd_config (Covered)
