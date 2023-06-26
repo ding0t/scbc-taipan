@@ -44,18 +44,17 @@ The cyber taipan at SCBC will (approx) cover
    1. firewalls (gui and terminal and iptables)
    1. anti-virus (purpose, gui and terminal)
    1. secure defaults (sysctl sane defaults/reccomendations)
-1. Automate the system
-   1. bash scripts
-   1. python (maybe)
 1. Intrusion detection and response
    1. Logs
    1. forensics (collect and analyse)
+1. Automate the system
+   1. bash scripts
+   1. python (maybe)
 1. Preparation and strategy
 
 # Resources
 Some handy guides
 
-## week01
 * [Linux command line for beginners](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
 * [Essential Linux commands](https://itsfoss.com/essential-ubuntu-commands/)
 
