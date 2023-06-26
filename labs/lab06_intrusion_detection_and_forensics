@@ -1,0 +1,17 @@
+# Intrusion Detection, response and forensics
+
+# Setup
+* Virtual machine running Ubuntu 22.04
+
+# Useful logs
+* ufw
+* auth
+* shell
+
+# Enabling audit with auditd
+
+# Forensics
+Simplest is savinf off files, look at metadata, crypto
+
+# Resoruces
+* [auditd](https://infosecwriteups.com/building-a-siem-centralized-logging-of-all-linux-commands-with-elk-auditd-3f2e70503933)
