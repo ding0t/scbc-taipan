@@ -8,28 +8,49 @@ Run sheet
 # resources
 * [hardening](https://gist.github.com/hiqsociety/2a4c26123df181bcdd3f1a0d42c7ee03)
 1. [](https://secscan.acron.pl/ubuntu1604/start)
+2. [good checklist](https://github.com/03npan/cyberpatriot-linux-scripts/blob/main/CyberPatriot%20Ubuntu%20Checklist.txt)
 
-# Check firewall status
-1. `sudo ufw status`
+# checklist
+## system and applciation updates
+### apt
+Update early, remember an apt command will lock the updating until completed. If you get a lock error, the simplest fix is to reboot.
+- [] check for apt updates and upgrade `sudo apt update`
+- []
+### Snap
+1. Ensure auto snap updates are on `snap refresh --unhold`
+1. Update snap now `sudo snap refresh`
+
+## users and groups
+Audit all users and groups to ensure they match policy. If you change a password, write it down in your notes! 
+Use a password that meets strong password policy like : `STRONG_layser_7784`
+### root user
+- [] disable root `sudo -l root`
+
+### other users
+Iterate through each user on the system, and mark them off against the policy. Use the gui for this
+- [] Should the user exist
+- [] Are they supposed to be admin, change setting if needed in gui
+- [] check user group membership `cmd`
+- [] check their password strength
+- [] before deleting user, check if they have any forensics questions, we may need data in their account
+- [] delete the user if not needed
+
+## firewall
+- [] Check firewall status `sudo ufw status`
+- [] Install if needed
+- [] Enable logging
 
 # Forensics questions
 Read them and get an idea of what you need to know.
 1. Are there any files you will need from a user directory (ie dont delete if first)
 
-# Check update settings (finish)
-Looking to ensure auto updates are on etc..
-
-# Install updates 
-Kick off updates early, remember an apt command will lock the updating until completed.
 
 ##  APT tracked updates in OS
 1. Kick off an update early `sudo apt update && sudo apt upgrade`
    1. If no `apt` use `sudo apt-get update && sudo apt-get upgrade`
    1. ? Will `sudo apt dist-upgrade` be required?
 
-## Snap
-1. Ensure auto snap updates are on `snap refresh --unhold`
-1. Update snap now `sudo snap refresh`
+
 
 # User management
 Note: Before deleting a user account, check if it has files that need to be saved off for forensics questions.
