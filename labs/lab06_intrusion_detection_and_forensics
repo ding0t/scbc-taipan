@@ -9,9 +9,49 @@
 * shell
 
 # Enabling audit with auditd
+Get logging of kernel activities, like process and network connections
+1 `sudo apt install -y auditd`
+1. `man auditd` and `man auditctl`
+1. `sudo auditctl -e 1` what does this do?
 
 # Forensics
-Simplest is savinf off files, look at metadata, crypto
+Simplest is saving off files, look at metadata, crypto
+
+# crontab
+
+# secure ssh
+1. `man ssh_config`
+1. create a backup of the original config `cp /etc/ssh/sshd_config ~/sshd_config_original`
+1. edit banner `sudo nano /etc/issue.net`
+```sh
+WARNING!
+Unauthorised access is prohibited.
+```
+1. secure config like
+```sh
+# edit /etc/ssh/sshd_config
+Banner /etc/issue.net
+# allow only ssh2
+Protocol 2
+# can change default port
+Port 43122
+
+# sane defaults
+LoginGraceTime 20
+PermitRootLogin no
+MaxAuthTries 3
+PasswordAuthentication  no
+
+# if we have only specific users that need ssh
+AllowUsers <username> 
+# Disconnect automatically idle sessions
+ClientAliveInterval 60
+ClientAliveCountMax 3
+
+# Restart ssh with "sudo sysctl restart sshd"
+```
 
 # Resoruces
 * [auditd](https://infosecwriteups.com/building-a-siem-centralized-logging-of-all-linux-commands-with-elk-auditd-3f2e70503933)
+* [threat hunting on linux - good write up with sysmon included](https://pberba.github.io/security/2021/11/22/linux-threat-hunting-for-persistence-sysmon-auditd-webshell/)
+* [ssh](https://www.redhat.com/sysadmin/eight-ways-secure-ssh)
