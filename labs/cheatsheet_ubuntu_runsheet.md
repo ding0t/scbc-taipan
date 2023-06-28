@@ -198,4 +198,5 @@ Blocks IPs with too many login attempts
     sudo rkhunter --check
 
 ## credit
-* https://gist.github.com/bobpaw/a0b6828a5cfa31cfe9007b711a36082f
+* [useful collection](https://github.com/MarKyehus/CyPatriot/blob/master/Linux/runme.sh)
+* [original list](https://gist.github.com/bobpaw/a0b6828a5cfa31cfe9007b711a36082f)
