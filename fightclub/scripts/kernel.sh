@@ -1,7 +1,5 @@
-#Firewall (ufw)
-echo "securing the firewall"
- apt-get install -y ufw
- ufw enable
+# purpose: te apply more secure kernel defaults
+# state: untested
 
 # Fine tuning network parameters for better perfomance #
 

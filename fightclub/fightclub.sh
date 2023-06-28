@@ -1,6 +1,7 @@
 #! /bin/bash
-#Author: Imagine Virt [12-3253], OATS 
-#Title: WCTA Cyberpatriot Script, Linux 
+
+# purpose: wrapper to run otehr scripts and check environment
+# state: untested
 
 ## Functions ##
 
