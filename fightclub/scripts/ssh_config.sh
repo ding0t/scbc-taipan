@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 # author: ding0t SCBC
 # purpose: to secure ssh config
@@ -19,6 +19,7 @@ sed -i '/Banner/ c\Banner /etc/issue.net' $ssh_config_file
 printf "Protocol 2" >> $ssh_config_file
 # can change default port
 sed -i '/Port 22/ c\Port 43122' $ssh_config_file
+# auth settings 
 sed -i '/LoginGraceTime/ c\LoginGraceTime 20' $ssh_config_file
 sed -i '/PermitRootLogin/ c\PermitRootLogin no' $ssh_config_file
 sed -i '/MaxAuthTries/ c\MaxAuthTries 3' $ssh_config_file
@@ -30,7 +31,7 @@ sed -i '/ClientAliveCountMax/ c\ClientAliveCountMax 3' $ssh_config_file
 # if we have only specific users that need ssh
 #AllowUsers <username> 
 
-# restart sshd
+# restart sshd to apply changes
 printf "restarting sshd\n"
 systemctl restart sshd
 printf "done!\n"

@@ -1,4 +1,4 @@
-# About
+# Lab 05 - protecting the system
 In this lab we learn how to protecting the system
 
 Practice:

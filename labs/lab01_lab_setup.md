@@ -1,4 +1,4 @@
-# About
+# Lab 01 - setup
 In this lab we will get the Ubuntu virtual machine running.
 
 # Requirements

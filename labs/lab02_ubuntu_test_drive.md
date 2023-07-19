@@ -1,4 +1,4 @@
-# About
+# Lab 02 - intro to Ubuntu
 In this lab we will get the Ubuntu virtual machine running, take it for a spin, and get familiar with the terminal.
 
 # Requirements

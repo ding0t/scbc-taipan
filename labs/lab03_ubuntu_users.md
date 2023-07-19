@@ -1,7 +1,5 @@
-# About
-In this lab we will learn about users and groups in Ubuntu 22.04.
-
-This lab will work in most older versions of Ubuntu and Debian.
+# AbLab 03 - users
+In this lab we will learn about users and groups in Ubuntu 22.04. This lab will work in most older versions of Ubuntu and Debian.
 
 # Requirements
 1. lab01
