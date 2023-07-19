@@ -60,7 +60,7 @@ Some key points:
 1. It acts on the behalf of the permissions it was invoked with. SO if you need sudo to restart a service, you will need to call your script with sudo for that to work.
 1. If you dont want a line to execute; comment that line out using `#` at the start of the line
 
-## example sutomating the update of ssh
+## example automating the secure configuration of ssh
 SSH needs some secure defaults, lets script this one..
 1.  [go to](../fightclub/scripts/ssh_config.sh)
 1. download the raw file
@@ -71,4 +71,23 @@ What did the script do?
 1. `man ssh_config`
 1. `cat /etc/ssh/sshd_config`
 1. `sudo ss -tlpn` where is 22 now?
+
+## other scripts
+Have a look at some of the other scripts in [fightclub](../fightclub/scripts/)
+
+## LinPEAS
+LinPEAS is a shell script to look for vulnerable system states that coule result in Privilige Escalation (PE). Not sure yet if this is allowed in the challenge as an audit tool.
+
+1. `wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -P /dev/shm`
+1. `cd /dev/shm` go where the script is
+1. `gedit linpeas.sh` observe shell scripting to the max
+1. `./linpeas.sh` does not execute
+1. `bash ./linpeas.sh | tee out.txt` executes because we specify bash as the executable, and the script as an argument
+1. `grep -i sudo -A 3 out.txt` 
+
+
+# Resources
+* [Linpeas](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
+
+
 
