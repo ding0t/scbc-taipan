@@ -21,5 +21,6 @@ script_dir="$(dirname "${0}")"
 users_csv_file="/config/users.csv"
 users_csv_path="${script_dir}${users_csv_file}"
 
-echo "${users_csv_path}"
+printf "adding users...\n"
+add_users("${users_csv_path}")
 
