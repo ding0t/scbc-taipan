@@ -11,16 +11,23 @@
 # make users in wrong groups
 #######################################
 
-
-function add_users2(){
-    useradd $NEWUSER -s /bin/bash -m -g $PRIMARYGRP -G $MYGROUP
-    $NEWUSER:$PASSWORD | sudo chpasswd
+#######################################
+# CAdds a user as admin in Ubuntu
+# Globals:
+#   nil
+# Arguments:
+#   expect a username
+# Outputs:
+#   Nil
+#######################################
+function add_admin(){
+    usermod -aG adm,cdrom,sudo,dip,plugdev,lpadmin,lxd,sambashare ${1}
 }
 
 #######################################
 # Creates users from a csv
 # Globals:
-#   SOMEDIR
+#   nil
 # Arguments:
 #   expect the filename as first function argument
 # Outputs:
@@ -48,12 +55,18 @@ function add_users(){
     # -g addsa a user to the named group and creates the group if it does not exist
     for i in "${!A_USERNAME[@]}"; do
         if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME" ]]; then
+            # add group and silently fail if exists
             groupadd -f "${A_GROUP[$i]}"
-            useradd -G "${A_GROUP[$i]}" \
+            # add user
+            useradd -g "${A_GROUP[$i]}" \
             -d "/home/${A_USERNAME[$i]}" \
             -s /bin/bash \
             -p "$(echo "${A_PASSWORD[$i]}" | openssl passwd -1 -stdin)" \
             "${A_USERNAME[$i]}"
+            # make admin user if sudo
+            if [[ "${A_GROUP[$i]}" == "sudo" ]]; then
+                add_admin "${A_USERNAME[$i]}"
+            fi
         fi
     done
 }
