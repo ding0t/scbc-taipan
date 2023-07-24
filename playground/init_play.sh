@@ -22,5 +22,5 @@ users_csv_file="/config/users.csv"
 users_csv_path="${script_dir}${users_csv_file}"
 
 printf "adding users...\n"
-add_users("${users_csv_path}")
+add_users "${users_csv_path}"
 

@@ -29,6 +29,7 @@ function add_users2(){
 function add_users(){
     # 
     users_csv_file=${1}
+    echo "adding users from csv file: ${users_csv_file}"
     # put each column into an array
     declare -a A_SURNAME
     declare -a A_NAME
@@ -42,7 +43,7 @@ function add_users(){
         A_USERNAME+=("$COL3")
         A_GROUP+=("$COL4")
         A_PASSWORD+=("$COL5")
-    done <"$users_csv_file"
+    done <"${users_csv_file}"
     # now add each user by iterating over the arrays
     # -g addsa a user to the named group and creates the group if it does not exist
     for i in "${!A_USERNAME[@]}"; do
