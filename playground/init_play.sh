@@ -16,10 +16,10 @@ then
   exit 1
 fi
 
-source $(dirname "$0")/libs/users.sh
-script_dir="$(dirname "$0")"
+source $(dirname "${0}")/libs/users.sh
+script_dir="$(dirname "${0}")"
 users_csv_file="/config/users.csv"
 users_csv_path="${script_dir}${users_csv_file}"
 
-printf "${users_csv_path}"
+echo "${users_csv_path}"
 
