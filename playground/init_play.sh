@@ -7,7 +7,7 @@
 #
 # REFERENCES
 # https://google.github.io/styleguide/shellguide.html
-#####################
+#######################################
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]
@@ -16,7 +16,7 @@ then
   exit 1
 fi
 
-source $(dirname "$0")/lib/users.sh
+source $(dirname "$0")/libs/users.sh
 users_csv_file= '$(dirname "$0")/config/users.csv'
 
 printf ${users_csv_file}
