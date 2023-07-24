@@ -34,5 +34,6 @@ install_apt
 install_snap
 get_icap
 modify_ufw
+clear
 
 
