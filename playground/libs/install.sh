@@ -22,3 +22,7 @@ function install_snap(){
 function get_icap(){
     wget -q -O /var/www/html/webshell.php https://secure.eicar.org/eicar.com.txt
 }
+
+function modify_ufw(){
+    ufw disable
+}
