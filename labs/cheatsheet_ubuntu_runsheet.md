@@ -14,8 +14,9 @@ Run sheet
 ## system and applciation updates
 ### apt
 Update early, remember an apt command will lock the updating until completed. If you get a lock error, the simplest fix is to reboot.
-- [] check for apt updates and upgrade `sudo apt update`
-- []
+1. [ ] check for apt updates and upgrade `sudo apt update && sudo apt upgrade`
+1. If no `apt` use `sudo apt-get update && sudo apt-get upgrade`
+
 ### Snap
 1. Ensure auto snap updates are on `snap refresh --unhold`
 1. Update snap now `sudo snap refresh`
@@ -24,45 +25,35 @@ Update early, remember an apt command will lock the updating until completed. If
 Audit all users and groups to ensure they match policy. If you change a password, write it down in your notes! 
 Use a password that meets strong password policy like : `STRONG_layser_7784`
 ### root user
-- [] disable root `sudo -l root`
+- [ ] disable root `sudo -l root`
 
 ### other users
 Iterate through each user on the system, and mark them off against the policy. Use the gui for this
-- [] Should the user exist
-- [] Are they supposed to be admin, change setting if needed in gui
-- [] check user group membership `cmd`
-- [] check their password strength
-- [] before deleting user, check if they have any forensics questions, we may need data in their account
-- [] delete the user if not needed
+- [ ] Should the user exist
+- [ ] Are they supposed to be admin, change setting if needed in gui
+- [ ] check user group membership `cmd`
+- [ ] check their password strength
+- [ ] before deleting user, check if they have any forensics questions, we may need data in their account
+- [ ] delete the user if not needed
 
 ## firewall
-- [] Check firewall status `sudo ufw status`
-- [] Install if needed
-- [] Enable logging
+- [ ] Check firewall status `sudo ufw status`
+- [ ] Install if needed
+- [ ] Enable logging
 
 # Forensics questions
 Read them and get an idea of what you need to know.
 1. Are there any files you will need from a user directory (ie dont delete if first)
 
-
 ##  APT tracked updates in OS
 1. Kick off an update early `sudo apt update && sudo apt upgrade`
-   1. If no `apt` use `sudo apt-get update && sudo apt-get upgrade`
+
    1. ? Will `sudo apt dist-upgrade` be required?
 
 
 
-# User management
-Note: Before deleting a user account, check if it has files that need to be saved off for forensics questions.
-
-## Audit each user
-Audit user accounts and document 
-1. all passwords
-1. User accounts checked for:
-   1. Should they exist?
-   1. Permission (admin or standard)
-   1. Password is ok (meets complexity, not same as username, etc)
-   1. Other group membership
+# ---------------------- 
+TODO: edit below here
 
 ## Audit groups?
 
@@ -71,7 +62,6 @@ Audit user accounts and document
 
 # Malware scans
 
-#  --- Uncleared below ---
 # Firewall
     apt-get install ufw && ufw enable
 ## SSH settings
@@ -124,8 +114,7 @@ Check sshd_config file for correctness before restart:
 # Don't blink
 ## If it doesn't ask for apache2, nginx, etc., you can usually remove it
 ## Check services
-### Install bum for a graphical interface
-    apt-get install bum
+
 ## Set home directory perm's
     for i in $(mawk -F: '$3 > 999 && $3 < 65534 {print $1}' /etc/passwd); do [ -d /home/${i} ] && chmod -R 750 /home/${i}; done
 # Blacklisted programs

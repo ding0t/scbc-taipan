@@ -1,5 +1,5 @@
 # Cyber Taipan
-_Caution DRAFT and untested_
+_Caution in DRAFT and will not run_
 
 Run scripts for South Coast Baptist College 
 
@@ -13,5 +13,7 @@ Run scripts for South Coast Baptist College
 1. `cd ` followed by `chmod +x fightclub.sh` then `./runme.sh`
 1. Browse the lists folder and work on compleating the image. Dont forget to read the read me!!
 
-### credit
+### resources
 * [initial source](https://github.com/MarKyehus/CyPatriot/blob/master/README.md)
+* [good script](https://github.com/BiermanM/CyberPatriot-Scripts/blob/master/UbuntuScript.sh)
+
