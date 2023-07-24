@@ -12,12 +12,14 @@
 # Check if running as root
 if [[ $EUID -ne 0 ]]
 then
-  printf "You must use sudo to run this script as root. Exiting."
+  printf "You must use sudo to run this script as root. Exiting.\n"
   exit 1
 fi
 
 source $(dirname "$0")/libs/users.sh
-users_csv_file= '$(dirname "$0")/config/users.csv'
+script_dir="${(dirname "$0")}"
+users_csv_file="/config/users.csv"
+users_csv_path="${script_dir}${users_csv_file}"
 
-printf ${users_csv_file}
+printf "${users_csv_path}"
 

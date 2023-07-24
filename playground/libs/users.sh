@@ -50,10 +50,3 @@ function add_users(){
     done
 }
 
-function add_bad_users(){
-
-}
-
-function edit_sudoers(){
-
-}
