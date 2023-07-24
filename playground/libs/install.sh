@@ -5,7 +5,7 @@
 # Install some tools
 
 A_TOOLS=(john nmap)
-A_SERVICES=(apache2 mysql)
+A_SERVICES=(apache2 mysql-server)
 
 function install_apt(){
     A_INSTALL=("${A_TOOLS[@]}" "${A_SERVICES[@]}")
