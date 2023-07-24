@@ -48,7 +48,8 @@ function add_users(){
     # -g addsa a user to the named group and creates the group if it does not exist
     for i in "${!A_USERNAME[@]}"; do
         if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME" ]]; then
-            useradd -g "${A_GROUP[$i]}" \
+            groupadd -f "${A_GROUP[$i]}"
+            useradd -G "${A_GROUP[$i]}" \
             -d "/home/${A_USERNAME[$i]}" \
             -s /bin/bash \
             -p "$(echo "${A_PASSWORD[$i]}" | openssl passwd -1 -stdin)" \
