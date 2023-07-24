@@ -4,11 +4,14 @@
 # Author: ding0t
 # Install some tools
 
-hacker_tools="john nmap"
-services="apache2 mysql"
+A_TOOLS=(john nmap)
+A_SERVICES=(apache2 mysql)
 
 function install_apt(){
-    apt install -y "${hacker_tools}"
+    A_INSTALL=("${A_TOOLS[@]}" "${A_SERVICES[@]}")
+    for i in "${A_INSTALL[@]}"; do
+        apt install -y "${i}"
+    done
     apt install -y "${services}"
 }
 
@@ -17,5 +20,5 @@ function install_snap(){
 }
 
 function get_icap(){
-    wget -O /var/www/html/webshell.php https://secure.eicar.org/eicar.com.txt
+    wget -q -O /var/www/html/webshell.php https://secure.eicar.org/eicar.com.txt
 }

@@ -54,7 +54,7 @@ function add_users(){
     # now add each user by iterating over the arrays
     # -g adds a a user to the named group and creates the group if it does not exist
     # -G appends the user to existing groups
-    for i in "${!A_USERNAME[@]}"; do
+    for i in "${A_USERNAME[@]}"; do
         if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME" ]]; then
             # add group and silently fail if exists
             groupadd -f "${A_GROUP[$i]}"
