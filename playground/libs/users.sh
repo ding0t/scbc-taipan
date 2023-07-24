@@ -46,7 +46,7 @@ function add_users(){
     # now add each user by iterating over the arrays
     # -g addsa a user to the named group and creates the group if it does not exist
     for i in "${!A_USERNAME[@]}"; do
-        if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME"]]; then
+        if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME"]];then
             useradd -g "${A_GROUP[$i]}" \
             -d "/home/${A_USERNAME[$i]}" \
             -s /bin/bash \
