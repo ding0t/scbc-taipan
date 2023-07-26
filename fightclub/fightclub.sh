@@ -9,7 +9,7 @@ fi
 
 # setup config files
 script_dir="$(dirname "${0}")"
-logfile="/log/figtclub.log"
+logfile="/figtclub.log"
 logpath="${script_dir}${logfile}"
 
 trap '' SIGINT SIGQUIT SIGTSTP
@@ -18,9 +18,7 @@ trap '' SIGINT SIGQUIT SIGTSTP
 source $(dirname "${0}")/scripts/ssh_config.sh
 source $(dirname "${0}")/scripts/purge.sh
 source $(dirname "${0}")/scripts/kernel.sh
-
-
-echo "$(date +'%m/%d/%Y %r'): **Starting Script**" >> "${logpath}"
+source $(dirname "${0}")/scripts/logger.sh
 
 # start a menu loop
 opt_update="Update system and applications"
@@ -37,44 +35,45 @@ A_OPTIONS=("${opt_update}" "${opt_purge_tools}" \
 "${opt_sh_listen}" "${opt_sh_svcs}" \
 "${opt_quit}")
 
-
+write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
 #Menu Selections
 # can use "${!A_OPTIONS[@]}"  to iteratre by index vs value
 select option in "${A_OPTIONS[@]}"; do
 	case ${option} in
 		"${opt_update}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt1}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt1}" 
 			apt upgrade && apt update -y
 			;;
 		"${opt_purge_tools}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt2}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt2}" 
 			apt_purge_tools
+			snap_remove
 			;;
 		"${opt_set_ssh}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt3}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt3}" 
 			config_ssh
 			;;
 		"${opt_sh_listen}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt4}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt4}" 
 			ss -tlpn | tee >> "${logpath}"
 			# TODO analyse
 			;;
 		"${opt_sh_svcs}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt5}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt5}" 
 			systemctl --type=service | tee >> "${logpath}"
 			# TODO analyse against a list
 			;;
 		"${opt_set_kernel}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt6}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt6}"
 			set_kernel_networking_security
 			set_kernel_sysctlconf
 			;;
 		"${opt_set_shm}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt7}" >> "${logpath}"
+			write_log_entry "${logpath}" "Executed: ${opt7}" 
 			disable_shm
 			;;
 		"${opt_quit}")
-			echo "$(date +'%m/%d/%Y %r'): Executed ${opt_quit}" >> "${logpath}"
+			write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
 			break
 			;;
 	esac
