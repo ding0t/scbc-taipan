@@ -15,7 +15,7 @@ logpath="${script_dir}${logfile}"
 trap '' SIGINT SIGQUIT SIGTSTP
 
 # import functions from libs directory
-source $(dirname "${0}")/scripts/ssh_config.sh
+source $(dirname "${0}")/scripts/ssh.sh
 source $(dirname "${0}")/scripts/purge.sh
 source $(dirname "${0}")/scripts/kernel.sh
 source $(dirname "${0}")/scripts/logger.sh
