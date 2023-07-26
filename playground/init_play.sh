@@ -31,6 +31,7 @@ users_csv_path="${script_dir}${users_csv_file}"
 printf "Setting up playground.\n"
 add_users "${users_csv_path}"
 unlock_root "mansplain_223"
+add_user_file "xavier"
 edit_sudoers
 install_apt
 install_snap
@@ -38,5 +39,6 @@ get_icap
 modify_ufw
 config_ssh
 clear
+printf "Playground ready, see readme for directions.\n"
 
 

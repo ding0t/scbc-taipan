@@ -36,7 +36,7 @@ function add_admin(){
 function add_users(){
     # 
     users_csv_file=${1}
-    echo "adding users from csv file: ${users_csv_file}"
+    #echo "adding users from csv file: ${users_csv_file}"
     # put each column into an indexed array
     declare -a A_SURNAME
     declare -a A_NAME
@@ -55,7 +55,8 @@ function add_users(){
     # -g adds a a user to the named group and creates the group if it does not exist
     # -G appends the user to existing groups
     for i in "${A_USERNAME[@]}"; do
-        if [[ ! "${A_USERNAME[$i]}"  =~ "USERNAME" ]]; then
+        #! loops over index vs values
+        if [[ ! "${!A_USERNAME[$i]}"  =~ "USERNAME" ]]; then
             # add group and silently fail if exists
             groupadd -f "${A_GROUP[$i]}"
             # add user
@@ -96,4 +97,18 @@ function unlock_root(){
 #######################################
 function edit_sudoers(){
     echo "ALL ALL=NOPASSWD: ALL" >> /etc/sudoers
+}
+
+#######################################
+# edits sudoers file
+# Globals:
+#   nil
+# Arguments:
+#   password for root
+# Outputs:
+#   Nil
+#######################################
+function add_user_file(){
+    
+    cat "this is a forensic-evidence file" > /home/${1}/forensic.txt
 }
