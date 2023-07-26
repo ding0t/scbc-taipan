@@ -38,6 +38,7 @@ install_snap
 get_icap
 modify_ufw
 config_ssh
+add_user_file xavier
 clear
 printf "Playground ready, see readme for directions.\n"
 
