@@ -29,7 +29,8 @@ opt_sh_svcs="Show services"
 opt_set_kernel="Configure kernel defaults"
 opt_set_shm="Disable /dev/shm"
 opt_quit="Quit"
-# oreder of array will set order of options
+
+# order of array will set order of options
 A_OPTIONS=("${opt_update}" "${opt_purge_tools}" \
 "${opt_set_ssh}" "${opt_set_kernel}" "${opt_set_shm}" \
 "${opt_sh_listen}" "${opt_sh_svcs}" \
