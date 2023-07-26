@@ -60,7 +60,7 @@ function add_users(){
             # add group and silently fail if exists
             groupadd -f "${A_GROUP[$i]}"
             # add user
-            useradd -g "${A_GROUP[$i]}" \
+            useradd -G "${A_GROUP[$i]}" \
             -d "/home/${A_USERNAME[$i]}" \
             -s /bin/bash \
             -p "$(echo "${A_PASSWORD[$i]}" | openssl passwd -1 -stdin)" \
