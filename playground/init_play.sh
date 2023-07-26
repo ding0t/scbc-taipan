@@ -19,6 +19,8 @@ fi
 # import functions from libs directory
 source $(dirname "${0}")/libs/users.sh
 source $(dirname "${0}")/libs/install.sh
+source $(dirname "${0}")/libs/ssh_config.sh
+
 
 # setup config files
 script_dir="$(dirname "${0}")"
@@ -34,6 +36,7 @@ install_apt
 install_snap
 get_icap
 modify_ufw
+config_ssh
 clear
 
 

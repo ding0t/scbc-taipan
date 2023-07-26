@@ -6,6 +6,11 @@ Run scripts for South Coast Baptist College
 ## How To Use
 *Scripts can cause penalties and break images*
 
+You can dowload the script as a zip archive or 
+1. `sudo apt install git`
+1.
+ 
+
 ### Linux 
 1. Do the foresnic questions first
 1. Run open a new terminal window and as root, `sudo su` run `apt update` followed by `apt install git`

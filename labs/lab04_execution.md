@@ -1,7 +1,7 @@
-# About
+# Lab 04 - how things run (execute)
 In this lab we learn how to
 1. List running processes
-1. 1 List active (listening) network connections
+1. List active (listening) network connections
 1. Operating system updates
    1. Settings
    1. Update now

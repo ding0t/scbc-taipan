@@ -107,65 +107,9 @@ Is software that looks for a set of known malware using file based sigantures. I
 # Audit
 1. `sudo apt install -y auditd && auditctl` <check>
 
-# Secure defaults
-
-## Check sudoers for overly permissive lines
-1. `sudo visudo`
-1. bad `ALL\s+ALL\s*=\s*NOPASSWD\s*:\s*ALL` all users, all commands, no password
-   1. If exists delete the line 
-   1. the default editor should be nano, if you end up in vi... 
-
-## Secure kernel defaults
-The kernel has some secure defaults that may be tested
-
-1. `sudo nano /etc/sysctl.conf`
-1. `ctrl + w` look for `sysrq` uncomment and set to `kernel.sysrq=0`
-1. `ctrl + w` look for `syncook` uncomment ensure value is `net.ipv4.tcp_syncookies=1` 
-
-OR paste in the following into `/etc/sysctl.conf`
-
-```sh
-net.ipv4.conf.all.rp_filter = 1
-net.ipv4.conf.all.accept_source_route = 0
-net.ipv4.tcp_rfc1337 = 1
-net.ipv4.tcp_syncookies = 1
-net.ipv4.icmp_echo_ignore_broadcasts = 1
-icmp_ignore_bogus_error_responses = 1
-net.ipv4.icmp_ratelimit = 20
-net.ipv4.icmp_ratemask = 88089
-kernel.sysrq=0
-```
-1. Check the settings `sudo sysctl -a | grep 1337` is our update in place?
-1. reload using `sudo sysctl --system`
-   1. test `sudo sysctl -a | grep sysrq` 
-
-## Secure SSH defaults
-
-## no exec on temporary file locations
-
-1. `sudo mount -l | grep /dev/shm `
-` sudo nano /etc/fstab`
-   1. `none     /dev/shm     tmpfs     ro,noexec,nosuid,nodev     0     0`
-1. `sudo mount -o remount /dev/shm`
-1. Edit `/etc/fstab` and add `noexec,ro` options to the `/dev/shm` mount
-   1. test as above to check permissions
-
-# References
-
+# Resources
 * [pty vs tty](https://www.baeldung.com/linux/pty-vs-tty)
 * [configuring ufw](https://www.cyberciti.biz/faq/how-to-configure-firewall-with-ufw-on-ubuntu-20-04-lts/)
 * [installing and using clam av](https://linuxhint.com/install_clamav_ubuntu/)
 * [more clam av guides](https://wiki.archlinux.org/title/ClamAV)
-
-## system configs
-* [ubuntu specific sysctl.conf settings](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecuritySettings)
-* [sysrq](https://www.debian.org/doc/manuals/securing-debian-manual/restrict-sysrq.it.html)
-* [whole heap of settings](https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.kernel.obscure.html)
-* [using syxsctl](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
-
-## shm
-* [stricter defualts](https://help.ubuntu.com/community/StricterDefaults)
-
-## sudo 
-link to good sudoers
 

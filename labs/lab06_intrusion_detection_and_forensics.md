@@ -8,7 +8,7 @@ Takes allot longer than on CSI/NCIS etrc tv shows, and generally now refers to a
 In order to detect and respond to security incidents, the system must be pre-positioned to record information about itself. This mainly involves ensuring the sytem is logging and storing (or forwarding) log events.
 
 ## Other artefacts
-It is hard not to leave a digital trace on a system. Hence on some movies you see the hacker 'thermiting' the system. Additional artefacts support investigation such as:
+It is hard not to leave a digital trace on a system. Hence on some movies you see the hacker 'thermiting' the system - physically destroying the system. Additional artefacts support investigation such as:
 1. The file system, that is files stored or deleted from the hard drive
 1. Memory, that is artefacts of the system running
 1. Network collect; for content or fact of communications with other systems

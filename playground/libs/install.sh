@@ -12,7 +12,6 @@ function install_apt(){
     for i in "${A_INSTALL[@]}"; do
         apt install -y "${i}"
     done
-    apt install -y "${services}"
 }
 
 function install_snap(){

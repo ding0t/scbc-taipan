@@ -88,6 +88,8 @@ LinPEAS is a shell script to look for vulnerable system states that coule result
 
 # Resources
 * [Linpeas](https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS)
+* [bash tutorial](https://www.javatpoint.com/bash)
+* [another bash scripting tutorial](https://www.linode.com/docs/guides/intro-bash-shell-scripting/)
 
 
 

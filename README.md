@@ -11,9 +11,10 @@ This repository will contain files for training and competition. This repository
 
 # What is in the repository
 1. README.md this file
-1. [vagrant](vagrant) For admins; contains instructions and code to setup the virtual machines for labs
-1. [labs](labs) For students; contains cheatsheets, and lab files
-1. [presentations](presentations) For all; holds the instruction material for each week
+1. [labs](./labs) For students; contains cheatsheets, and lab files
+1. [fightclub](./fightclub) for run sheets and script to use in competition
+1. [playground](./playground/) for a play with applying the things we know
+
 
 # Course outline
 The cyber taipan at SCBC will (approx) cover
@@ -57,6 +58,7 @@ Some handy guides
 
 * [Linux command line for beginners](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)
 * [Essential Linux commands](https://itsfoss.com/essential-ubuntu-commands/)
+* [learn unix](https://www.tutorialspoint.com/unix/index.htm)
 
 
 
