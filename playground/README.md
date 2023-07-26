@@ -28,10 +28,18 @@ The following users are expected on the system
 1. using cli `useradd`
 
 ### ading or removing an admin privs
-1. gui is simplist; 
+1. gui is simplist
 1. cli `usermod` but note it has quite a few groups if added using gui.
 
+## what else can we do?
+1. Check out some of our labs
+
 ## forensics questions
+1. There is an unauthorised user on the system; what file is in their home directory?
+
+
+# resources
+* [aecus scoring engine](https://github.com/elysium-suite/aeacus) can be used to score
 
 
 
