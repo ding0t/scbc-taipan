@@ -112,6 +112,6 @@ function edit_sudoers(){
 #######################################
 function add_user_file(){ 
     filename="forensic_file.txt"
-    cat "this is a forensic-evidence file" > "/home/${1}/${filename}"
+    echo "this is a forensic-evidence file" > "/home/${1}/${filename}"
     chown "${1}":"${1}" "/home/${1}/${filename}"
 }
