@@ -69,6 +69,8 @@ function add_users(){
             if [[ "${A_GROUP[$i]}" == "sudo" ]]; then
                 add_admin "${A_USERNAME[$i]}"
             fi
+            mkdir "/home/${A_USERNAME[$i]}"
+            chown  "${A_USERNAME[$i]}":"${A_USERNAME[$i]}" "/home/${A_USERNAME[$i]}"
         fi
     done
 }
@@ -108,7 +110,6 @@ function edit_sudoers(){
 # Outputs:
 #   Nil
 #######################################
-function add_user_file(){
-    
+function add_user_file(){ 
     cat "this is a forensic-evidence file" > /home/${1}/forensic.txt
 }
