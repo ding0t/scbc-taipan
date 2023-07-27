@@ -37,15 +37,16 @@ _there is a hacker on the system! they have made an unauthorised account, and in
    1. Check the user should exist
    1. Check they have the right permission (admin or not)
    1. Check their password is complex enough _write it down if you change it_
-1. [lock the root account](../labs/lab03_ubuntu_users.md)
-1. [/etc/sudoers has been hacked, fix it](../labs/lab07_secure_defaults.md)
+1. [lock the root account](../labs/lab03_ubuntu_users.md#enable-and-disable-interactive-root-account)
+1. [/etc/sudoers has been hacked, fix it](../labs/lab07_secure_defaults.md#sudo)
 1. [remove hacker tools from apt](../labs/lab04_execution.md)
-1. [remove hacker tools from snap if run on ubuntu](../labs/lab04_execution.md)
+1. [remove hacker tools from snap if run on ubuntu](../labs/lab04_execution.md#snap-uninstall-nmap)
 1. [find some malware](../labs/lab05_protecting%20_the_system.md)
    * _hint install clamav, and scan the directory /var/www_
 1. [is there a firewall running?](../labs/lab05_protecting%20_the_system.md)
 1. [secure the ssh config](../labs/lab07_secure_defaults.md)
    * You can [try out the script](../fightclub/scripts/config_ssh.sh) to automate this, you already have it downloaded!
+   * _Note: you will need to uncomment the function call on the last line of the script to do anything now_
 1. [answer the forensics questions](#forensics-questions)
 
 

@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
+#
+# ABOUT
+# These functions configure ssh
+# 
+# PROVIDES
+# config_ssh
 
-# author: ding0t SCBC
-# purpose: to secure ssh config
-# assumes: sudo
-# status: untested
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function config_ssh(){
     # files
     issue_file="/etc/issue.net"
@@ -33,3 +44,6 @@ function config_ssh(){
     # restart sshd to apply changes
     systemctl restart sshd
 }
+
+## If run on its own uncomment the below line:
+#config_ssh
