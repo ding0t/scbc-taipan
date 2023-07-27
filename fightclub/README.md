@@ -1,14 +1,15 @@
 # Cyber Taipan
-_Caution in DRAFT and will not run_
+_Caution in DRAFT results are untested_
 
 Run scripts for South Coast Baptist College 
 
 ## How To Use
-*Scripts can cause penalties and break images*
+*Note: scripts can cause penalties and break images if you are not sure what it is doing*
 
-You can dowload the script as a zip archive or 
+You can dowload the script as a zip archive or by using git
 1. `sudo apt install git`
-1.
+1. `cd ~`
+1. `git pull `
  
 
 ### Linux 

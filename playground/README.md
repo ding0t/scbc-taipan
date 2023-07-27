@@ -1,8 +1,8 @@
-# ABOUT
+# About Playground
 Playground is for setting up some excercises to practice what we have learned in the labs
 
 
-# SETUP
+# Setup
 What is needed to get this happening...
 1. You can use either debian or Ubuntu for the playground
 1. When you vm is running, take a snapshot by selecting `machine` then `trake snapshot` in virtualbox
@@ -20,7 +20,7 @@ _Note: If you did not chmod +x you will need to tell the terminal what to open t
 When the script has run you will get a message on terminal that the _playground is ready!_
 
 
-# PLAY
+# Playtime!
 Now we are ready to test our skills!
 
 ## tips
@@ -41,16 +41,16 @@ _there is a hacker on the system! they have made an unauthorised account, and in
 1. [/etc/sudoers has been hacked, fix it](../labs/lab07_secure_defaults.md#sudo)
 1. [remove hacker tools from apt](../labs/lab04_execution.md)
 1. [remove hacker tools from snap if run on ubuntu](../labs/lab04_execution.md#snap-uninstall-nmap)
-1. [find some malware](../labs/lab05_protecting%20_the_system.md)
+1. [find some malware](../labs/lab05_protecting_the_system.md#installing-clamav)
    * _hint install clamav, and scan the directory /var/www_
-1. [is there a firewall running?](../labs/lab05_protecting%20_the_system.md)
+1. [is there a firewall running?](../labs/lab05_protecting_the_system.md#uncomplicated-firewall-ufw)
 1. [secure the ssh config](../labs/lab07_secure_defaults.md)
    * You can [try out the script](../fightclub/scripts/config_ssh.sh) to automate this, you already have it downloaded!
    * _Note: you will need to uncomment the function call on the last line of the script to do anything now_
 1. [answer the forensics questions](#forensics-questions)
 
 
-## Users
+## users
 The following users are expected on the system
 
 | USERNAME | ROLE | PASSWORD |
@@ -67,7 +67,7 @@ The following users are expected on the system
 1. What was the malware file called?
 
 
-# resources
+# Resources
 * Use the labs to find some tips
 * **For the bold** check out the source code that made the changes:
    * [here is the main script](./init_play.sh) 

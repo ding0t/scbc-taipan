@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # ABOUT
-# These functions work with apt packages
+# These functions remove applications
 # 
 # PROVIDES
 # apt_purge_tools
@@ -86,7 +86,8 @@ function apt_purge_servcies(){
 #   Nil
 #######################################
 function snap_remove(){
-	A_SNAP_TOOLS=(nmap john-the-ripper)
+	A_SNAP_TOOLS=(nmap 
+	john-the-ripper)
     for i in "${A_SNAP_TOOLS[@]}"; do
         snap remove "${i}"
     done

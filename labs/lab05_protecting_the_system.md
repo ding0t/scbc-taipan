@@ -88,7 +88,7 @@ Is software that looks for a set of known malware using file based sigantures. I
 1. `cd ~` change to our home directory
 1. `wget https://secure.eicar.org/eicar.com.txt` grab a malware test file
 
-## Installing
+## Installing clamav
 1. `sudo apt install -y clamav clamav-daemon clamtk`
 1. `sudo systemctl stop clamav-freshclam` stop clam so we can force a signature update (otherwise `sudo systemctl stop clamav-freshclam`)
 1. `sudo freshclam`
