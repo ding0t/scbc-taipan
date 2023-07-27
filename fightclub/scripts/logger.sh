@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# ABOUT
+# These functions provide logging for the script
+# 
+# PROVIDES
 
 #######################################
 # writes a log line
@@ -11,6 +16,5 @@
 #   Nil
 #######################################
 function write_log_entry(){
-
-    echo "$(date +'%m/%d/%Y %r'): ${2}" >> "${1}"
+    printf "$(date +'%m/%d/%Y %r'): ${2}\n" >> "${1}"
 }

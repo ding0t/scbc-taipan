@@ -1,10 +1,27 @@
-#! /bin/bash
+#!/usr/bin/env bash
+#
+# ABOUT
+# These functions configure kernel settings
+# 
+# PROVIDES
+#
+# REFERENCES:
+# [ubuntu specific sysctl.conf settings](https://wiki.ubuntu.com/ImprovedNetworking/KernelSecuritySettings)
+# [sysrq](https://www.debian.org/doc/manuals/securing-debian-manual/restrict-sysrq.it.html)
+# [whole heap of settings](https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.kernel.obscure.html)
+# [using syxsctl](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
+# [stricter defualts](https://help.ubuntu.com/community/StricterDefaults)
 
-# purpose: to apply more secure kernel defaults
-# state: untested
-# references:
-# https://help.ubuntu.com/community/StricterDefaults
 
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_sysctlconf(){
   sysctl_conf="/etc/sysctl.conf"
   cat <<EOT >> "${sysctl_conf}"
@@ -20,6 +37,16 @@ kernel.sysrq=0
 EOT
 }
 
+
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_networking_security(){
   # Network parameters for better security 
   # Disable packet forwarding (if this machine is not a router)
@@ -51,6 +78,15 @@ function set_kernel_networking_security(){
   # echo "nospoof on" > sudo tee -a /etc/host.conf    #ERROR
 }
 
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_networking_performance(){
   # Fine tuning network parameters for better perfomance #
   # Change the following parameters when a high rate of incoming connection requests result in connection failures
@@ -88,6 +124,15 @@ function set_kernel_networking_performance(){
   echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
 }
 
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_memory_protections(){
   # Disable Core Dumps
   echo "0" > /proc/sys/fs/suid_dumpable
@@ -96,6 +141,16 @@ function set_kernel_memory_protections(){
   echo "1" > /proc/sys/kernel/randomize_va_space
 }
 
+
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_filesystem(){
   # File system tuning #
   # Increase system file descriptor limit
@@ -104,6 +159,16 @@ function set_kernel_filesystem(){
   echo "65536" > /proc/sys/kernel/pid_max
 }
 
+
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
 function set_kernel_memory_ratios(){
   # Use up to 95% of RAM (5% free)
   echo "5" > /proc/sys/vm/swappiness
@@ -111,7 +176,3 @@ function set_kernel_memory_ratios(){
   echo "25" > /proc/sys/vm/dirty_ratio
 }
 
-function disable_shm(){
-  echo "none     /dev/shm     tmpfs     ro,noexec,nosuid,nodev     0     0" >> /etc/fstab
-  mount -o remount /dev/shm
-}
