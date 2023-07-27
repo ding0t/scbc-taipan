@@ -62,7 +62,7 @@ Some key points:
 
 ## example automating the secure configuration of ssh
 SSH needs some secure defaults, lets script this one..
-1.  [go to](../fightclub/scripts/ssh_config.sh)
+1.  [go to](../fightclub/scripts/config_ssh.sh)
 1. download the raw file
 1. `chmod +x ssh_config.sh` make the file executable
 1. `sudo ./ssh_config.sh` done!

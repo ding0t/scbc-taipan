@@ -45,6 +45,7 @@ _there is a hacker on the system! they have made an unauthorised account, and in
    * _hint install clamav, and scan the directory /var/www_
 1. [is there a firewall running?](../labs/lab05_protecting%20_the_system.md)
 1. [secure the ssh config](../labs/lab07_secure_defaults.md)
+   * You can [try out the script](../fightclub/scripts/config_ssh.sh) to automate this, you already have it downloaded!
 1. [answer the forensics questions](#forensics-questions)
 
 
