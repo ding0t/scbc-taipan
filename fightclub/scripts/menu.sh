@@ -82,12 +82,12 @@ function print_menu(){
     #  Show options like
     # 1) "Option"
     for i in "${!A_OPTIONS[@]}"; do
-        #col1="${i})"
-        col1="${i}) ${A_OPTIONS[${i}]}"
-        #col2="${A_OPTIONS[${i}]}"
+        col1="${i})"
+        col2="${A_OPTIONS[${i}]}"
         col3="(Runs: ${a_option_runs[${i}]})"
         #printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
-        paste <(printf %s "${col1}") <(printf %s "${col3}")
+        #paste <(printf %s "${col1}") <(printf %s "${col3}")
+        printf "${col1} ${col2}\t${col3}\n"
         
     done
 }
