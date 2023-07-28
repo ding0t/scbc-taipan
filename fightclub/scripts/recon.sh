@@ -18,6 +18,12 @@
 #   Nil
 #######################################
 
+fuction get_system_recon(){
+    ps -aux  >> "${reconpath}"
+    ss -tlpn >> "${reconpath}"
+    systemctl --type=service >> "${reconpath}"
+} 
+
 
 grep -i sudo /etc/group
 grep -i adm /etc/group

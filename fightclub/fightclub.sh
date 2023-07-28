@@ -25,6 +25,8 @@ fi
 script_dir="$(dirname "${0}")"
 logfile="/logfight.log"
 logpath="${script_dir}${logfile}"
+reconfile="/recondata.txt"
+reconpath="${script_dir}${reconfile}"
 
 trap '' SIGINT SIGQUIT SIGTSTP
 
@@ -37,11 +39,12 @@ source $(dirname "${0}")/scripts/config_kernel.sh
 source $(dirname "${0}")/scripts/logger.sh
 
 
-# define menu options for array
+# define menu options for options array
 # This text will be used in the case statement, keep short
 # show state
 opt_sh_listen="Show listening connections"
 opt_sh_svcs="Show services"
+opt_sh_process="Show running processes"
 # applications
 opt_update="Update system and applications"
 opt_purge_tools="Purge hacker tools"
@@ -56,7 +59,8 @@ opt_quit="Quit"
 # Place them in reccomended order of execution
 A_OPTIONS=("${opt_update}" 
 "${opt_sh_listen}" 
-"${opt_sh_svcs}" 
+"${opt_sh_process}" 
+"${opt_sh_svcs}"
 "${opt_purge_tools}" 
 "${opt_set_ssh}" 
 "${opt_set_kernel}" 
@@ -88,15 +92,21 @@ while true; do
 				config_ssh
 				break
 				;;
+			"${opt_sh_process}")
+				write_log_entry "${logpath}" "Executed: ${opt4}" 
+				ps -aux | tee >> "${reconpath}"
+				# TODO analyse
+				break
+				;;
 			"${opt_sh_listen}")
 				write_log_entry "${logpath}" "Executed: ${opt4}" 
-				ss -tlpn | tee >> "${logpath}"
+				ss -tlpn | tee >> "${reconpath}"
 				# TODO analyse
 				break
 				;;
 			"${opt_sh_svcs}")
 				write_log_entry "${logpath}" "Executed: ${opt5}" 
-				systemctl --type=service | tee >> "${logpath}"
+				systemctl --type=service | tee >> "${reconpath}"
 				# TODO analyse against a list
 				break
 				;;

@@ -26,5 +26,5 @@ function find_media_files(){
 	    for i in "${A_MEDIA_FILES[@]}"; do
         find ${dir} -iname '"${search}${i}"' -type f
     done
-
+	write_log_entry "${logpath}" "${0}"
 }
