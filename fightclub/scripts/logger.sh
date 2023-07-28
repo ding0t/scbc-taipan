@@ -5,6 +5,8 @@
 # 
 # PROVIDES
 
+
+
 #######################################
 # writes a log line
 # Globals:
@@ -15,6 +17,9 @@
 # Outputs:
 #   Nil
 #######################################
+# setup config files
+
+
 function write_log_entry(){
     printf "$(date +'%m/%d/%Y %r'): ${2}\n" >> "${1}"
 }

@@ -24,6 +24,7 @@ opt_set_kernel="Configure kernel defaults"
 opt_set_shm="Disable /dev/shm"
 # script operations
 opt_quit="Quit"
+opt_clean_menu="Redisplay  menu"
 
 # order of array will set order of options
 # Place them in reccomended order of execution
@@ -34,11 +35,15 @@ A_OPTIONS=("${opt_update}"
 "${opt_purge_tools}" 
 "${opt_set_ssh}" 
 "${opt_set_kernel}" 
-"${opt_set_shm}" 
+"${opt_set_shm}"
+"${opt_clean_menu}" 
 "${opt_quit}" 
 )
 
 num_options="${#A_OPTIONS[@]}"
+# array for tracking number of runs per option, initialised to 0 using shell paremeter expansion syntax
+# https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion
+a_option_runs=("${A_OPTIONS[@]/*/0}")
 
 
 #######################################
@@ -72,17 +77,28 @@ echo "${logo_b64}" | base64 -d
 #   Nil
 #######################################
 function print_menu(){
-    # clean slate
-    clear 
     # Logo
     print_logo
     #  Show options like
     # 1) "Option"
     for i in "${!A_OPTIONS[@]}"; do
-        printf "${i}) ${A_OPTIONS[${i}]}\n"
+        printf "${i}) ${A_OPTIONS[${i}]}\t\t(Run count: ${a_option_runs[${i}]})"
     done
 }
 
+#######################################
+# Displays a new menu on clean screen
+# Globals:
+#   A_OPTIONS
+# Arguments:
+#   $0 itself
+# Outputs:
+#   Nil
+#######################################
+function print_clean_menu(){
+    clear 
+	print_menu
+}
 #######################################
 # gets menu item by number - when not using select funciton
 # Globals:
@@ -116,59 +132,76 @@ function execute_option(){
         "${opt_update}")
             write_log_entry "${logpath}" "Executed: ${opt_update}" 
             apt upgrade && apt update -y
-            break
             ;;
         "${opt_purge_tools}")
             write_log_entry "${logpath}" "Executed: ${opt_purge_tools}" 
+            # TODO read to confirm
             apt_purge_tools
             snap_remove
-            break
+            printf "apt andd snap tools uninstalled\n"
             ;;
         "${opt_set_ssh}")
-            write_log_entry "${logpath}" "Executed: ${opt_set_ssh}" 
+            write_log_entry "${logpath}" "Executed: ${opt_set_ssh}"
             config_ssh
-            break
+            printf "SSH configured\n"
             ;;
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
             ps -aux | tee >> "${reconpath}"
+            printf "\n"
             # TODO analyse
-            break
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
+            write_log_entry "${reconpath}" "======= listening services; look here for anything that should not be running"
             ss -tlpn | tee >> "${reconpath}"
+            printf "\n"
             # TODO analyse
-            break
+            
             ;;
         "${opt_sh_svcs}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
             systemctl --type=service | tee >> "${reconpath}"
             # TODO analyse against a list
-            break
+            
             ;;
         "${opt_set_kernel}")
             write_log_entry "${logpath}" "Executed: ${opt_set_kernel}"
             set_kernel_networking_security
             set_kernel_sysctlconf
-            break
+            
             ;;
         "${opt_set_shm}")
             write_log_entry "${logpath}" "Executed: ${opt_set_shm}" 
             disable_shm
-            break
+            ;;
+        "${opt_clean_menu}")
+            print_clean_menu
             ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
-            break 2
+            break 
             ;;
         "*")
             printf "Enter a number from above range only\n"
-            break
+            
             ;;
     esac
 }
 
+#######################################
+# increment option runs
+# Globals:
+#   A_OPTIONS
+# Arguments:
+#   $0 itself
+# Outputs:
+#   Nil
+#######################################
+function increment_option_runcount(){
+    current_runs=${a_option_runs["${REPLY}"]}
+    ${a_option_runs["${REPLY}"]}=${current_runs}+1
+}
 
 #######################################
 # Runs a menu using select
