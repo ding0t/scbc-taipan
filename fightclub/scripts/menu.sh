@@ -87,7 +87,7 @@ function print_menu(){
         col3="(Runs: ${a_option_runs[${i}]})"
         #printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
         #paste <(printf %s "${col1}") <(printf %s "${col3}")
-        printf "${col1} ${col2}\t${col3}\n"
+        printf "${col1} ${col2}\t\t${col3}\n"
         
     done
 }
@@ -205,8 +205,7 @@ function execute_option(){
 #   Nil
 #######################################
 function increment_option_runcount(){
-    current_runs=${a_option_runs["${REPLY}"]}
-    ${a_option_runs["${REPLY}"]}=${current_runs}+1
+    (( a_option_runs["${REPLY}"]++ ))
 }
 
 #######################################
