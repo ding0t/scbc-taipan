@@ -78,7 +78,7 @@ function print_menu(){
     print_logo
     #  Show options like
     # 1) "Option"
-    for i in in "${!A_OPTIONS[@]}"; do
+    for i in "${!A_OPTIONS[@]}"; do
         printf "${i}) ${A_OPTIONS[${i}]}\n"
     done
 }
@@ -95,7 +95,7 @@ function print_menu(){
 #######################################
 function get_user_selected_option(){
     num_options="${#A_OPTIONS[@]}"
-    read -p "Enter a action to take 1 to ${num_options}:"
+    read -p "Enter a action to take 0 to ${num_options - 1}:"
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
         execute_option "${A_OPTIONS["${REPLY}"]}" 
     fi
