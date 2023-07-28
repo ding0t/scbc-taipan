@@ -87,7 +87,7 @@ function print_menu(){
         col3="(Runs: ${a_option_runs[${i}]})"
         #printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
         #paste <(printf %s "${col1}") <(printf %s "${col3}")
-        printf "${col1} ${col2}\t\t${col3}\n"
+        printf "${col1} ${col2}  ${col3}\n"
         
     done
 }
@@ -154,14 +154,14 @@ function execute_option(){
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
             ps -aux | tee >> "${reconpath}"
-            printf "\n"
+            printf "Proceses\n"
             # TODO analyse
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
             write_log_entry "${reconpath}" "======= listening services; look here for anything that should not be running"
             ss -tlpn | tee >> "${reconpath}"
-            printf "\n"
+            printf "${opt_sh_listen} written to: ${reconpath}\n"
             # TODO analyse
             ;;
         "${opt_sh_svcs}")
@@ -185,7 +185,7 @@ function execute_option(){
             ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
-            break 2
+            exit 0
             ;;
         "*")
             printf "Enter a number from above range only\n"
