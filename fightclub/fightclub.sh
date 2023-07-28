@@ -49,7 +49,7 @@ while :;do
     read -p "Enter a action to take 1 to ${num_options}:"
 	# asess reply
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
-		printf "Executing option "${REPLY}""
+		#printf "Executing option "${REPLY}""
         execute_option "${A_OPTIONS["${REPLY}"]}" 
 	else 
 		printf "Enter a number from above range only\n"

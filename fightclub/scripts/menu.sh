@@ -82,7 +82,12 @@ function print_menu(){
     #  Show options like
     # 1) "Option"
     for i in "${!A_OPTIONS[@]}"; do
-        printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
+        col1="${i})"
+        col2="${A_OPTIONS[${i}]}"
+        col3="(Runs: ${a_option_runs[${i}]})"
+        #printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
+        paste <(printf %s "${col1}") <(printf %s "${col2}") <(printf %s "${col3}")
+        
     done
 }
 
@@ -157,7 +162,6 @@ function execute_option(){
             ss -tlpn | tee >> "${reconpath}"
             printf "\n"
             # TODO analyse
-            
             ;;
         "${opt_sh_svcs}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
@@ -180,13 +184,14 @@ function execute_option(){
             ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
-            break 
+            break 2
             ;;
         "*")
             printf "Enter a number from above range only\n"
             
             ;;
     esac
+    increment_option_runcount
 }
 
 #######################################
