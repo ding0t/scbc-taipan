@@ -82,7 +82,7 @@ function print_menu(){
     #  Show options like
     # 1) "Option"
     for i in "${!A_OPTIONS[@]}"; do
-        printf "${i}) ${A_OPTIONS[${i}]}\t(Run count: ${a_option_runs[${i}]})\n"
+        printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
     done
 }
 
