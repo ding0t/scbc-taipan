@@ -4,9 +4,10 @@
 # These functions setup the main selection menu
 # 
 # PROVIDES
-# apt_purge_tools
-# apt_purge_servcies
-# snap_remove
+# print_logo
+# print_menu
+# get_user_selected_option
+# execute_option
 
 # define menu options for options array
 # This text will be used in the case statement, keep short
@@ -66,7 +67,7 @@ echo "${logo_b64}" | base64 -d
 # Globals:
 #   A_OPTIONS
 # Arguments:
-#
+#   $0 itself
 # Outputs:
 #   Nil
 #######################################

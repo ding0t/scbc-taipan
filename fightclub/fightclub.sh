@@ -31,13 +31,12 @@ reconpath="${script_dir}${reconfile}"
 #trap '' SIGINT SIGQUIT SIGTSTP
 
 # import functions from scripts directory
-source $(dirname "${0}")/scripts/config_ssh.sh
-source $(dirname "${0}")/scripts/config_users.sh
-source $(dirname "${0}")/scripts/apt.sh
-# snap
-source $(dirname "${0}")/scripts/config_kernel.sh
-source $(dirname "${0}")/scripts/logger.sh
-source $(dirname "${0}")/scripts/menu.sh
+source "$(dirname "${0}")/scripts/config_ssh.sh"
+source "$(dirname "${0}")/scripts/config_users.sh"
+source "$(dirname "${0}")/scripts/apt.sh"
+source "$(dirname "${0}")/scripts/config_kernel.sh"
+source "$(dirname "${0}")/scripts/logger.sh"
+source "$(dirname "${0}")/scripts/menu.sh"
 
 # lets get going...
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
