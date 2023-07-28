@@ -33,7 +33,7 @@ reconpath="${script_dir}${reconfile}"
 # import functions from scripts directory
 source "$(dirname "${0}")/scripts/config_ssh.sh"
 source "$(dirname "${0}")/scripts/config_users.sh"
-source "$(dirname "${0}")/scripts/apt.sh"
+source "$(dirname "${0}")/scripts/applications.sh"
 source "$(dirname "${0}")/scripts/config_kernel.sh"
 source "$(dirname "${0}")/scripts/logger.sh"
 source "$(dirname "${0}")/scripts/menu.sh"
@@ -48,6 +48,7 @@ while :;do
     read -p "Enter a action to take 1 to ${num_options}:"
 	# asess reply
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
+		printf "Executing option "${REPLY}""
         execute_option "${A_OPTIONS["${REPLY}"]}" 
 	else 
 		printf "Enter a number from above range only\n"

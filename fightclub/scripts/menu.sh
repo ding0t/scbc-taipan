@@ -80,6 +80,7 @@ function print_menu(){
     # 1) "Option"
     for i in in "${!A_OPTIONS[@]}"; do
         printf "${i}) A_OPTIONS[${i}]"
+    done
 }
 
 #######################################
