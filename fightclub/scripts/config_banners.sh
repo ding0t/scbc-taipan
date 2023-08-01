@@ -25,10 +25,10 @@ function set_motd_terminal(){
     # note /etc/issue.net is set in ssh_config
     banner_warn_filename="/etc/login.warn"
     banner_local_Filename="/etc/issue"
-    tee -a "${banner_filename}" <EOF
+    tee -a "${banner_filename}" <<EOF
 This system is for official use only by authorised users
 EOF
-    tee -a "${banner_local_Filename}" <EOF
+    tee -a "${banner_local_Filename}" <<EOF
 This system is for official use only by authorised users
 EOF
 
@@ -51,18 +51,19 @@ function set_gnome_login_banner(){
     gdm_profile_filename="/etc/dconf/profile/gdm"
     gnome_banner_filename="/etc/dconf/db/gdm.d/01-banner-message"
 
-    tee -a "${gdm_profile_filename}" <<EOF
+    cat <> "${gdm_profile_filename}" 
 [org/gnome/login-screen] 
 banner-message-enable=true 
 banner-message-text='This system is for official use only by authorised users.'
 EOF   
 
-    tee -a "${gnome_banner_filename}" <<EOF
+    cat <> "${gnome_banner_filename}" 
 user-db:user 
 system-db:gdm 
 file-db:/usr/share/gdm/greeter-dconf-defaults
 EOF
 dconf update
+EOF
 
 }
 
