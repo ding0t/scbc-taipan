@@ -75,5 +75,5 @@ function snap_remove_named_tools(){
     for i in "${A_SNAP_TOOLS[@]}"; do
         snap remove "${i}"
     done
-	write_log_entry "${logpath}" "${0}"
+	
 }

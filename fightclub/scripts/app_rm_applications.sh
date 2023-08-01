@@ -44,7 +44,7 @@ function apt_purge_tools(){
         apt purge -y "${i}"
     done
 	apt autoremove -y
-	write_log_entry "${logpath}" "${0}"
+	
 }
 
 #######################################
@@ -77,7 +77,7 @@ function apt_purge_servcies(){
         apt purge -y "${i}"
     done
 	apt autoremove -y
-	write_log_entry "${logpath}" "${0}"
+	
 }
 
 

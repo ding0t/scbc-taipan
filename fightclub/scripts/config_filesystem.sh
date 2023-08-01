@@ -19,5 +19,5 @@ function disable_shm(){
     # should test if line exists, add if does not
     echo "none     /dev/shm     tmpfs     ro,noexec,nosuid,nodev     0     0" >> /etc/fstab
     mount -o remount /dev/shm
-    write_log_entry "${logpath}" "${0}"
+    
 }

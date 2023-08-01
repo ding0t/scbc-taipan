@@ -31,7 +31,7 @@ EOF
     tee -a "${banner_local_Filename}" <EOF
 This system is for official use only by authorised users
 EOF
-write_log_entry "${logpath}" "${0}"
+
 }
 
 
@@ -63,7 +63,7 @@ system-db:gdm
 file-db:/usr/share/gdm/greeter-dconf-defaults
 EOF
 dconf update
-write_log_entry "${logpath}" "${0}"
+
 }
 
 #######################################
@@ -84,5 +84,5 @@ function set_banner_permissions(){
     chmod 644 /etc/issue.net
     chown root:root /etc/motd 
     chmod 644 /etc/motd
-    write_log_entry "${logpath}" "${0}"
+    
 }

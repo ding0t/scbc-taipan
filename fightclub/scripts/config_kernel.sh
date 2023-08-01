@@ -35,7 +35,7 @@ net.ipv4.icmp_ratelimit = 20
 net.ipv4.icmp_ratemask = 88089
 kernel.sysrq=0
 EOT
-  write_log_entry "${logpath}" "${0}"
+  
 }
 
 
@@ -77,7 +77,7 @@ function set_kernel_networking_security(){
   echo "1" > /proc/sys/net/ipv6/conf/default/disable_ipv6 
   #Prevent IP spoofing
   # echo "nospoof on" > sudo tee -a /etc/host.conf    #ERROR
-  write_log_entry "${logpath}" "${0}"
+  
 }
 
 #######################################
@@ -124,7 +124,7 @@ function set_kernel_networking_performance(){
   echo "15" > /proc/sys/net/ipv4/tcp_reordering
   #
   echo "cubic" > /proc/sys/net/ipv4/tcp_congestion_control
-  write_log_entry "${logpath}" "${0}"
+  
 }
 
 #######################################
@@ -142,7 +142,7 @@ function set_kernel_memory_protections(){
   # Enable ExecShield
   echo "1" > /proc/sys/kernel/exec-shield
   echo "1" > /proc/sys/kernel/randomize_va_space
-  write_log_entry "${logpath}" "${0}"
+  
 }
 
 
@@ -161,7 +161,7 @@ function set_kernel_filesystem(){
   echo "7930900" > /proc/sys/fs/file-max
   # Allow for more PIDs
   echo "65536" > /proc/sys/kernel/pid_max
-  write_log_entry "${logpath}" "${0}"
+  
 }
 
 
@@ -179,6 +179,6 @@ function set_kernel_memory_ratios(){
   echo "5" > /proc/sys/vm/swappiness
   echo "20" > /proc/sys/vm/dirty_background_ratio
   echo "25" > /proc/sys/vm/dirty_ratio
-  write_log_entry "${logpath}" "${0}"
+  
 }
 

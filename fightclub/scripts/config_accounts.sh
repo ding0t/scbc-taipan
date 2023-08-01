@@ -22,7 +22,7 @@
 function lock_root(){
     # /etc/shadow username:!: means locked
     passwd -l root
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 #######################################
@@ -42,7 +42,7 @@ function set_login_defaults(){
     sed -i '/PASS_WARN_AGE/ c\PASS_WARN_AGE 7' "${passwd_logins_config_file}"
     sed -i '/LOGIN_TIMEOUT/ c\LOGIN_TIMEOUT 60' "${passwd_logins_config_file}"
     sed -i '/CHFN_RESTRICT/ c\CHFN_RESTRICT rwh' "${passwd_logins_config_file}"
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 #######################################
@@ -66,7 +66,7 @@ auth    required    pam_tally2.so    onerr=fail deny=3 unlock_time=1800
 auth    required                        pam_permit.so
 
 EOF
-write_log_entry "${logpath}" "${0}"
+
 }
 
 #######################################
@@ -89,7 +89,7 @@ function disable_guest_account(){
     grep -qiF "${disable_autologin_str}" "${lightdm_config_file}" &&
         sed -i 's/${disable_autologin_str}/${disable_autologin_str}/' "${lightdm_config_file}" || echo "${disable_autologin_str}" >> "${lightdm_config_file}"
     
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 
@@ -118,5 +118,5 @@ function set_password_complexity(){
     sed -i '/ocredit/ c\ocredit = -1' "${password_quality_filename}"
     sed -i '/usercheck/ c\usercheck = 1' "${password_quality_filename}"
     sed -i '/enforcing/ c\enforcing = 1' "${password_quality_filename}"
-    write_log_entry "${logpath}" "${0}"
+    
 }

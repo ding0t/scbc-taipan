@@ -21,7 +21,7 @@ function get_system_recon(){
     ps -aux  >> "${reconpath}"
     ss -tlpn >> "${reconpath}"
     systemctl --type=service >> "${reconpath}"
-    write_log_entry "${logpath}" "${0}"
+    
 } 
 
 #######################################
@@ -34,11 +34,11 @@ function get_system_recon(){
 #   Nil
 #######################################
 function recon_get_processes(){
-    write_log_entry "${reconpath}" "====== running processes; "
-    ptree -p >> "${reconpath}"
-    write_log_entry "${reconpath}" "====== running processes tree view; "
+    write_log_entry "${reconpath}" "====== running processestree view\n"
+    pstree -p >> "${reconpath}"
+    write_log_entry "${reconpath}" "====== running processes\n "
     ps -aux >> "${reconpath}"
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 #######################################
@@ -51,9 +51,8 @@ function recon_get_processes(){
 #   Nil
 #######################################
 function recon_get_services(){
-    write_log_entry "${reconpath}" "====== services; "
+    write_log_entry "${reconpath}" "====== services"
     systemctl --type=service >> "${reconpath}"
-    write_log_entry "${logpath}" "${0}"
     # TODO analyse against a list
 }
 
@@ -67,9 +66,8 @@ function recon_get_services(){
 #   Nil
 #######################################
 function recon_get_listening(){
-    write_log_entry "${reconpath}" "====== listening services; look here for anything that should not be running"
+    write_log_entry "${reconpath}" "====== listening services; look here for anything that should not be running\n"
     ss -tlpn >> "${reconpath}"
-    write_log_entry "${logpath}" "${0}"
 }
 
 #######################################
@@ -83,7 +81,7 @@ function recon_get_listening(){
 #######################################
 function analyse_recondata(){
     #printf "todo\n"
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 #######################################
@@ -98,7 +96,7 @@ function analyse_recondata(){
 function check_for_admins(){
     grep -i sudo /etc/group
     grep -i adm /etc/group
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 #######################################
@@ -115,5 +113,5 @@ function check_installed(){
     apt list --installed 
     grep -i 'install\s' /var/log/dpkg.log*
     zgrep -i 'install\s' /var/log/dpkg.log.*.gz
-    write_log_entry "${logpath}" "${0}"
+    
 }

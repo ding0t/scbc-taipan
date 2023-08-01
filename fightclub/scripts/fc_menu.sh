@@ -37,9 +37,9 @@ opt_find_media_files="FORENSICS: Find media files"
 # tips
 # unlock account when locked
 # script operations
-opt_quit="FC: Quit"
-opt_show_functions="FC: Show available functions"
-opt_clean_menu="FC: Redisplay  menu"
+opt_quit="FightClub: Quit"
+opt_show_functions="FightClub: Show available functions"
+opt_clean_menu="FightC: Redisplay  menu"
 
 # 2
 # order of array will set order of options

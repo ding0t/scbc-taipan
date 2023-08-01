@@ -78,7 +78,7 @@ function config_ssh(){
 
     # restart sshd to apply changes
     systemctl restart sshd
-    write_log_entry "${logpath}" "${0}"
+    
 }
 
 ## If run on its own uncomment the below line:
