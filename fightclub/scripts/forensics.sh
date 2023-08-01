@@ -30,7 +30,8 @@ function find_media_files_by_extension(){
 		find ${$2} -iname "${search}${1}" -type f
 	else
 		for i in "${A_MEDIA_FILES[@]}"; do
-        find ${dir} -iname "${search}${i}" -type f
+        	find ${dir} -iname "${search}${i}" -type f
+		done
 	fi
 	#find . -name '*.mp3' -type f 
 	

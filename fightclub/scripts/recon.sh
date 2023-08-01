@@ -81,6 +81,7 @@ function recon_get_listening(){
 #######################################
 function analyse_recondata(){
     #printf "todo\n"
+    sleep 2
     
 }
 

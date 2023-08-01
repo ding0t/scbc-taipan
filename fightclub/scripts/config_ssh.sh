@@ -21,7 +21,7 @@ function config_ssh_banner(){
 
 This computer system is the private property of its owner, whether
 individual, corporate or government.  It is for authorized use only.
-Users (authorized or unauthorized) have no explicit or implicit
+Users, authorized or unauthorized, have no explicit or implicit
 expectation of privacy.
 
 Any or all uses of this system and all files on this system may be
