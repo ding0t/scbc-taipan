@@ -36,7 +36,7 @@ function enable_security_updates(){
     sed -i '/security.ubuntu/s/^#//g' "${passwd_logins_config_file}"
 }
 
-software-properties-gtk
+
 #######################################
 # WIP
 # Globals:
