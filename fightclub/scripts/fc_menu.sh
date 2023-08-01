@@ -162,19 +162,19 @@ function execute_option(){
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
             recon_get_processes
-            print "Check here for output: ${reconpath}\n"
+            echo "Check here for output: ${reconpath}"
             # TODO analyse
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
             recon_get_listening
-            print "Check here for output: ${reconpath}\n"
+            echo "Check here for output: ${reconpath}"
             # TODO analyse
             ;;
         "${opt_sh_svcs}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
             recon_get_services
-            print "Check here for output: ${reconpath}\n"
+            echo "Check here for output: ${reconpath}"
             ;;
         #### applications
         "${opt_update}")
