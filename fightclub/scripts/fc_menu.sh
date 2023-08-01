@@ -198,7 +198,7 @@ function execute_option(){
         ### secure config
         "${opt_set_ssh}")
             write_log_entry "${logpath}" "Executed: ${opt_set_ssh}"
-            config_ssh_banner
+            config_ssh_banner "./rsc/banner.txt"
             config_ssh
             printf "SSH configured\n"
             ;;
