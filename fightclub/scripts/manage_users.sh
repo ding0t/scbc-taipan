@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # ABOUT
-# These functions remove applications
+# These functions configure users
 # 
 # PROVIDES
 # apt_purge_tools

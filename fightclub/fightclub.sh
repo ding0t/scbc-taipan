@@ -83,7 +83,7 @@ print_clean_menu
 while :;do
 	# User instructions
 	# ask user
-    read -p "Enter action 0 to ${((num_options-1))}:"
+    read -p "Enter action 0 to $((num_options-1)):"
 	# asess reply
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
 		#printf "Executing option "${REPLY}""

@@ -1,7 +1,7 @@
-# Cyber Taipan
+# SCBC FightClub for Cyber Taipan
 _Caution in DRAFT results are untested_
 
-Run scripts for South Coast Baptist College 
+Run scripts for South Coast Baptist College
 
 ## How To Use
 *Note: scripts can cause penalties and break images if you are not sure what it is doing*
@@ -9,14 +9,18 @@ Run scripts for South Coast Baptist College
 You can dowload the script as a zip archive or by using git
 
 ```sh
-sudo apt install git
+sudo apt install git -y
+cd ~
 git clone https://github.com/ding0t/scbc-taipan.git
-cd scbc-taipan/fightclub
-sudo bash ./fightclub.sh
 ``` 
+Run the scripts like:
+```sh
+cd ~/scbc-taipan/fightclub
+sudo bash ./fightclub.sh
+```
  
-### Linux 
-1. Do the foresnic questions first
+# Completinfg the challenge notes 
+1. Do the forensic questions first
 1. Run open a new terminal window and as root, `sudo su` run `apt update` followed by `apt install git`
 1. Run the command `git clone`
 1. `cd ` followed by `chmod +x fightclub.sh` then `./runme.sh`
