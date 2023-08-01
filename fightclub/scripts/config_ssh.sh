@@ -75,7 +75,7 @@ function config_ssh(){
 
     # if we have only specific users that need ssh
     #AllowUsers <username> 
-
+    
     # restart sshd to apply changes
     systemctl restart sshd
     
