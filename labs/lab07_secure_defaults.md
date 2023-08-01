@@ -65,7 +65,7 @@ ClientAliveCountMax 3
 
 ## Check sudoers for overly permissive lines
 1. `sudo visudo`
-1. bad `ALL\s+ALL\s*=\s*NOPASSWD\s*:\s*ALL` all users, all commands, no password
+1. bad `ALL ALL=NOPASSWD: ALL` all users, all commands, no password
    1. If exists delete the line 
    1. the default editor should be nano, if you end up in vi... 
 
@@ -92,8 +92,6 @@ kernel.sysrq=0
 1. Check the settings `sudo sysctl -a | grep 1337` is our update in place?
 1. reload using `sudo sysctl --system`
    1. test `sudo sysctl -a | grep sysrq` 
-
-## Secure SSH defaults
 
 ## no exec on temporary file locations
 

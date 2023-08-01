@@ -7,11 +7,14 @@ Run scripts for South Coast Baptist College
 *Note: scripts can cause penalties and break images if you are not sure what it is doing*
 
 You can dowload the script as a zip archive or by using git
-1. `sudo apt install git`
-1. `cd ~`
-1. `git pull `
- 
 
+```sh
+sudo apt install git
+git clone https://github.com/ding0t/scbc-taipan.git
+cd scbc-taipan/fightclub
+sudo bash ./fightclub.sh
+``` 
+ 
 ### Linux 
 1. Do the foresnic questions first
 1. Run open a new terminal window and as root, `sudo su` run `apt update` followed by `apt install git`

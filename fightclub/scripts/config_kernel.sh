@@ -14,7 +14,7 @@
 
 
 #######################################
-# what
+# Set sysctl.conf secure configs
 # Globals:
 #   nil
 # Arguments:
@@ -40,7 +40,7 @@ EOT
 
 
 #######################################
-# what
+# Network securtiy configs for kernel
 # Globals:
 #   nil
 # Arguments:
@@ -81,7 +81,7 @@ function set_kernel_networking_security(){
 }
 
 #######################################
-# what
+# Networking performance configs
 # Globals:
 #   nil
 # Arguments:
@@ -128,7 +128,7 @@ function set_kernel_networking_performance(){
 }
 
 #######################################
-# what
+# Enables kernel memory protections
 # Globals:
 #   nil
 # Arguments:
@@ -147,7 +147,7 @@ function set_kernel_memory_protections(){
 
 
 #######################################
-# what
+# Set filesytem settings
 # Globals:
 #   nil
 # Arguments:
@@ -166,7 +166,7 @@ function set_kernel_filesystem(){
 
 
 #######################################
-# what
+# Setup kernel memory behaviors
 # Globals:
 #   nil
 # Arguments:

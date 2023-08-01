@@ -6,7 +6,7 @@
 # PROVIDES
 # apt_purge_tools
 # apt_purge_servcies
-# 
+
 
 #######################################
 # what
@@ -36,13 +36,15 @@ function apt_purge_tools(){
 	kismet 
 	lcrack 
 	ophcrack
-	sl 
+	sl
+	scanmem
 	Freeciv 
 	zenmap)
     for i in "${A_TOOLS[@]}"; do
         apt purge -y "${i}"
     done
 	apt autoremove -y
+	write_log_entry "${logpath}" "${0}"
 }
 
 #######################################
@@ -60,12 +62,14 @@ function apt_purge_servcies(){
 	mysql-server
 	nmdb 
 	php5 
-	postfix 
+	postfix
+	pure-ftpd 
 	postgresql
 	tomcat 
 	tomcat6 
 	telnet 
 	telnet-server
+	telnetd
 	tightvnc-common tightvncserver 
 	vnc4server 
 	vncserver)
@@ -73,23 +77,8 @@ function apt_purge_servcies(){
         apt purge -y "${i}"
     done
 	apt autoremove -y
+	write_log_entry "${logpath}" "${0}"
 }
 
 
-#######################################
-# what
-# Globals:
-#   nil
-# Arguments:
-#   $0 its own name
-# Outputs:
-#   Nil
-#######################################
-function snap_remove(){
-	A_SNAP_TOOLS=(nmap 
-	john-the-ripper)
-    for i in "${A_SNAP_TOOLS[@]}"; do
-        snap remove "${i}"
-    done
-}
 

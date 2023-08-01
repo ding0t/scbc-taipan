@@ -14,11 +14,29 @@
 # 1. All of the scipts in ./scripts folder
 # 1. Run as sudo (root priviliges)
 #
+# REFERENCES
+# https://secscan.acron.pl/centos7/1/7/2
+# https://secscan.acron.pl/ubuntu1604/start
+#
 # TODO
 # Provide feedback of actions taken to stdout (clearing menu atm, reprint or save some output, or have a menu when in an option)
-# keep state of actions; put a number of times run next to any action already run
-# install av and run scan
-# install ufw and enable and setup
+#
+# copy any configs changed
+#
+# recon system
+# backup - key files
+# patch - os
+# patch - applications
+# check users and permissions
+# secure config - kernel
+# secure config - services
+# secure config - sudoers
+# remove - hacker tools
+# remove - non-business applications
+# remove - unused services
+# remove - non-business files
+# protect - enable firewall, setup
+# protect - enable av, setup, execute scan
 
 
 # Check if running as root
@@ -31,13 +49,32 @@ fi
 #trap '' SIGINT SIGQUIT SIGTSTP
 
 # import functions from scripts directory
-source "$(dirname "${0}")/scripts/config_ssh.sh"
-source "$(dirname "${0}")/scripts/config_users.sh"
-source "$(dirname "${0}")/scripts/applications.sh"
+# global variables
+source "$(dirname "${0}")/scripts/fc_globals.sh"
+# menu setup and execution
+source "$(dirname "${0}")/scripts/fc_menu.sh"
+source "$(dirname "${0}")/scripts/fc_logger.sh"
+# recon
+source "$(dirname "${0}")/scripts/recon.sh"
+# check users 
+
+# secure config
+source "$(dirname "${0}")/scripts/config_accounts.sh"
+source "$(dirname "${0}")/scripts/config_applications.sh"
+source "$(dirname "${0}")/scripts/config_banners.sh"
+source "$(dirname "${0}")/scripts/config_filesystem.sh"
 source "$(dirname "${0}")/scripts/config_kernel.sh"
-source "$(dirname "${0}")/scripts/logger.sh"
-source "$(dirname "${0}")/scripts/menu.sh"
-source "$(dirname "${0}")/scripts/globals.sh"
+source "$(dirname "${0}")/scripts/config_ssh.sh"
+source "$(dirname "${0}")/scripts/config_audit.sh"
+
+# apt and snap and services
+source "$(dirname "${0}")/scripts/app_update_apt.sh"
+source "$(dirname "${0}")/scripts/app_rm_applications.sh"
+source "$(dirname "${0}")/scripts/app_rm_snap.sh"
+# protect_firewall
+
+# protect_av
+
 
 # lets get going...
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
@@ -46,7 +83,7 @@ print_clean_menu
 while :;do
 	# User instructions
 	# ask user
-    read -p "Enter a action to take 1 to ${num_options}:"
+    read -p "Enter action 0 to ${((num_options-1))}:"
 	# asess reply
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
 		#printf "Executing option "${REPLY}""

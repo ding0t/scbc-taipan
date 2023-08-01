@@ -2,6 +2,11 @@
 #
 # ABOUT
 # These functions setup the main selection menu
+#
+# ADDING AN OPTION
+# 1. add a new option variable and assign a dsiplay name
+# 2. add the option to the option array; this is the display order
+# 3. add a case statemeent and execution instructions to the function "execute_option"
 # 
 # PROVIDES
 # print_logo
@@ -9,34 +14,49 @@
 # get_user_selected_option
 # execute_option
 
+# 1
 # define menu options for options array
 # This text will be used in the case statement, keep short
 # show state
-opt_sh_listen="Show listening connections"
-opt_sh_svcs="Show services"
-opt_sh_process="Show running processes"
+opt_sh_listen="RECON: listening connections"
+opt_sh_svcs="RECON: active services"
+opt_sh_process="RECON: running processes"
 # applications
-opt_update="Update system and applications"
-opt_purge_tools="Purge hacker tools"
+opt_update="APPS: Update system and applications"
+opt_purge_tools="APPS: Purge hacker tools"
+opt_rm_snap="APPS: Remove snap package manager"
 # configure settings
-opt_set_ssh="Configure SSH"
-opt_set_kernel="Configure kernel defaults"
-opt_set_shm="Disable /dev/shm"
+opt_set_ssh="CONFIG: Configure SSH"
+opt_set_banners="CONFIG: set login banners"
+opt_set_kernel="CONFIG: set kernel defaults"
+opt_set_audit="CONFIG: set audit policies"
+opt_set_shm="CONFIG: Disable /dev/shm"
+opt_set_account_policies="CONFIG: Set password and account policies"
+# forensics
+opt_find_media_files="FORENSICS: Find media files"
 # script operations
-opt_quit="Quit"
-opt_clean_menu="Redisplay  menu"
+opt_quit="FC: Quit"
+opt_show_functions="FC: Show available functions"
+opt_clean_menu="FC: Redisplay  menu"
 
+# 2
 # order of array will set order of options
 # Place them in reccomended order of execution
-A_OPTIONS=("${opt_update}" 
-"${opt_sh_listen}" 
+A_OPTIONS=("${opt_sh_listen}" 
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
-"${opt_purge_tools}" 
-"${opt_set_ssh}" 
+"${opt_purge_tools}"
+"${opt_update}"
+"${opt_rm_snap}" 
+"${opt_set_ssh}"
+"${opt_set_banners}" 
+"${opt_set_account_policies}"
+"${opt_set_audit}"
 "${opt_set_kernel}" 
 "${opt_set_shm}"
-"${opt_clean_menu}" 
+"${opt_find_media_files}"
+"${opt_clean_menu}"
+"${opt_show_functions}" 
 "${opt_quit}" 
 )
 
@@ -117,14 +137,15 @@ function print_clean_menu(){
 #######################################
 function get_user_selected_option(){
     num_options="${#A_OPTIONS[@]}"
-    read -p "Enter a action to take 0 to ${num_options - 1}:"
+    read -p "Enter a action to take 0 to ${num_options}:"
     if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
         execute_option "${A_OPTIONS["${REPLY}"]}" 
     fi
 }
 
+# 3
 #######################################
-# Displays a menu
+# executes an option when called
 # Globals:
 #   logpath
 #   reconpath
@@ -135,6 +156,25 @@ function get_user_selected_option(){
 #######################################
 function execute_option(){
     case ${1} in
+        ### recon
+        "${opt_sh_process}")
+            write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
+            recon_get_processes
+            print "Check here for output: ${reconpath}\n
+            # TODO analyse
+            ;;
+        "${opt_sh_listen}")
+            write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
+            recon_get_listening
+            print "Check here for output: ${reconpath}\n
+            # TODO analyse
+            ;;
+        "${opt_sh_svcs}")
+            write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
+            recon_get_services
+            print "Check here for output: ${reconpath}\n"
+            ;;
+        #### applications
         "${opt_update}")
             write_log_entry "${logpath}" "Executed: ${opt_update}" 
             apt upgrade && apt update -y
@@ -146,50 +186,73 @@ function execute_option(){
             snap_remove
             printf "apt andd snap tools uninstalled\n"
             ;;
+        "${opt_rm_snap}")
+            write_log_entry "${logpath}" "Executed: ${opt_rm_snap}"
+            #snap_remove_named_tools
+            snap_remove_all_installed
+            #remove_snapd
+            #snap_prevent_reinstall
+            ;;
+        ### secure config
         "${opt_set_ssh}")
             write_log_entry "${logpath}" "Executed: ${opt_set_ssh}"
+            config_ssh_banner
             config_ssh
             printf "SSH configured\n"
             ;;
-        "${opt_sh_process}")
-            write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
-            ps -aux | tee >> "${reconpath}"
-            printf "Proceses\n"
-            # TODO analyse
+        "${opt_set_banners}")
+            write_log_entry "${logpath}" "Executed: ${opt_set_banners}"
+            set_motd_terminal
+            set_gnome_login_banner
+            set_banner_permissions
+            printf "Banners configured\n"
             ;;
-        "${opt_sh_listen}")
-            write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
-            write_log_entry "${reconpath}" "======= listening services; look here for anything that should not be running"
-            ss -tlpn | tee >> "${reconpath}"
-            printf "${opt_sh_listen} written to: ${reconpath}\n"
-            # TODO analyse
+        "${opt_set_account_policies}")
+            write_log_entry "${logpath}" "Executed: ${opt_set_account_policies}"
+            lock_root
+            set_login_defaults
+            set_lockout_policy
+            disable_guest_account
+            set_password_complexity
+            print "Account policies configured.\n"
             ;;
-        "${opt_sh_svcs}")
-            write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
-            systemctl --type=service | tee >> "${reconpath}"
-            # TODO analyse against a list
-            
+        "${opt_set_audit}")
+            write_log_entry "${logpath}" "Executed: ${opt_set_audit}"
+            remove_bash_history_symlink
+            print "Audit policies configured.\n"
             ;;
         "${opt_set_kernel}")
             write_log_entry "${logpath}" "Executed: ${opt_set_kernel}"
             set_kernel_networking_security
             set_kernel_sysctlconf
-            
+            set_kernel_memory_protections
+            printf "Reccomended secure kernel defaults configured.\n"
             ;;
         "${opt_set_shm}")
             write_log_entry "${logpath}" "Executed: ${opt_set_shm}" 
             disable_shm
+            printf "\dev\shm is now read only.\n"
             ;;
+        ### forensics
+        "${opt_find_media_files}")
+            find_media_files_by_type
+            ;;
+        ## fightclub specific
         "${opt_clean_menu}")
             print_clean_menu
             ;;
+        "${opt_show_functions}")
+            declare -F
+            ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
+            # print check logfiles
+            printf "Thank you for using SCBC FightClub!\n\n"
             exit 0
             ;;
         "*")
             printf "Enter a number from above range only\n"
-            
+            decalre -F
             ;;
     esac
     increment_option_runcount
@@ -208,22 +271,3 @@ function increment_option_runcount(){
     (( a_option_runs["${REPLY}"]++ ))
 }
 
-#######################################
-# Runs a menu using select
-# Globals:
-#   nil
-# Arguments:
-#
-# Outputs:
-#   Nil
-#######################################
-function run_select_menu(){
-    while true; do
-	# can use "${!A_OPTIONS[@]}"  to iteratre by index vs value or use $REPLY
-	# break forces the menu to be reprinted 
-	printf "Logs are written to: ${logpath}\n"
-	select option in "${A_OPTIONS[@]}"; do
-        execute_option "${option}"
-	done
-done
-}
