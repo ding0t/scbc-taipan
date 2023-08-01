@@ -71,10 +71,12 @@ source "$(dirname "${0}")/scripts/config_audit.sh"
 source "$(dirname "${0}")/scripts/app_update_apt.sh"
 source "$(dirname "${0}")/scripts/app_rm_applications.sh"
 source "$(dirname "${0}")/scripts/app_rm_snap.sh"
-# protect_firewall
+# protect
+source "$(dirname "${0}")/scripts/protect_antivirus.sh"
+source "$(dirname "${0}")/scripts/protect_firewall.sh"
 
-# protect_av
-
+# forensics
+source "$(dirname "${0}")/scripts/forensics.sh"
 
 # lets get going...
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="

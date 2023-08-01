@@ -34,6 +34,8 @@ opt_set_shm="CONFIG: Disable /dev/shm"
 opt_set_account_policies="CONFIG: Set password and account policies"
 # forensics
 opt_find_media_files="FORENSICS: Find media files"
+# tips
+# unlock account when locked
 # script operations
 opt_quit="FC: Quit"
 opt_show_functions="FC: Show available functions"
@@ -42,7 +44,8 @@ opt_clean_menu="FC: Redisplay  menu"
 # 2
 # order of array will set order of options
 # Place them in reccomended order of execution
-A_OPTIONS=("${opt_sh_listen}" 
+A_OPTIONS=("${opt_quit}"
+"${opt_sh_listen}" 
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
 "${opt_purge_tools}"
@@ -57,7 +60,6 @@ A_OPTIONS=("${opt_sh_listen}"
 "${opt_find_media_files}"
 "${opt_clean_menu}"
 "${opt_show_functions}" 
-"${opt_quit}" 
 )
 
 num_options="${#A_OPTIONS[@]}"
@@ -160,13 +162,13 @@ function execute_option(){
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
             recon_get_processes
-            print "Check here for output: ${reconpath}\n
+            print "Check here for output: ${reconpath}\n"
             # TODO analyse
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
             recon_get_listening
-            print "Check here for output: ${reconpath}\n
+            print "Check here for output: ${reconpath}\n"
             # TODO analyse
             ;;
         "${opt_sh_svcs}")
@@ -242,7 +244,8 @@ function execute_option(){
             print_clean_menu
             ;;
         "${opt_show_functions}")
-            declare -F
+            printf "Caution, not all of these functions are tested.\n"
+            declare -F | awk '{print $3}'
             ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
@@ -252,7 +255,6 @@ function execute_option(){
             ;;
         "*")
             printf "Enter a number from above range only\n"
-            decalre -F
             ;;
     esac
     increment_option_runcount
