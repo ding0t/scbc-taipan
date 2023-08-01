@@ -59,12 +59,12 @@ source "$(dirname "${0}")/scripts/recon.sh"
 # check users 
 
 # secure config
+source "$(dirname "${0}")/scripts/config_ssh.sh"
 source "$(dirname "${0}")/scripts/config_accounts.sh"
 source "$(dirname "${0}")/scripts/config_applications.sh"
 source "$(dirname "${0}")/scripts/config_banners.sh"
 source "$(dirname "${0}")/scripts/config_filesystem.sh"
 source "$(dirname "${0}")/scripts/config_kernel.sh"
-source "$(dirname "${0}")/scripts/config_ssh.sh"
 source "$(dirname "${0}")/scripts/config_audit.sh"
 
 # apt and snap and services
