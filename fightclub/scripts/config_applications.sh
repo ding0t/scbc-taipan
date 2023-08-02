@@ -47,5 +47,5 @@ function enable_security_updates(){
 #   Nil
 #######################################
 function launch_updates_config_gui(){
-    software-properties-gtk
+    software-properties-gtk &
 }
