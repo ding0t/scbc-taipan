@@ -175,7 +175,7 @@ function execute_option(){
         ### recon
         "${opt_sh_installed}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_installed}"
-            print "you can also use 'apt list --installed' \n"
+            echo "you can also use 'apt list --installed' \n"
             check_recently_installed
             echo "Check here for output: ${reconpath}"
             ;;

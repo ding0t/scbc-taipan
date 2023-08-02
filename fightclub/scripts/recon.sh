@@ -112,7 +112,6 @@ function check_for_admins(){
 function check_recently_installed(){
     write_log_entry "${reconpath}" "====== recently installed apps\n"
     #use apt search <appname>
-    
     grep -i 'install\s' /var/log/dpkg.log* >> "${reconpath}"
     zgrep -i 'install\s' /var/log/dpkg.log.*.gz >> "${reconpath}"
     
