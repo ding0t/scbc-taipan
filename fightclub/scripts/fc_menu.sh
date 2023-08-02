@@ -238,7 +238,7 @@ function execute_option(){
             set_login_defaults
             set_lockout_policy
             disable_guest_account
-            #set_password_complexity
+            set_password_complexity
             echo "Account policies configured."
             ;;
         "${opt_set_audit}")
