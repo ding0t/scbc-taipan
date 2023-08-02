@@ -261,8 +261,10 @@ function execute_option(){
         ### forensics
         "${opt_find_media_files}")
             write_log_entry "${logpath}" "Executed: ${opt_find_media_files}"
+            global_menu_reply_state="${REPLY}"
             read -p "Enter a path to search like '/home': "
             find_media_files_by_type "${REPLY}"
+            REPLY="${global_menu_reply_state}"
             ;;
         ## fightclub specific
         "${opt_clean_menu}")
