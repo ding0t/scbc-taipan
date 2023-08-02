@@ -236,8 +236,8 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_set_account_policies}"
             lock_root
             set_login_defaults
-            #set_lockout_policy
-            #disable_guest_account
+            set_lockout_policy
+            disable_guest_account
             #set_password_complexity
             echo "Account policies configured."
             ;;
