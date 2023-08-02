@@ -188,7 +188,7 @@ function execute_option(){
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
-            printf "Lines not in colour below are interesting\n"
+            printf "Any process names not in colour below are interesting\n"
             recon_get_listening
             echo "Check here for output: ${reconpath}"
             # TODO analyse
