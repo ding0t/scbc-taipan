@@ -67,7 +67,7 @@ function recon_get_services(){
 #######################################
 function recon_get_listening(){
     write_log_entry "${reconpath}" "====== listening services; look here for anything that should not be running\n"
-    ss -tlpn | tee -a "${reconpath}"
+    ss -tlpn | egrep --color=always -i '^|sshd|systemd-resolve|cupsd' >> "${reconpath}"
 }
 
 #######################################

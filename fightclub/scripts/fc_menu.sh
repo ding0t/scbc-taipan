@@ -51,8 +51,8 @@ opt_clean_menu="FightClub: Redisplay  menu"
 # order of array will set order of options
 # Place them in reccomended order of execution
 A_OPTIONS=("${opt_quit}"
-"${opt_sh_installed}"
 "${opt_sh_tips}"
+"${opt_sh_installed}"
 "${opt_sh_listen}" 
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
@@ -181,12 +181,14 @@ function execute_option(){
             ;;
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
+            #printf "T\n"
             recon_get_processes
             echo "Check here for output: ${reconpath}"
             # TODO analyse
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
+            printf "Lines not in colour below are interesting\n"
             recon_get_listening
             echo "Check here for output: ${reconpath}"
             # TODO analyse
