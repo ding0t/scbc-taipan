@@ -124,7 +124,7 @@ function print_menu(){
 #   Nil
 #######################################
 function print_clean_menu(){
-    clear 
+    #clear 
 	print_menu
 }
 #######################################

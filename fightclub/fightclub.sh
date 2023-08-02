@@ -77,7 +77,6 @@ source "$(dirname "${0}")/scripts/protect_firewall.sh"
 
 # forensics
 source "$(dirname "${0}")/scripts/forensics.sh"
-sleep 5
 
 # lets get going...
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
