@@ -17,7 +17,10 @@
 #######################################
 function disable_shm(){
     # should test if line exists, add if does not
-    echo "none     /dev/shm     tmpfs     ro,noexec,nosuid,nodev     0     0" >> /etc/fstab
+    fstab_filename="/etc/fstab"
+    create_backup_of_file "${fstab_filename}"
+    echo "none     /dev/shm     tmpfs     ro,noexec,nosuid,nodev     0     0" >> "${fstab_filename}"
+    create_edited_config_mark "${fstab_filename}"
     mount -o remount /dev/shm
     
 }

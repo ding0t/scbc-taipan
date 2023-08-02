@@ -25,6 +25,7 @@ function config_ssh_banner(){
     issue_file="/etc/issue.net"
     create_backup_of_file "${issue_file}"
     install -D -m 644 "${1}" "${issue_file}"
+    create_edited_config_mark "${issue_file}"
 }
 
 #######################################
@@ -58,6 +59,7 @@ function config_ssh(){
     # if we have only specific users that need ssh
     #AllowUsers <username> 
     
+    create_edited_config_mark "${ssh_config_file}"
     # restart sshd to apply changes
     systemctl restart sshd
     

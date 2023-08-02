@@ -24,6 +24,7 @@ opt_sh_process="RECON: running processes"
 # applications
 opt_update="APPS: Update system and applications"
 opt_purge_tools="APPS: Purge hacker tools"
+opt_purge_services="APPS: remove likely uneeded services"
 opt_rm_snap="APPS: Remove snap package manager"
 # configure settings
 opt_set_ssh="CONFIG: Configure SSH"
@@ -49,6 +50,7 @@ A_OPTIONS=("${opt_quit}"
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
 "${opt_purge_tools}"
+"${opt_purge_services}"
 "${opt_update}"
 "${opt_rm_snap}" 
 "${opt_set_ssh}"
@@ -185,8 +187,14 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_purge_tools}" 
             # TODO read to confirm
             apt_purge_tools
+            apt_purge_games
             snap_remove
-            printf "apt andd snap tools uninstalled\n"
+            printf "apt and snap tools uninstalled\n"
+            ;;
+        "${opt_purge_services}")
+            write_log_entry "${logpath}" "Executed: ${opt_purge_services}"
+            apt_purge_servcies
+            printf "Services uninstalled\n"
             ;;
         "${opt_rm_snap}")
             write_log_entry "${logpath}" "Executed: ${opt_rm_snap}"
@@ -245,7 +253,9 @@ function execute_option(){
             ;;
         "${opt_show_functions}")
             printf "Caution, not all of these functions are tested.\n"
-            declare -F | awk '{print $3}'
+            a_functions=("$(declare -F | awk '{print $3}')")
+            echo "${a_functions}"
+            #read -p "Enter a function name to run: "
             ;;
         "${opt_quit}")
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # ABOUT
-# These functions remove applications
+# These functions remove applications using apt
 # 
 # PROVIDES
 # apt_purge_tools
@@ -23,11 +23,8 @@ function apt_purge_tools(){
 	airmon-ng 
 	hydra-gtk
 	john 
-	johnny 
-	hive 
 	burp 
 	cainandable 
-	myheritage
 	wireshark 
 	nmap 
 	nikto 
@@ -38,7 +35,6 @@ function apt_purge_tools(){
 	ophcrack
 	sl
 	scanmem
-	Freeciv 
 	zenmap)
     for i in "${A_TOOLS[@]}"; do
         apt purge -y "${i}"
@@ -80,5 +76,20 @@ function apt_purge_servcies(){
 	
 }
 
-
+#######################################
+# remove games
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+#######################################
+function apt_purge_games(){
+	A_TOOLS=(freeciv)
+	for i in "${A_SERVICES[@]}"; do
+ 	   apt purge -y "${i}"
+    done
+	apt autoremove -y
+}
 

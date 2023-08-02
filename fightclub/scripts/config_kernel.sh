@@ -24,18 +24,9 @@
 #######################################
 function set_kernel_sysctlconf(){
   sysctl_conf="/etc/sysctl.conf"
-  cat <<EOT >> "${sysctl_conf}"
-net.ipv4.conf.all.rp_filter = 1
-net.ipv4.conf.all.accept_source_route = 0
-net.ipv4.tcp_rfc1337 = 1
-net.ipv4.tcp_syncookies = 1
-net.ipv4.icmp_echo_ignore_broadcasts = 1
-icmp_ignore_bogus_error_responses = 1
-net.ipv4.icmp_ratelimit = 20
-net.ipv4.icmp_ratemask = 88089
-kernel.sysrq=0
-EOT
-  
+  create_backup_of_file "${sysctl_conf}"
+  cat "$(dirname "${0}")/rsc/sysctl.conf" >> "${sysctl_conf}"
+  create_edited_config_mark "${sysctl_conf}" 
 }
 
 

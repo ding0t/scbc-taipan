@@ -10,4 +10,5 @@ logfile="/logfight.log"
 logpath="${script_dir}${logfile}"
 reconfile="/recondata.txt"
 reconpath="${script_dir}${reconfile}"
+edited_config_mark="# edited by SCBC taipan"
 
