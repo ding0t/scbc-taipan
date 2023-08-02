@@ -24,9 +24,7 @@ function config_ssh_banner(){
     # set up a banner message
     issue_file="/etc/issue.net"
     create_backup_of_file "${issue_file}"
-    cp "${1}" "${issue_file}"
-    chown root:root "${issue_file}"
-    chmod 644 "${issue_file}"
+    install -D -m 644 "${1}" "${issue_file}"
 }
 
 #######################################

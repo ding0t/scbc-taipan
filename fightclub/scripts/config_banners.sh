@@ -25,12 +25,11 @@ function set_motd_terminal(){
     # note /etc/issue.net is set in ssh_config
     banner_warn_filename="/etc/login.warn"
     banner_local_Filename="/etc/issue"
-    tee -a "${banner_filename}" <<EOF
-This system is for official use only by authorised users
-EOF
-    tee -a "${banner_local_Filename}" <<EOF
-This system is for official use only by authorised users
-EOF
+    banner_motd_filename="/etc/motd"
+
+    install -D -m 644  "$(dirname "${0}")/rsc/banner.txt" "${banner_warn_filename}" 
+    install -D -m 644  "$(dirname "${0}")/rsc/banner.txt" "${banner_local_Filename}"
+    install -D -m 644  "$(dirname "${0}")/rsc/banner.txt" "${banner_motd_filename}"
 
 }
 
@@ -49,22 +48,12 @@ EOF
 #######################################
 function set_gnome_login_banner(){
     gdm_profile_filename="/etc/dconf/profile/gdm"
-    gnome_banner_filename="/etc/dconf/db/gdm.d/01-banner-message"
+    gdm_keyfile_filename="/etc/dconf/db/gdm.d/01-banner-message"
 
-    cat <> "${gdm_profile_filename}" 
-[org/gnome/login-screen] 
-banner-message-enable=true 
-banner-message-text='This system is for official use only by authorised users.'
-EOF   
-
-    cat <> "${gnome_banner_filename}" 
-user-db:user 
-system-db:gdm 
-file-db:/usr/share/gdm/greeter-dconf-defaults
-EOF
-dconf update
-EOF
-
+    install -D -m 644 "$(dirname "${0}")/rsc/gdm" "${gdm_profile_filename}" 
+    install -D -m 644 "$(dirname "${0}")/rsc/01-banner-message" "${gdm_keyfile_filename}" 
+    # 
+    dconf update
 }
 
 #######################################
