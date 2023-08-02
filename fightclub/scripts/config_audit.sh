@@ -19,7 +19,8 @@
 #######################################
 function remove_bash_history_symlink(){
     bash_history_filepath="~/.bash_history"
-    if [[ ! -L "${bash_history_filepath}" ]]; then
+    # test if file is a symlink
+    if [[ -L "${bash_history_filepath}" ]]; then
         rm "${bash_history_filepath}"
     fi
 }

@@ -230,7 +230,7 @@ function execute_option(){
             set_motd_terminal
             set_gnome_login_banner
             set_banner_permissions
-            printf "Banners configured\n"
+            echo "Banners configured."
             ;;
         "${opt_set_account_policies}")
             write_log_entry "${logpath}" "Executed: ${opt_set_account_policies}"
@@ -244,14 +244,14 @@ function execute_option(){
         "${opt_set_audit}")
             write_log_entry "${logpath}" "Executed: ${opt_set_audit}"
             remove_bash_history_symlink
-            print "Audit policies configured.\n"
+            echo "Audit policies configured."
             ;;
         "${opt_set_kernel}")
             write_log_entry "${logpath}" "Executed: ${opt_set_kernel}"
             set_kernel_networking_security
             set_kernel_sysctlconf
             set_kernel_memory_protections
-            printf "Reccomended secure kernel defaults configured.\n"
+            echo "Reccomended secure kernel defaults configured."
             ;;
         "${opt_set_shm}")
             write_log_entry "${logpath}" "Executed: ${opt_set_shm}" 
@@ -260,7 +260,7 @@ function execute_option(){
             ;;
         ### forensics
         "${opt_find_media_files}")
-            find_media_files_by_type
+            find_media_files_by_type "/home"
             ;;
         ## fightclub specific
         "${opt_clean_menu}")

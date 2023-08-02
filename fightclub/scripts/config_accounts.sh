@@ -76,6 +76,7 @@ function disable_guest_account(){
     lightdm_config_file="/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
     disable_guest_str="allow-guest=false"
     disable_autologin_str="autologin-user=false"
+    # can use if [[ -e path ]] to test for older config filenames
     create_backup_of_file "${lightdm_config_file}" 
     grep -qiF "${disable_guest_str}" "${lightdm_config_file}" &&
         sed -i 's/\${disable_guest_str}/\${disable_guest_str}/' "${lightdm_config_file}" || echo "${disable_guest_str}" >> "${lightdm_config_file}"
