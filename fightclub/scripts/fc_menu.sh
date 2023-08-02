@@ -23,6 +23,8 @@ opt_sh_installed="RECON: find recently installed apps"
 opt_sh_listen="RECON: listening connections"
 opt_sh_svcs="RECON: active services"
 opt_sh_process="RECON: running processes"
+# users
+opt_launch_users_gui="USERS: Launch user setup gui"
 # applications
 opt_update="APPS: Update system and applications"
 opt_purge_tools="APPS: Purge hacker tools"
@@ -56,6 +58,7 @@ A_OPTIONS=("${opt_quit}"
 "${opt_sh_listen}" 
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
+"${opt_launch_users_gui}"
 "${opt_launch_updates_config_gui}"
 "${opt_purge_tools}"
 "${opt_purge_services}"
@@ -197,6 +200,11 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
             recon_get_services
             echo "Check here for output: ${reconpath}"
+            ;;
+        ### users
+        "${opt_launch_users_gui}")
+            write_log_entry "${logpath}" "Executed: ${opt_launch_users_gui}"
+            launch_settings_users_gui
             ;;
         #### applications
         "${opt_launch_updates_config_gui}")
