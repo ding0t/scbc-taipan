@@ -52,7 +52,7 @@ function set_kernel_sysctl(){
   sysctl -w kernel.randomize_va_space=1
   create_edited_config_mark "${sysctl_conf}" 
 }
-sysctl -w kernel.randomize_va_space=1
+#sysctl -w kernel.randomize_va_space=1
 
 
 #######################################

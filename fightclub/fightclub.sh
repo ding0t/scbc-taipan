@@ -57,7 +57,7 @@ source "$(dirname "${0}")/scripts/fc_logger.sh"
 # recon
 source "$(dirname "${0}")/scripts/recon.sh"
 # check users 
-
+source "$(dirname "${0}")/scripts/manage_users.sh"
 # secure config
 source "$(dirname "${0}")/scripts/config_ssh.sh"
 source "$(dirname "${0}")/scripts/config_accounts.sh"
