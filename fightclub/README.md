@@ -8,13 +8,13 @@ Run scripts for South Coast Baptist College
 
 You can dowload the script as a zip archive or by using git
 
-### instralling
+### installing
 ```sh
 sudo apt install git -y
 cd ~
 git clone https://github.com/ding0t/scbc-taipan.git
 ``` 
-### Run the scripts like:
+### run the scripts like:
 ```sh
 cd ~/scbc-taipan/fightclub
 sudo bash ./fightclub.sh
