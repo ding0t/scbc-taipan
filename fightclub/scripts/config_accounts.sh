@@ -60,6 +60,9 @@ function set_lockout_policy(){
     create_backup_of_file "${pam_auth_filename}"
     install -D -m 644 "$(dirname "${0}")/rsc/common-auth" "${pam_auth_filename}"
     create_edited_config_mark "${pam_auth_filename}"
+    touch /etc/security/opasswd
+    chown root:root /etc/security/opasswd
+    chmod 600 /etc/security/opasswd
 }
 
 #######################################
@@ -113,5 +116,6 @@ function set_password_complexity(){
     sed -i '/usercheck/ c\usercheck = 1' "${password_quality_filename}"
     sed -i '/enforcing/ c\enforcing = 1' "${password_quality_filename}"
     create_edited_config_mark "${password_quality_filename}"
-    
+    # 
+
 }
