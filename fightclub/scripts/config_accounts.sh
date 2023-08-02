@@ -101,7 +101,7 @@ function set_password_complexity(){
     create_backup_of_file "${pam_password_filename}"
     create_backup_of_file "${password_quality_filename}"
     #
-    sed '/pam_unix.so/ s/$/ remember=5 minlen=12/' "${pam_password_filename}"
+    sed -i '/pam_unix.so/ s/$/ remember=5 minlen=12/' "${pam_password_filename}"
     create_edited_config_mark "${pam_password_filename}"
     #
     sed -i '/minlen/ c\minlen = 12' "${password_quality_filename}"
