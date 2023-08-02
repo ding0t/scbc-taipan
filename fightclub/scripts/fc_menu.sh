@@ -38,6 +38,7 @@ opt_set_shm="CONFIG: Disable /dev/shm"
 
 # forensics
 opt_find_media_files="FORENSICS: Find media files"
+opt_delete_media_files="FORENSICS: DELETE media files"
 # tips
 # unlock account when locked
 # script operations
@@ -65,6 +66,7 @@ A_OPTIONS=("${opt_quit}"
 "${opt_set_kernel}" 
 "${opt_set_shm}"
 "${opt_find_media_files}"
+"${opt_delete_media_files}"
 "${opt_clean_menu}"
 "${opt_show_functions}" 
 )
@@ -265,6 +267,18 @@ function execute_option(){
             read -p "Enter a path to search like '/home': "
             find_media_files_by_type "${REPLY}"
             REPLY="${global_menu_reply_state}"
+            echo "Find media files by type completed."
+            ;;
+        "${opt_delete_media_files}")
+            write_log_entry "${logpath}" "Executed: ${opt_find_media_files}"
+            global_menu_reply_state="${REPLY}"
+            read -p "Enter a path to delete files from like '/home': "
+            file_delete_path="${REPLY}"
+            read -p "Enter an extension to delete like 'mp3': "
+            file_delete_extentions="${REPLY}"
+            delete_media_by_extension  "${file_delete_extentions}"  "${file_delete_path}"
+            REPLY="${global_menu_reply_state}"
+            echo "DELETE media files by extension ${file_delete_extentions} completed."
             ;;
         ## fightclub specific
         "${opt_clean_menu}")

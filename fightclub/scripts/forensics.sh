@@ -58,11 +58,13 @@ function find_media_files_by_type(){
 # Globals:
 #   nil
 # Arguments:
-#   $0 its own name
+#	$1 extension list like 'mp3 ogg'
+# 	$2 path like '/home'
 # Outputs:
 #   Nil
 #######################################
-function find_delete_media_files_by_extension(){
-	find ${$2} -iname "${search}${1}" -type f -delete
-	
+
+function delete_media_by_extension(){
+	search="*."
+	find ${$2} -iname "${search}${1}" -type f -delete | tee -a "${logpath}"
 }
