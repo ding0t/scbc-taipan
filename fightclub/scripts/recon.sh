@@ -67,7 +67,7 @@ function recon_get_services(){
 #######################################
 function recon_get_listening(){
     write_log_entry "${reconpath}" "====== listening services; look here for anything that should not be running\n"
-    ss -tlpn >> "${reconpath}"
+    ss -tlpn | tee -a "${reconpath}"
 }
 
 #######################################
@@ -109,10 +109,11 @@ function check_for_admins(){
 # Outputs:
 #   Nil
 #######################################
-function check_installed(){
+function check_recently_installed(){
+    write_log_entry "${reconpath}" "====== recently installed apps\n"
     #use apt search <appname>
-    apt list --installed 
-    grep -i 'install\s' /var/log/dpkg.log*
-    zgrep -i 'install\s' /var/log/dpkg.log.*.gz
+    
+    grep -i 'install\s' /var/log/dpkg.log* >> "${reconpath}"
+    zgrep -i 'install\s' /var/log/dpkg.log.*.gz >> "${reconpath}"
     
 }

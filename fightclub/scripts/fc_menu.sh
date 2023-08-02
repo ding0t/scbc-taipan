@@ -19,6 +19,7 @@
 # This text will be used in the case statement, keep short
 # show state
 opt_sh_tips="FightClub: show tips"
+opt_sh_installed="RECON: find recently installed apps"
 opt_sh_listen="RECON: listening connections"
 opt_sh_svcs="RECON: active services"
 opt_sh_process="RECON: running processes"
@@ -50,6 +51,7 @@ opt_clean_menu="FightClub: Redisplay  menu"
 # order of array will set order of options
 # Place them in reccomended order of execution
 A_OPTIONS=("${opt_quit}"
+"${opt_sh_installed}"
 "${opt_sh_tips}"
 "${opt_sh_listen}" 
 "${opt_sh_process}" 
@@ -171,6 +173,12 @@ function execute_option(){
             cat "$(dirname "${0}")/tips.md"
             ;;
         ### recon
+        "${opt_sh_installed}")
+            write_log_entry "${logpath}" "Executed: ${opt_sh_installed}"
+            print "you can also use 'apt list --installed' \n"
+            check_recently_installed
+            echo "Check here for output: ${reconpath}"
+            ;;
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
             recon_get_processes
