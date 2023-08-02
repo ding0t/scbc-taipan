@@ -21,7 +21,7 @@
 function snap_remove_all_installed(){
     snap_installed_a=($(snap list | awk 'NR > 1 {print $1}' | sort -r ))
     for snap_package in "${snap_installed_a}"; do
-        snap remove --purge "${snap_package} -y"
+        snap remove --purge "${snap_package}" -y
     done
 }
 
@@ -53,11 +53,7 @@ function remove_snapd(){
 #######################################
 function snap_prevent_reinstall(){
     config_filename="/etc/apt/preferences.d/nosnap.pref"
-    tee -a "${config_filename}" <<EOF
-Package: snapd
-Pin: release a=*
-Pin-Priority: -10
-EOF
+    install -D -m 644 "$(dirname "${0}")/rsc/nosnap.pref" "${config_filename}"
 }
 
 #######################################

@@ -156,8 +156,8 @@ function set_kernel_memory_protections(){
   # Disable Core Dumps
   echo "0" > /proc/sys/fs/suid_dumpable
   # Enable ExecShield
-  echo "1" > /proc/sys/kernel/exec-shield
-  sysctl -w kernel.randomize_va_space=1
+  #echo "1" > /proc/sys/kernel/exec-shield
+  #sysctl -w kernel.randomize_va_space=1
   
 }
 
