@@ -78,9 +78,9 @@ function disable_guest_account(){
     disable_autologin_str="autologin-user=false"
     create_backup_of_file "${lightdm_config_file}" 
     grep -qiF "${disable_guest_str}" "${lightdm_config_file}" &&
-        sed -i 's/${disable_guest_str}/${disable_guest_str}/' "${lightdm_config_file}" || echo "${disable_guest_str}" >> "${lightdm_config_file}"
+        sed -i 's/\${disable_guest_str}/\${disable_guest_str}/' "${lightdm_config_file}" || echo "${disable_guest_str}" >> "${lightdm_config_file}"
     grep -qiF "${disable_autologin_str}" "${lightdm_config_file}" &&
-        sed -i 's/${disable_autologin_str}/${disable_autologin_str}/' "${lightdm_config_file}" || echo "${disable_autologin_str}" >> "${lightdm_config_file}"
+        sed -i 's/\${disable_autologin_str}/\${disable_autologin_str}/' "${lightdm_config_file}" || echo "${disable_autologin_str}" >> "${lightdm_config_file}"
     create_edited_config_mark "${lightdm_config_file}" 
 }
 

@@ -239,7 +239,7 @@ function execute_option(){
             #set_lockout_policy
             #disable_guest_account
             #set_password_complexity
-            print "Account policies configured.\n"
+            echo "Account policies configured."
             ;;
         "${opt_set_audit}")
             write_log_entry "${logpath}" "Executed: ${opt_set_audit}"
