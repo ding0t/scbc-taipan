@@ -21,7 +21,7 @@
 function snap_remove_all_installed(){
     snap_installed_a=($(snap list | awk 'NR > 1 {print $1}' | sort -r ))
     for snap_package in "${snap_installed_a}"; do
-        snap remove --purge "${snap_package}" -y
+        snap remove --purge "${snap_package}"
     done
 }
 
