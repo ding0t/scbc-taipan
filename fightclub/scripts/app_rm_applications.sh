@@ -20,18 +20,15 @@
 function apt_purge_tools(){
 	A_TOOLS=(netcat-* 
 	aircrack-ng 
-	airmon-ng 
 	hydra-gtk
 	john 
-	burp 
-	cainandable 
+	burp  
 	wireshark 
 	nmap 
 	nikto 
 	hashcat
 	etherape 
-	kismet 
-	lcrack 
+	kismet  
 	ophcrack
 	sl
 	scanmem
@@ -55,20 +52,16 @@ function apt_purge_tools(){
 function apt_purge_servcies(){
 	A_SERVICES=(apache2 
 	dnsmasq 
-	mysql-server
-	nmdb 
+	mysql-server 
 	php5 
 	postfix
 	pure-ftpd 
-	postgresql
-	tomcat 
-	tomcat6 
+	postgresql 
 	telnet 
 	telnet-server
-	telnetd
-	tightvnc-common tightvncserver 
-	vnc4server 
-	vncserver)
+	telnetd 
+	tightvncserver 
+	vnc4server)
 	for i in "${A_SERVICES[@]}"; do
         apt purge -y "${i}"
     done

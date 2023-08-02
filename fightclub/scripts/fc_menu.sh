@@ -18,6 +18,7 @@
 # define menu options for options array
 # This text will be used in the case statement, keep short
 # show state
+opt_sh_tips="FightClub: show tips"
 opt_sh_listen="RECON: listening connections"
 opt_sh_svcs="RECON: active services"
 opt_sh_process="RECON: running processes"
@@ -26,6 +27,7 @@ opt_update="APPS: Update system and applications"
 opt_purge_tools="APPS: Purge hacker tools"
 opt_purge_services="APPS: remove likely uneeded services"
 opt_rm_snap="APPS: Remove snap package manager"
+opt_launch_updates_config_gui="APPS: launch 'Software & Updates' GUI"
 # configure settings
 opt_set_ssh="CONFIG: Configure SSH"
 opt_set_banners="CONFIG: set login banners"
@@ -40,15 +42,17 @@ opt_find_media_files="FORENSICS: Find media files"
 # script operations
 opt_quit="FightClub: Quit"
 opt_show_functions="FightClub: Show available functions"
-opt_clean_menu="FightC: Redisplay  menu"
+opt_clean_menu="FightClub: Redisplay  menu"
 
 # 2
 # order of array will set order of options
 # Place them in reccomended order of execution
 A_OPTIONS=("${opt_quit}"
+"${opt_sh_tips}"
 "${opt_sh_listen}" 
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
+"${opt_launch_updates_config_gui}"
 "${opt_purge_tools}"
 "${opt_purge_services}"
 "${opt_update}"
@@ -160,6 +164,9 @@ function get_user_selected_option(){
 #######################################
 function execute_option(){
     case ${1} in
+        "${opt_sh_tips}")
+            cat "$(dirname "${0}")/tips.md"
+            ;;
         ### recon
         "${opt_sh_process}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_process}" 
@@ -179,6 +186,13 @@ function execute_option(){
             echo "Check here for output: ${reconpath}"
             ;;
         #### applications
+        "${opt_launch_updates_config_gui}")
+            write_log_entry "${logpath}" "Executed: ${opt_launch_updates_config_gui}"
+            printf "Launching gui now\n"
+            printf "Enable security updates, and auto install"
+            printf ""
+            launch_updates_config_gui
+            ;;
         "${opt_update}")
             write_log_entry "${logpath}" "Executed: ${opt_update}" 
             apt upgrade && apt update -y
