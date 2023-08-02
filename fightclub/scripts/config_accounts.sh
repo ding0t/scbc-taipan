@@ -42,7 +42,7 @@ function set_login_defaults(){
     sed -i '/PASS_WARN_AGE/ c\PASS_WARN_AGE 7' "${passwd_logins_config_file}"
     sed -i '/LOGIN_TIMEOUT/ c\LOGIN_TIMEOUT 60' "${passwd_logins_config_file}"
     sed -i '/CHFN_RESTRICT/ c\CHFN_RESTRICT rwh' "${passwd_logins_config_file}"
-    
+    create_edited_config_mark "${passwd_logins_config_file}"
 }
 
 #######################################
@@ -58,15 +58,8 @@ function set_login_defaults(){
 function set_lockout_policy(){
     pam_auth_filename="/etc/pam.d/common-auth"
     create_backup_of_file "${pam_auth_filename}"
-tee -a "${pam_auth_filename}" <<EOF
-# Custom PAM config
-auth    [success=1 default=ignore]      pam_unix.so nullok_secure
-auth    required                        pam_deny.so
-auth    required    pam_tally2.so    onerr=fail deny=3 unlock_time=1800
-auth    required                        pam_permit.so
-
-EOF
-
+    install -D -m 644 "$(dirname "${0}")/rsc/common-auth" "${pam_auth_filename}"
+    create_edited_config_mark "${pam_auth_filename}"
 }
 
 #######################################
@@ -82,14 +75,13 @@ EOF
 function disable_guest_account(){
     lightdm_config_file="/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf"
     disable_guest_str="allow-guest=false"
-    disable_autologin_str=""autologin-user=false""
+    disable_autologin_str="autologin-user=false"
     create_backup_of_file "${lightdm_config_file}" 
     grep -qiF "${disable_guest_str}" "${lightdm_config_file}" &&
         sed -i 's/${disable_guest_str}/${disable_guest_str}/' "${lightdm_config_file}" || echo "${disable_guest_str}" >> "${lightdm_config_file}"
     grep -qiF "${disable_autologin_str}" "${lightdm_config_file}" &&
         sed -i 's/${disable_autologin_str}/${disable_autologin_str}/' "${lightdm_config_file}" || echo "${disable_autologin_str}" >> "${lightdm_config_file}"
-    
-    
+    create_edited_config_mark "${lightdm_config_file}" 
 }
 
 
@@ -110,6 +102,7 @@ function set_password_complexity(){
     create_backup_of_file "${password_quality_filename}"
     #
     sed '/pam_unix.so/ s/$/ remember=5 minlen=12/' "${pam_password_filename}"
+    create_edited_config_mark "${pam_password_filename}"
     #
     sed -i '/minlen/ c\minlen = 12' "${password_quality_filename}"
     sed -i '/ucredit/ c\ucredit = -1' "${password_quality_filename}"
@@ -118,5 +111,6 @@ function set_password_complexity(){
     sed -i '/ocredit/ c\ocredit = -1' "${password_quality_filename}"
     sed -i '/usercheck/ c\usercheck = 1' "${password_quality_filename}"
     sed -i '/enforcing/ c\enforcing = 1' "${password_quality_filename}"
+    create_edited_config_mark "${password_quality_filename}"
     
 }

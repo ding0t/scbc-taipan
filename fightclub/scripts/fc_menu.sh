@@ -31,10 +31,11 @@ opt_launch_updates_config_gui="APPS: launch 'Software & Updates' GUI"
 # configure settings
 opt_set_ssh="CONFIG: Configure SSH"
 opt_set_banners="CONFIG: set login banners"
+opt_set_account_policies="CONFIG: set password and account policies"\
 opt_set_kernel="CONFIG: set kernel defaults"
 opt_set_audit="CONFIG: set audit policies"
 opt_set_shm="CONFIG: Disable /dev/shm"
-opt_set_account_policies="CONFIG: Set password and account policies"
+
 # forensics
 opt_find_media_files="FORENSICS: Find media files"
 # tips
