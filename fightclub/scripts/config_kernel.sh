@@ -11,6 +11,8 @@
 # [whole heap of settings](https://tldp.org/HOWTO/Adv-Routing-HOWTO/lartc.kernel.obscure.html)
 # [using syxsctl](https://www.cyberciti.biz/faq/reload-sysctl-conf-on-linux-using-sysctl/)
 # [stricter defualts](https://help.ubuntu.com/community/StricterDefaults)
+#
+# https://www.cyberciti.biz/faq/linux-kernel-etcsysctl-conf-security-hardening/
 
 
 #######################################
@@ -25,9 +27,32 @@
 function set_kernel_sysctlconf(){
   sysctl_conf="/etc/sysctl.conf"
   create_backup_of_file "${sysctl_conf}"
-  cat "$(dirname "${0}")/rsc/sysctl.conf" >> "${sysctl_conf}"
+  if ! [[ $(grep -q -i "${edited_config_mark}" "${1}") ]] ; then
+        cat "$(dirname "${0}")/rsc/sysctl.conf" >> "${sysctl_conf}"
+    fi
+  create_edited_config_mark "${sysctl_conf}" 
+  chmod 644 "${sysctl_conf}"
+}
+
+
+#######################################
+# Set sysctl.conf secure configs
+# Globals:
+#   nil
+# Arguments:
+#   $0 its own name
+# Outputs:
+#   Nil
+# Ref
+# https://www.cyberciti.biz/faq/ubuntu-exec-shield-protection-nx-bit-protection-sysctl/
+#######################################
+function set_kernel_sysctl(){
+  sysctl_conf="/etc/sysctl.conf"
+  create_backup_of_file "${sysctl_conf}"
+  sysctl -w kernel.randomize_va_space=1
   create_edited_config_mark "${sysctl_conf}" 
 }
+sysctl -w kernel.randomize_va_space=1
 
 
 #######################################
@@ -132,7 +157,7 @@ function set_kernel_memory_protections(){
   echo "0" > /proc/sys/fs/suid_dumpable
   # Enable ExecShield
   echo "1" > /proc/sys/kernel/exec-shield
-  echo "1" > /proc/sys/kernel/randomize_va_space
+  sysctl -w kernel.randomize_va_space=1
   
 }
 
