@@ -8,25 +8,38 @@ Run scripts for South Coast Baptist College
 
 You can dowload the script as a zip archive or by using git
 
+### instralling
 ```sh
 sudo apt install git -y
 cd ~
 git clone https://github.com/ding0t/scbc-taipan.git
 ``` 
-Run the scripts like:
+### Run the scripts like:
 ```sh
 cd ~/scbc-taipan/fightclub
 sudo bash ./fightclub.sh
 ```
+### look for the logs
+logs are created in the same directory you ran the scripts
+
+### caution
+* FightClub has been tested, but some things may not work as expected
+* Read the source and modify it if you need
  
-# Completinfg the challenge notes 
-1. Do the forensic questions first
-1. Run open a new terminal window and as root, `sudo su` run `apt update` followed by `apt install git`
-1. Run the command `git clone`
-1. `cd ` followed by `chmod +x fightclub.sh` then `./runme.sh`
-1. Browse the lists folder and work on compleating the image. Dont forget to read the read me!!
+# Tips for Completing the challenge
+1. Priorities
+   1. Read/Do the forensic questions early
+   1. Run a system update
+   1. Fix user acounts **keep records**
+   1. Look at update settings in gui `software & updates`
+   1. Look for unauthorised software (gui) 
+1. Test out the fightclub script to save time
+    1. Follow the instruction [how to use](#how-to-use)
+
+
 
 ### resources
-* [initial source](https://github.com/MarKyehus/CyPatriot/blob/master/README.md)
-* [good script](https://github.com/BiermanM/CyberPatriot-Scripts/blob/master/UbuntuScript.sh)
+Exaples of other scripts
+* [MarKyehus/CyPatriot](https://github.com/MarKyehus/CyPatriot/blob/master/README.md)
+* [BiermanM/CyberPatriot-Script](https://github.com/BiermanM/CyberPatriot-Scripts/blob/master/UbuntuScript.sh)
 
