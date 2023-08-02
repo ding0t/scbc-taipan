@@ -7,6 +7,9 @@
 # apt_purge_tools
 # apt_purge_servcies
 
+function launch_settings_users_gui(){
+    gnome-control-center  user-accounts &
+}
 
 function remove_users(){
     for i in $(cat /etc/passwd | cut -d: -f 1,3,6 | grep -e "[5-9][0-9][0-9]" -e "[0-9][0-9][0-9][0-9]" | grep "/home" | cut -d: -f1) ; do
