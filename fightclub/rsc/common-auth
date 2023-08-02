@@ -2,10 +2,12 @@
 # deny=5 the number of times you can get incorrect password before lockout
 # unlock_time=1800 the number of time in seconds before account is re-enabled
 # https://manpages.ubuntu.com/manpages/trusty/man8/pam_unix.8.html
-auth    [success=1 default=ignore]      pam_unix.so obscure nullok_secure
+auth    required    pam_tally2.so    onerr=fail deny=5 unlock_time=60
+auth	[success=2 default=ignore]	pam_unix.so nullok
+auth	[success=1 default=ignore]	pam_sss.so use_first_pass
 # if auth fails deny login, removed requisite so tally.so runs
 auth    required                        pam_deny.so
-# if auth successful
-auth    required    pam_tally2.so    onerr=fail deny=5 unlock_time=60
 # set success code
 auth    required                        pam_permit.so
+auth	optional			pam_cap.so
+

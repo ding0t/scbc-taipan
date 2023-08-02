@@ -58,7 +58,11 @@ function set_login_defaults(){
 function set_lockout_policy(){
     pam_auth_filename="/etc/pam.d/common-auth"
     create_backup_of_file "${pam_auth_filename}"
-    install -D -m 644 "$(dirname "${0}")/rsc/common-auth" "${pam_auth_filename}"
+    #install -D -m 644 "$(dirname "${0}")/rsc/common-auth" "${pam_auth_filename}"
+    # can use grep -v to invert
+    if ! [[ $(grep -qiF "pam_tally2.so" "${pam_auth_filename}") ]]; then
+        sed -i "/pam_unix.so/i auth    optional    pam_tally2.so    onerr=fail deny=5 unlock_time=60" "${pam_auth_filename}"
+    fi
     create_edited_config_mark "${pam_auth_filename}"
     touch /etc/security/opasswd
     chown root:root /etc/security/opasswd
