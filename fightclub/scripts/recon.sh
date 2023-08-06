@@ -95,8 +95,9 @@ function analyse_recondata(){
 #   Nil
 #######################################
 function check_for_admins(){
-    grep -i sudo /etc/group
-    grep -i adm /etc/group
+    A_GROUPS=('sambashare', 'sudo', 'adm')
+    egrep -i 'sudo' /etc/group | cut -d: -f4
+    egrep -i 'adm' /etc/group | cut -d: -f4
     
 }
 

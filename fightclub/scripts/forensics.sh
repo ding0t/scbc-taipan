@@ -7,7 +7,7 @@
 #
 # find_media_files_by_extension
 # find_media_files_by_type
-# find_delete_media_files_by_extension
+# delete_media_by_extension
 
 
 #######################################
@@ -15,7 +15,6 @@
 # Globals:
 #   nil
 # Arguments:
-#   $0 its own name
 #	$1 optional extension like 'mp3'
 # 	$2 optional path like '/home'
 # Outputs:
@@ -42,8 +41,7 @@ function find_media_files_by_extension(){
 # Globals:
 #   nil
 # Arguments:
-#   $0 its own name
-# 	$1 path
+# 	$1 path to search for files
 # Outputs:
 #   Nil
 #######################################

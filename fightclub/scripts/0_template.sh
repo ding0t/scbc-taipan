@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #
 # ABOUT
-# These functions manage the firewall
+# Describes the purpose of functions here
 # 
 # PROVIDES
+# function_names
 
 
 #######################################
@@ -16,5 +17,7 @@
 #   Nil
 #######################################
 function function_name(){
-    create_edited_config_mark "${password_quality_filename}"
+    write_log_entry "${logpath}" "Tempolate message"
+    #create_backup_of_file "${filename}"
+    #reate_edited_config_mark "${file_after_edit}"
 }

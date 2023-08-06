@@ -128,19 +128,7 @@ function print_menu(){
     done
 }
 
-#######################################
-# Displays a new menu on clean screen
-# Globals:
-#   A_OPTIONS
-# Arguments:
-#   $0 itself
-# Outputs:
-#   Nil
-#######################################
-function print_clean_menu(){
-    #clear 
-	print_menu
-}
+
 #######################################
 # gets menu item by number - when not using select funciton
 # Globals:
@@ -318,19 +306,8 @@ function execute_option(){
             printf "Enter a number from above range only\n"
             ;;
     esac
-    increment_option_runcount
-}
-
-#######################################
-# increment option runs
-# Globals:
-#   A_OPTIONS
-# Arguments:
-#   $0 itself
-# Outputs:
-#   Nil
-#######################################
-function increment_option_runcount(){
+    # increment option run count
     (( a_option_runs["${REPLY}"]++ ))
 }
+
 

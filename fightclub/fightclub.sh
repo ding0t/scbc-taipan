@@ -5,7 +5,7 @@
 #
 # USAGE
 # 1. Clone the git repo
-# 2. EIther `chmod +x`` this script or execute by calling bash explicity with this script as an argument like:
+# 2. Either `chmod +x`` this script or execute by calling bash explicity with this script as an argument like:
 # 3a. `sudo bash fightclub.sh` or
 # 3b. `sudo ./fightclub.sh`
 # 4. Select a option by typing the number then enter to view help and then execute that option
@@ -13,6 +13,11 @@
 # REQUIREMENTS
 # 1. All of the scipts in ./scripts folder
 # 1. Run as sudo (root priviliges)
+#
+# CONTRIBUTING
+# The 'scripts' directory contains shell files that are logical groupings of shell functions
+# the 'fc_menu.sh' script is the main menu state handler; call new functionality in that script
+# Each script is named with a prefix that decribes and groups broad level function (apps, config, protect, fc (fughtclubb specific))
 #
 # REFERENCES
 # https://secscan.acron.pl/centos7/1/7/2
@@ -23,26 +28,26 @@
 #
 # copy any configs changed
 #
-# recon system
-# backup - key files
-# patch - os
-# patch - applications
-# check users and permissions
-# secure config - kernel
-# secure config - services
-# secure config - sudoers
-# remove - hacker tools
-# remove - non-business applications
-# remove - unused services
-# remove - non-business files
-# protect - enable firewall, setup
-# protect - enable av, setup, execute scan
+# recon system ~
+# backup - key files y 
+# patch - os y 
+# patch - applications y
+# check users and permissions !
+# secure config - kernel y
+# secure config - services !
+# secure config - sudoers !
+# remove - hacker tools y
+# remove - non-business applications ~
+# remove - unused services ~
+# remove - non-business files y
+# protect - enable firewall, setup !
+# protect - enable av, setup, execute scan !
 
 
 # Check if running as root
 if [[ $EUID -ne 0 ]]
 then
-  printf "You must use sudo to run this script as root. Exiting.\n"
+  printf "Please rerun the script using sudo. Exiting.\n"
   exit 1
 fi
 
@@ -80,19 +85,19 @@ source "$(dirname "${0}")/scripts/forensics.sh"
 
 # lets get going...
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
-print_clean_menu
-# Sow menu and execute options
+print_menu
+# Show menu and execute options in forever loop
 while :;do
-	# User instructions
+  # User instructions
 	# ask user
-    read -p "Enter action 0 to $((num_options-1)): "
+  read -p "Enter action 0 to $((num_options-1)): "
 	# asess reply
-    if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
+  if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then
 		#printf "Executing option "${REPLY}""
-        execute_option "${A_OPTIONS["${REPLY}"]}" 
+      execute_option "${A_OPTIONS["${REPLY}"]}" 
 	else 
 		printf "Enter a number from above range only\n"
-    fi
+  fi
 done
 
 
