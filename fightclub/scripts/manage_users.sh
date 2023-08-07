@@ -51,13 +51,13 @@ done
 # Arguments:
 #   expect the filename as first function argument
 # Outputs:
-#   sets global array
+#   sets global array A_CURRENT_STD_USERS
 #######################################
 function get_current_standard_users_list(){
     A_CURRENT_STD_USERS=("$(cat /etc/passwd | cut -d: -f 1,3,6 | grep -e "[5-9][0-9][0-9]" -e "[0-9][0-9][0-9][0-9]" | grep "/home" | cut -d: -f1)")
     # create associative array using map username:key
-    declare -A A_MAP_CURRENT_STD_USERS
-    for key in "${!A_CURRENT_STD_USERS[@]}"; do A_MAP_CURRENT_STD_USERS[${A_CURRENT_STD_USERS[$key]}="${key}"]; done
+    #declare -A A_MAP_CURRENT_STD_USERS
+    #for key in "${!A_CURRENT_STD_USERS[@]}"; do A_MAP_CURRENT_STD_USERS[${A_CURRENT_STD_USERS[$key]}="${key}"]; done
     #for i in $(cat /etc/passwd | cut -d: -f 1,3,6 | grep -e "[5-9][0-9][0-9]" -e "[0-9][0-9][0-9][0-9]" | grep "/home" | cut -d: -f1) ; do
 	    # if user not in the README
        # if [[ $( grep -ic -e $i $(pwd)/README ) -eq 0 ]]; then	
@@ -75,6 +75,9 @@ function get_current_standard_users_list(){
 #   Nil
 #######################################
 function audit_users(){
+    local i
+    local j
+    local u
     # get a list of current users on the system
     get_current_standard_users_list
     # UID_MAX, UID_MIN
@@ -96,12 +99,19 @@ function audit_users(){
 
     # iterate through existing users to look for anomalies
     declare -A A_MAP_USERNAMES
-    for key in "${!A_USERNAME[@]}"; do 
-        A_MAP_USERNAMES[${A_USERNAME[$key]}="${key}"]
+    for i in "${!A_USERNAME[@]}"; do 
+        # key = username; value = index
+        $A_MAP_USERNAMES["${A_USERNAME["${i}"]}"]="${i}"
     done
+    #######done
     for j in "${A_CURRENT_STD_USERS[@]}"; do
         # if username not in authorised list
-        if ! [[ -n "${A_MAP_USERNAMES["${j}"]}" ]]; then
+        #user_exists=False
+        #for i in "${A_USERNAME[@]}"; do [[ "${j}" == "${i}" ]]  && $user_exists=True; done
+        #If username exists as a key in the associative array list of users from file
+        if [[ ${A_MAP_USERNAMES["${j}"]} ]]; then
+             echo "Found authorised user: ${j}"
+        else
             echo "WARNING! Found unauthorised user: ${j}"
         fi
     done
