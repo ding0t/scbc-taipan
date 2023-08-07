@@ -92,11 +92,12 @@ function audit_users(){
         # ignore comment lines
         echo "Processing from file: $COL1"
         [[ "$COL1" =~ ^#.*$ ]] && continue
-        $ process the columns
+        # process the columns
         A_USERNAME+=("$COL1")
         A_ISADMIN+=("$COL2")
         A_PASSWORD+=("$COL3")
     done <"${users_csv_file}"
+    echo "File: ${users_csv_file}"
     echo "List of Users: ${A_USERNAME[@]}"
 
     # iterate through existing users to look for anomalies
