@@ -109,8 +109,8 @@ function audit_users(){
         #user_exists=False
         #for i in "${A_USERNAME[@]}"; do [[ "${j}" == "${i}" ]]  && $user_exists=True; done
         #If username exists as a key in the associative array list of users from file
-        if [[ ${A_MAP_USERNAMES["${j}"]} ]]; then
-             echo "Found authorised user: ${j}"
+        if ! [[ ${A_MAP_USERNAMES["${j}"]} ]]; then
+            echo "Found authorised user: ${j}"
         else
             echo "WARNING! Found unauthorised user: ${j}"
         fi
@@ -123,13 +123,13 @@ function audit_users(){
         # current logged in user
         if [[ "${A_USERNAME[$i]}"  =~ "${SUDO_USER:-$USER}" ]]; then
             # this is the user executing the script!
-            echo "User '${SUDO_USER:-$USER}' is likely you!.\n"
+            echo "User '${SUDO_USER:-$USER}' is likely you!."
             continue
         fi
         # do they exist, if not make them
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
             #add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
-            echo "Add user: ${A_USERNAME[$i]}\n"
+            echo "Add user: ${A_USERNAME[$i]}"
         fi
         # should they be admin
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
