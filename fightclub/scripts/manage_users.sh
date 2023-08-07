@@ -101,13 +101,13 @@ function audit_users(){
 
     # iterate through existing users to look for anomalies
     declare -A A_MAP_USERNAMES
-    for i in "${A_USERNAME[@]}"; do 
+    for i in ${A_USERNAME[@]}; do 
         # key = username; value = index
-        u="${A_USERNAME[${i}]}"
-        A_MAP_USERNAMES[${u}]=1
+        echo "Mapping: ${A_USERNAME[${i}]}"
+        A_MAP_USERNAMES[${A_USERNAME[${i}]}]=1
     done
     echo "Current users: ${A_CURRENT_STD_USERS[@]}"
-    echo "List of UsersMAP: ${!A_MAP_USERNAMES[@]}"
+    echo "List of Users MAP: ${!A_MAP_USERNAMES[@]}"
     
     # test current users
     for j in "${A_CURRENT_STD_USERS[@]}"; do
