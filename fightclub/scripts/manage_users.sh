@@ -103,6 +103,8 @@ function audit_users(){
         # key = username; value = index
         $A_MAP_USERNAMES["${A_USERNAME["${i}"]}"]="${i}"
     done
+    echo "Current users: ${A_CURRENT_STD_USERS[@]}"
+    echo "List of Users: ${!A_MAP_USERNAMES[@]}"
     # test current users
     for j in "${A_CURRENT_STD_USERS[@]}"; do
         # if username not in authorised list
