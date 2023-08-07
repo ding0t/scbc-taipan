@@ -90,12 +90,14 @@ function audit_users(){
     # read each line into the approprate array, note order of csv matters
     while IFS=| read -r COL1 COL2 COL3 TRASH; do
         # ignore comment lines
+        echo "Processing from file: $COL1"
         [[ "$COL1" =~ ^#.*$ ]] && continue
         $ process the columns
         A_USERNAME+=("$COL1")
         A_ISADMIN+=("$COL2")
         A_PASSWORD+=("$COL3")
     done <"${users_csv_file}"
+    echo "List of Users: ${A_USERNAME[@]}"
 
     # iterate through existing users to look for anomalies
     declare -A A_MAP_USERNAMES
@@ -104,7 +106,6 @@ function audit_users(){
         $A_MAP_USERNAMES["${A_USERNAME["${i}"]}"]="${i}"
     done
     echo "Current users: ${A_CURRENT_STD_USERS[@]}"
-    echo "List of Users: ${A_USERNAME[@]}"
     echo "List of UsersMAP: ${!A_MAP_USERNAMES[@]}"
     
     # test current users
