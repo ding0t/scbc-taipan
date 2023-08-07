@@ -63,7 +63,6 @@ function get_current_standard_users_list(){
        # if [[ $( grep -ic -e $i $(pwd)/README ) -eq 0 ]]; then	
 		#    (deluser $i --remove-all-files >> "${logpath}") &  #starts deleting in background
 	    #fi
-done
 }
 
 #######################################
