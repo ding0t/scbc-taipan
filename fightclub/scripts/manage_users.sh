@@ -162,7 +162,7 @@ function audit_users(){
         # if no remove them
         else 
             # no test here yet, not needed if user is not admin anyway
-            if [[ (id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
+            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
                  echo "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
             fi
             if [[ $make_changes == 'true' ]]; then 
