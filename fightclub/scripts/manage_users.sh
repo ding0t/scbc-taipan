@@ -80,7 +80,7 @@ function audit_users(){
     local make_changes=$2
 
     if [[ $make_changes == 'true' ]]; then 
-        echo "make changes!"
+        echo "This run will make changes!"
     fi
     # get a list of current users on the system
     get_current_standard_users_list
@@ -120,6 +120,12 @@ function audit_users(){
         #If username exists as a key in the associative array list of users from file
         if ! [[ -n ${A_MAP_USERNAMES[${j}]} ]]; then
             echo "WARNING! Found unauthorised user: ${j}"
+            if [[ $make_changes == 'true' ]]; then 
+                # remove user
+                # confirm?
+                write_log_entry "${logpath}" "Removing user: $j"
+                deluser $j --remove-all-files >> "${logpath}"
+            fi
         fi
     done
 
@@ -135,18 +141,35 @@ function audit_users(){
         fi
         # do they exist, if not make them
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
-            #add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
+            #
             echo "Add user: ${A_USERNAME[$i]}"
+            if [[ $make_changes == 'true' ]]; then 
+                # 
+                write_log_entry "${logpath}" "Adding user user: ${A_USERNAME[$i]}"
+                add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
+            fi
         fi
         # should they be admin
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
             # if yes, add them
-            #add_admin "${A_USERNAME[$i]}"
+            #"
             echo "Add admin for user: ${A_USERNAME[$i]}"
+            if [[ $make_changes == 'true' ]]; then 
+                # 
+                write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
+                add_admin "${A_USERNAME[$i]}"
+            fi
         # if no remove them
         else 
-            #remove_admin "${A_USERNAME[$i]}"
-            echo "Remove admin for user: ${A_USERNAME[$i]}"
+            # no test here yet, not needed if user is not admin anyway
+            if [[ (id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
+                 echo "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
+            fi
+            if [[ $make_changes == 'true' ]]; then 
+                # 
+                write_log_entry "${logpath}" "Removing admin privilige frm user: ${A_USERNAME[$i]}"
+                remove_admin "${A_USERNAME[$i]}"
+            fi
         fi
     done
 }
