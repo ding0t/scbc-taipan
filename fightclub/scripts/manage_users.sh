@@ -105,6 +105,7 @@ function audit_users(){
     done
     #######done
     for j in "${A_CURRENT_STD_USERS[@]}"; do
+        echo "Current user test: ${j}"
         # if username not in authorised list
         #user_exists=False
         #for i in "${A_USERNAME[@]}"; do [[ "${j}" == "${i}" ]]  && $user_exists=True; done
