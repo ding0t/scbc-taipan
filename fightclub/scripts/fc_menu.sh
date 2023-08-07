@@ -204,7 +204,7 @@ function execute_option(){
             ;;
         "${opt_audit_users}")
             write_log_entry "${logpath}" "Executed: ${opt_audit_users}"
-            audit_users
+            audit_users "$(dirname "${0}")/users.conf"
             ;;
         #### applications
         "${opt_launch_updates_config_gui}")
