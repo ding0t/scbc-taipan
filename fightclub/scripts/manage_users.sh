@@ -103,14 +103,13 @@ function audit_users(){
         # key = username; value = index
         $A_MAP_USERNAMES["${A_USERNAME["${i}"]}"]="${i}"
     done
-    #######done
+    # test current users
     for j in "${A_CURRENT_STD_USERS[@]}"; do
-        echo "Current user test: ${j}"
         # if username not in authorised list
         #user_exists=False
         #for i in "${A_USERNAME[@]}"; do [[ "${j}" == "${i}" ]]  && $user_exists=True; done
         #If username exists as a key in the associative array list of users from file
-        if ! [[ ${A_MAP_USERNAMES["${j}"]} ]]; then
+        if [[ -n ${A_MAP_USERNAMES["${j}"]} ]]; then
             echo "Found authorised user: ${j}"
         else
             echo "WARNING! Found unauthorised user: ${j}"
