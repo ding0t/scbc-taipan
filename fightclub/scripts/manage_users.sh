@@ -104,7 +104,7 @@ function audit_users(){
     for i in ${A_USERNAME[@]}; do 
         # key = username; value = index
         echo "Mapping: ${i}"
-        A_MAP_USERNAMES[${i]}]=1
+        A_MAP_USERNAMES["${i}"]=1
     done
     echo "Current users: ${A_CURRENT_STD_USERS[@]}"
     echo "List of Users MAP: ${!A_MAP_USERNAMES[@]}"
