@@ -102,7 +102,7 @@ function audit_users(){
     for j in "${A_CURRENT_STD_USERS[@]}"; do
         # if username not in authorised list
         if ! [[ -n "${A_MAP_USERNAMES["${j}"]}" ]]; then
-            printf "WARNING! Found unauthorised user: ${j}\n"
+            echo "WARNING! Found unauthorised user: ${j}"
         fi
     done
 
@@ -113,23 +113,23 @@ function audit_users(){
         # current logged in user
         if [[ "${A_USERNAME[$i]}"  =~ "${SUDO_USER:-$USER}" ]]; then
             # this is the user executing the script!
-            printf "User '${SUDO_USER:-$USER}' is likely you!.\n"
+            echo "User '${SUDO_USER:-$USER}' is likely you!.\n"
             continue
         fi
         # do they exist, if not make them
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
             #add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
-            printf "Add user: ${A_USERNAME[$i]}\n"
+            echo "Add user: ${A_USERNAME[$i]}\n"
         fi
         # should they be admin
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
             # if yes, add them
             #add_admin "${A_USERNAME[$i]}"
-            printf "Add admin for user: ${A_USERNAME[$i]}"
+            echo "Add admin for user: ${A_USERNAME[$i]}"
         # if no remove them
         else 
             remove_admin "${A_USERNAME[$i]}"
-            printf "Remove admin for user: ${A_USERNAME[$i]}"
+            echo "Remove admin for user: ${A_USERNAME[$i]}"
         fi
     done
 }
