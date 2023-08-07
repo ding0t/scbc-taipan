@@ -103,8 +103,8 @@ function audit_users(){
     declare -A A_MAP_USERNAMES
     for i in "${A_USERNAME[@]}"; do 
         # key = username; value = index
-        u="${A_USERNAME["${i}"]}"
-        ${A_MAP_USERNAMES["${u}"]}=1
+        u="${A_USERNAME[${i}]}"
+        A_MAP_USERNAMES[${u}]=1
     done
     echo "Current users: ${A_CURRENT_STD_USERS[@]}"
     echo "List of UsersMAP: ${!A_MAP_USERNAMES[@]}"
@@ -145,7 +145,7 @@ function audit_users(){
             echo "Add admin for user: ${A_USERNAME[$i]}"
         # if no remove them
         else 
-            remove_admin "${A_USERNAME[$i]}"
+            #remove_admin "${A_USERNAME[$i]}"
             echo "Remove admin for user: ${A_USERNAME[$i]}"
         fi
     done
