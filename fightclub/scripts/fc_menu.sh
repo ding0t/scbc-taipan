@@ -25,6 +25,7 @@ opt_sh_svcs="RECON: active services"
 opt_sh_process="RECON: running processes"
 # users
 opt_launch_users_gui="USERS: Launch user setup gui"
+opt_audit_users="USERS: Audit users against config file"
 # applications
 opt_update="APPS: Update system and applications"
 opt_purge_tools="APPS: Purge hacker tools"
@@ -38,12 +39,14 @@ opt_set_account_policies="CONFIG: set password and account policies"
 opt_set_kernel="CONFIG: set kernel defaults"
 opt_set_audit="CONFIG: set audit policies"
 opt_set_shm="CONFIG: Disable /dev/shm"
-
 # forensics
 opt_find_media_files="FORENSICS: Find media files"
 opt_delete_media_files="FORENSICS: DELETE media files"
-# tips
-# unlock account when locked
+# protect
+opt_protect_install_av="PROTECT: Install clamAV"
+opt_protect_run_av="PROTECT: Install clamAV and update signatures"
+opt_protect_install_firewall="PROTECT: Install Firewall and enable"
+opt_protect_conf_firewall="PROTECT: Configure Firewall"
 # script operations
 opt_quit="FightClub: Quit"
 opt_show_functions="FightClub: Show available functions"
@@ -59,6 +62,7 @@ A_OPTIONS=("${opt_quit}"
 "${opt_sh_process}" 
 "${opt_sh_svcs}"
 "${opt_launch_users_gui}"
+"${opt_audit_users}"
 "${opt_launch_updates_config_gui}"
 "${opt_purge_tools}"
 "${opt_purge_services}"
@@ -72,6 +76,10 @@ A_OPTIONS=("${opt_quit}"
 "${opt_set_shm}"
 "${opt_find_media_files}"
 "${opt_delete_media_files}"
+"${opt_protect_install_av}"
+"${opt_protect_run_av}"
+"${opt_protect_install_firewall}"
+"${opt_protect_conf_firewall}"
 "${opt_clean_menu}"
 "${opt_show_functions}" 
 )
@@ -194,6 +202,10 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_launch_users_gui}"
             launch_settings_users_gui
             ;;
+        "${opt_audit_users}")
+            write_log_entry "${logpath}" "Executed: ${opt_audit_users}"
+            audit_users
+            ;;
         #### applications
         "${opt_launch_updates_config_gui}")
             write_log_entry "${logpath}" "Executed: ${opt_launch_updates_config_gui}"
@@ -252,6 +264,7 @@ function execute_option(){
         "${opt_set_audit}")
             write_log_entry "${logpath}" "Executed: ${opt_set_audit}"
             remove_bash_history_symlink
+            ## todo some more
             echo "Audit policies configured."
             ;;
         "${opt_set_kernel}")
@@ -285,6 +298,22 @@ function execute_option(){
             delete_media_by_extension  "${file_delete_extentions}"  "${file_delete_path}"
             REPLY="${global_menu_reply_state}"
             echo "DELETE media files by extension ${file_delete_extentions} completed."
+            ;;
+        ## Protect
+        "${opt_protect_install_av}")
+            write_log_entry "${logpath}" "Executed: ${opt_protect_install_av}"
+            install_clamav
+            printf "clamscan installed\nuse 'clamtk' to run a scan from gui, remember it is slow!\n"
+            ;;
+        "${opt_protect_run_av}")
+            write_log_entry "${logpath}" "Executed: ${opt_protect_run_av}"
+            printf ""
+            ;;
+        "${opt_protect_install_firewall}")
+            write_log_entry "${logpath}" "Executed: ${opt_protect_install_firewall}"
+            ;;
+        "${opt_protect_conf_firewall}")
+            write_log_entry "${logpath}" "Executed: ${opt_protect_conf_firewall}"
             ;;
         ## fightclub specific
         "${opt_clean_menu}")
