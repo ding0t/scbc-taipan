@@ -204,7 +204,14 @@ function execute_option(){
             ;;
         "${opt_audit_users}")
             write_log_entry "${logpath}" "Executed: ${opt_audit_users}"
-            audit_users "$(dirname "${0}")/users.conf"
+            global_menu_reply_state="${REPLY}"
+            read -p "Do you want to autofix the users? (Y, default is no): "
+            if [[ ${REPLY} =~ 'y' ]]; then 
+                audit_users "$(dirname "${0}")/users.conf" 'true'
+            else
+                audit_users "$(dirname "${0}")/users.conf" 'false'
+            fi
+            REPLY="${global_menu_reply_state}"
             ;;
         #### applications
         "${opt_launch_updates_config_gui}")

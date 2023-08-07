@@ -77,7 +77,11 @@ function get_current_standard_users_list(){
 function audit_users(){
     local i
     local j
-    local u
+    local make_changes=$2
+
+    if [[ $make_changes == 'true' ]]; then 
+        echo "make changes!"
+    fi
     # get a list of current users on the system
     get_current_standard_users_list
     # UID_MAX, UID_MIN
@@ -96,29 +100,25 @@ function audit_users(){
         A_ISADMIN+=("$COL2")
         A_PASSWORD+=("$COL3")
     done <"${users_csv_file}"
-    echo "File: ${users_csv_file}"
-    echo "List of Users: ${A_USERNAME[@]}"
+    #echo "File: ${users_csv_file}"
+    #echo "List of Users: ${A_USERNAME[@]}"
 
     # iterate through existing users to look for anomalies
     declare -A A_MAP_USERNAMES
     for i in ${A_USERNAME[@]}; do 
         # key = username; value = index
-        echo "Mapping: ${i}"
         A_MAP_USERNAMES["${i}"]=1
     done
-    echo "Current users: ${A_CURRENT_STD_USERS[@]}"
-    echo "List of Users MAP: ${!A_MAP_USERNAMES[@]}"
+    #echo "Current users: ${A_CURRENT_STD_USERS[@]}"
+    #echo "List of Users MAP: ${!A_MAP_USERNAMES[@]}"
     
-    # test current users
+    # test current users to look for unauthorised users
     for j in "${A_CURRENT_STD_USERS[@]}"; do
         # if username not in authorised list
-        echo " test: ${A_MAP_USERNAMES[${j}]}"
         #user_exists=False
         #for i in "${A_USERNAME[@]}"; do [[ "${j}" == "${i}" ]]  && $user_exists=True; done
         #If username exists as a key in the associative array list of users from file
-        if [[ -n ${A_MAP_USERNAMES[${j}]} ]]; then
-            echo "Found authorised user: ${j}"
-        else
+        if ! [[ -n ${A_MAP_USERNAMES[${j}]} ]]; then
             echo "WARNING! Found unauthorised user: ${j}"
         fi
     done
@@ -130,7 +130,7 @@ function audit_users(){
         # current logged in user
         if [[ "${A_USERNAME[$i]}"  =~ "${SUDO_USER:-$USER}" ]]; then
             # this is the user executing the script!
-            echo "User '${SUDO_USER:-$USER}' is likely you!."
+            echo "User '${SUDO_USER:-$USER}' is likely you! Will not change anything."
             continue
         fi
         # do they exist, if not make them
