@@ -103,7 +103,8 @@ function audit_users(){
     declare -A A_MAP_USERNAMES
     for i in "${A_USERNAME[@]}"; do 
         # key = username; value = index
-        $A_MAP_USERNAMES["${A_USERNAME["${i}"]}"]=1
+        u="${A_USERNAME["${i}"]}"
+        ${A_MAP_USERNAMES["${u}"]}=1
     done
     echo "Current users: ${A_CURRENT_STD_USERS[@]}"
     echo "List of UsersMAP: ${!A_MAP_USERNAMES[@]}"
