@@ -88,7 +88,7 @@ function audit_users(){
     declare -a A_ISADMIN
     declare -a A_PASSWORD
     # read each line into the approprate array, note order of csv matters
-    while IFS=| read -r COL1 COL2 COL3 TRASH; do
+    while IFS=, read -r COL1 COL2 COL3 TRASH; do
         # ignore comment lines
         echo "Processing from file: $COL1"
         [[ "$COL1" =~ ^#.*$ ]] && continue
