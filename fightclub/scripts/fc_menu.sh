@@ -325,7 +325,7 @@ function execute_option(){
             echo "${a_functions}"
             #read -p "Enter a function name to run: "
             ;;
-        "${opt_quit}")
+        "${opt_quit}" | 'q' | 'Q')
             write_log_entry "${logpath}" "___FINISHED SCBC FIGHTCLUB___" 
             # print check logfiles
             printf "Thank you for using SCBC FightClub!\n\n"

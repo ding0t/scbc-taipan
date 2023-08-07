@@ -54,7 +54,7 @@ done
 #   sets global array A_CURRENT_STD_USERS
 #######################################
 function get_current_standard_users_list(){
-    A_CURRENT_STD_USERS=("$(cat /etc/passwd | cut -d: -f 1,3,6 | grep -e "[5-9][0-9][0-9]" -e "[0-9][0-9][0-9][0-9]" | grep "/home" | cut -d: -f1)")
+    A_CURRENT_STD_USERS=($(cat /etc/passwd | cut -d: -f 1,3,6 | grep -e "[5-9][0-9][0-9]" -e "[0-9][0-9][0-9][0-9]" | grep "/home" | cut -d: -f1))
     # create associative array using map username:key
     #declare -A A_MAP_CURRENT_STD_USERS
     #for key in "${!A_CURRENT_STD_USERS[@]}"; do A_MAP_CURRENT_STD_USERS[${A_CURRENT_STD_USERS[$key]}="${key}"]; done
