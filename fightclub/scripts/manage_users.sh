@@ -96,11 +96,14 @@ function audit_users(){
 
     # iterate through existing users to look for anomalies
     declare -A A_MAP_USERNAMES
-    for key in "${!A_USERNAME[@]}"; do A_MAP_USERNAMES[${A_USERNAME[$key]}="${key}"]; done
+    for key in "${!A_USERNAME[@]}"; do 
+        A_MAP_USERNAMES[${A_USERNAME[$key]}="${key}"]
+    done
     for j in "${A_CURRENT_STD_USERS[@]}"; do
         # if username not in authorised list
         if ! [[ -n "${A_MAP_USERNAMES["${j}"]}" ]]; then
             printf "WARNING! Found unauthorised user: ${j}\n"
+        fi
     done
 
     # -g adds a a user to the named group and creates the group if it does not exist
