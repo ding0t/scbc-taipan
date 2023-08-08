@@ -50,7 +50,6 @@ function find_media_files_by_type(){
 	echo "Searching for audio and video files in: ${1:-${default_dir}}"
 	find "${1:-${default_dir}}" -type f -exec file -N -i -- {} + | grep video
 	find "${1:-${default_dir}}" -type f -exec file -N -i -- {} + | grep audio
-	echo "Finished searching"
 }
 
 #######################################
@@ -66,5 +65,6 @@ function find_media_files_by_type(){
 
 function delete_media_by_extension(){
 	search="*."
-	find ${$2} -iname "${search}${1}" -type f -delete | tee -a "${logpath}"
+	find "${2}" -iname "${search}${1}" -type f -delete 
+	# | tee -a "${logpath}"
 }
