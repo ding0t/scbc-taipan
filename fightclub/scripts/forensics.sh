@@ -47,9 +47,10 @@ function find_media_files_by_extension(){
 #######################################
 function find_media_files_by_type(){
 	local default_dir="/home/"
+	echo "Searching for audio and video files in: ${1:-${default_dir}}"
 	find "${1:-${default_dir}}" -type f -exec file -N -i -- {} + | grep video
 	find "${1:-${default_dir}}" -type f -exec file -N -i -- {} + | grep audio
-	
+	echo "Finished searching"
 }
 
 #######################################
