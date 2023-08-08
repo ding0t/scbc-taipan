@@ -34,7 +34,21 @@ function install_clamav(){
 # Outputs:
 #   Nil
 #######################################
-function launch_clamav(){
-    clamtk &
+function launch_clamav_gui(){
+    (clamtk) &
+
+}
+
+#######################################
+# what
+# Globals:
+#   nil
+# Arguments:
+#   $1 directory to scan
+# Outputs:
+#   Nil
+#######################################
+function launch_clamav_scan(){
+    clamscan -i "${1}"
 
 }

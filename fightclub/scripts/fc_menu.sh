@@ -137,9 +137,9 @@ function execute_option(){
             ;;
         "${opt_sh_listen}")
             write_log_entry "${logpath}" "Executed: ${opt_sh_listen}" 
-            printf "Any process names not in colour below are interesting\n"
+            printf "NOTE: Any process names not in colour below are interesting\n"
             recon_get_listening
-            echo "Check here for output: ${recon_listening_path}"
+            printf "\nCheck here for output: ${recon_listening_path}\n"
             # TODO analyse
             ;;
         "${opt_sh_svcs}")
@@ -160,7 +160,14 @@ function execute_option(){
         "${opt_audit_users}")
             write_log_entry "${logpath}" "Executed: ${opt_audit_users}"
             global_menu_reply_state="${REPLY}"
-            read -p "Do you want to autofix the users? (Y, default is no): "
+            # 
+            if [[ ${a_option_runs[${global_menu_reply_state}]} == 0 ]]; then
+                printf "USAGE:\n"
+                printf "1. For this to work, you must edit the file: \n"
+                printf "2. reccomend doing a dry run before autofix!\n"
+                printf "3. after the dry run, check if the unauthorised user has files or evidence for forensics questions\n"
+            fi
+            read -p "Do you want to autofix the users? (Y, default is no, dry run only): "
             if [[ ${REPLY} =~ 'y' ]]; then 
                 audit_users "$(dirname "${0}")/users.conf" 'true'
             else
@@ -172,8 +179,8 @@ function execute_option(){
         "${opt_launch_updates_config_gui}")
             write_log_entry "${logpath}" "Executed: ${opt_launch_updates_config_gui}"
             printf "Launching gui now\n"
-            printf "Enable security updates, and auto install"
-            printf ""
+            printf "Go to updates tab, Enable security updates, and auto install\n"
+            printf "\n"
             launch_updates_config_gui
             ;;
         "${opt_update}")
@@ -265,21 +272,24 @@ function execute_option(){
         "${opt_protect_install_av}")
             write_log_entry "${logpath}" "Executed: ${opt_protect_install_av}"
             install_clamav
-            printf "clamscan installed\nuse 'clamtk' to run a scan from gui, remember it is slow!\n"
+            printf "clamscan installed\nRun 'clamtk' to run a scan from gui, remember it is slow!\n"
+            printf "'clamscan -i /' to run a scan on the whole system, if you know the path, specify it\n\n"
             ;;
         "${opt_protect_run_av}")
             write_log_entry "${logpath}" "Executed: ${opt_protect_run_av}"
-            printf ""
+            printf "'clamscan -i /' to run a scan on the whole system, if you know the path, specify it\n\n"
             ;;
         "${opt_protect_install_firewall}")
             write_log_entry "${logpath}" "Executed: ${opt_protect_install_firewall}"
+            install_enable_firewall
             ;;
         "${opt_protect_conf_firewall}")
             write_log_entry "${logpath}" "Executed: ${opt_protect_conf_firewall}"
+            printf ""
             ;;
         ## fightclub specific
         "${opt_clean_menu}")
-            print_clean_menu
+            print_menu
             ;;
         "${opt_show_functions}")
             printf "Caution, not all of these functions are tested.\n"
@@ -321,7 +331,7 @@ Ly8gLyBfIFwKL19fXy9cX19fL19fX18vXF9fXy8gL18vIC9fL1xfLCAvXy8vXy9cX18vXF9fXy9f\
 L1xfLF8vXy5fXy8KICAgICAgICAgICAgICAgICAgICAgICAgICAgL19fXy8gICAgICAgICAgICAg\
 ICAgICAgICAgICAgICAKCg=="
 echo "${logo_b64}" | base64 -d
-echo "A Cyber Taipan helper by ding0t"
+echo "A cyber taipan helper by ding0t. Version: ${script_version}"
 echo ""
 }
 
@@ -341,7 +351,8 @@ function print_menu(){
     echo "USAGE:"
     echo "1. Options that make changes will prmpt for permission."
     echo "2. Look for log files in the same directory this scripot was run from."
-    echo "3. Option run count updates only on a menu refresh."
+    echo "3. Config files are backed up before change nexct to their original location. Check ${logpath} for records."
+    echo "4. Option run count updates only on a menu refresh."
     echo ""
     #  Show options like
     # 1) "Option"

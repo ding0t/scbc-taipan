@@ -81,6 +81,7 @@ function audit_users(){
 
     if [[ $make_changes == 'true' ]]; then 
         echo "This run will make changes!"
+        write_log_entry "${logpath}" " INFO: making changes to users as follows..."
     fi
     # get a list of current users on the system
     get_current_standard_users_list
@@ -120,32 +121,34 @@ function audit_users(){
         #If username exists as a key in the associative array list of users from file
         if ! [[ -n ${A_MAP_USERNAMES[${j}]} ]]; then
             echo "WARNING! Found unauthorised user: ${j}"
+            write_log_entry "${user_audit_path}" "WARNING! Found unauthorised user: ${j}"
             if [[ $make_changes == 'true' ]]; then 
                 # remove user
                 # confirm?
-                write_log_entry "${logpath}" "Removing user: $j"
+                write_log_entry "${logpath}" "Removing user and all of their files: $j"
                 deluser $j --remove-all-files >> "${logpath}"
             fi
         fi
     done
 
-    # -g adds a a user to the named group and creates the group if it does not exist
-    # -G appends the user to existing groups
+    ## itereate over the authorised users file
     for i in "${!A_USERNAME[@]}"; do
         #! loops over index vs values
         # current logged in user
         if [[ "${A_USERNAME[$i]}"  =~ "${SUDO_USER:-$USER}" ]]; then
             # this is the user executing the script!
             echo "User '${SUDO_USER:-$USER}' is likely you! Will not change anything."
+            write_log_entry "${user_audit_path}" "User '${SUDO_USER:-$USER}' is likely you! Will not change anything."
             continue
         fi
         # do they exist, if not make them
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
             #
-            echo "Add user: ${A_USERNAME[$i]}"
+            echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}"
+            write_log_entry "${user_audit_path}" echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}" 
             if [[ $make_changes == 'true' ]]; then 
                 # 
-                write_log_entry "${logpath}" "Adding user user: ${A_USERNAME[$i]}"
+                write_log_entry "${logpath}" "Adding authorised user: ${A_USERNAME[$i]}"
                 add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
             fi
         fi
@@ -154,6 +157,7 @@ function audit_users(){
             # if yes, add them
             #"
             echo "Add admin for user: ${A_USERNAME[$i]}"
+            write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
             if [[ $make_changes == 'true' ]]; then 
                 # 
                 write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
@@ -164,6 +168,7 @@ function audit_users(){
             # no test here yet, not needed if user is not admin anyway
             if [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
                  echo "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
+                 write_log_entry "${user_audit_path}" "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
             fi
             if [[ $make_changes == 'true' ]]; then 
                 # 
@@ -209,7 +214,7 @@ function remove_admin(){
 #   A_USERNAME, A_PASSWORD, A_ISADMIN
 # Arguments:
 #   $1 username
-#   
+#   $2 password
 # Outputs:
 #   Nil
 #######################################
@@ -218,15 +223,12 @@ function add_user(){
     #runuser -l "${SUDO_USER:-$USER}" -c "gnome-control-center  user-accounts &"
     #groupadd -f "${A_GROUP[$i]}"
     # add user to supplemantary groups with -G
-    useradd -G "${A_GROUP[$i]}" \
-    -d "/home/${A_USERNAME[$i]}" \
+    # -g adds a a user to the named group and creates the group if it does not exist
+    # -G appends the user to existing groups -G "${A_GROUP[$i]}" 
+    useradd  -d "/home/${A_USERNAME[$i]}" \
     -s /bin/bash \
     -p "$(echo "${A_PASSWORD[$i]}" | openssl passwd -1 -stdin)" \
     "${A_USERNAME[$i]}"
-    # make admin user if sudo
-    if [[ "${A_GROUP[$i]}" == "sudo" ]]; then
-        add_admin "${A_USERNAME[$i]}"
-    fi
     # make the home dir
     mkdir "/home/${A_USERNAME[$i]}"
     chown  "${A_USERNAME[$i]}":"${A_USERNAME[$i]}" "/home/${A_USERNAME[$i]}"
