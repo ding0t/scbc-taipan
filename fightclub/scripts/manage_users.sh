@@ -121,12 +121,14 @@ function audit_users(){
         #If username exists as a key in the associative array list of users from file
         if ! [[ -n ${A_MAP_USERNAMES[${j}]} ]]; then
             echo "WARNING! Found unauthorised user: ${j}"
-            write_log_entry "${user_audit_path}" "WARNING! Found unauthorised user: ${j}"
+            
             if [[ $make_changes == 'true' ]]; then 
                 # remove user
                 # confirm?
-                write_log_entry "${logpath}" "Removing user and their home directory: ${j}"
+                write_log_entry "${logpath}" "Removing unauthorised user and their home directory: ${j}"
                 deluser "${j}"  --remove-home >> "${logpath}"
+            else
+                write_log_entry "${user_audit_path}" "WARNING! Found unauthorised user: ${j}"
             fi
         fi
     done
@@ -145,36 +147,43 @@ function audit_users(){
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
             #
             echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}"
-            write_log_entry "${user_audit_path}" echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}" 
+             
             if [[ $make_changes == 'true' ]]; then 
                 # 
                 write_log_entry "${logpath}" "Adding authorised user: ${A_USERNAME[$i]}"
                 add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
+            else
+                write_log_entry "${user_audit_path}" echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}"
             fi
         fi
         # should they be admin
+        # sorry nested ifs follow
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
             # if yes, add them
             #"
             echo "Add admin for user: ${A_USERNAME[$i]}"
-            write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
+            
             if [[ $make_changes == 'true' ]]; then 
                 # 
                 write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
                 add_admin "${A_USERNAME[$i]}"
+            else
+                write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
             fi
-        # if no remove them
+        # if no test if admin and remove them
         else 
-            # no test here yet, not needed if user is not admin anyway
+            # testing, but not needed if user is not admin anyway
             if [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
                  echo "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
-                 write_log_entry "${user_audit_path}" "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
+                if [[ $make_changes == 'true' ]]; then 
+                    # 
+                    write_log_entry "${logpath}" "Removing admin privilige frm user: ${A_USERNAME[$i]}"
+                    remove_admin "${A_USERNAME[$i]}"
+                else
+                    write_log_entry "${user_audit_path}" "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
+                fi
             fi
-            if [[ $make_changes == 'true' ]]; then 
-                # 
-                write_log_entry "${logpath}" "Removing admin privilige frm user: ${A_USERNAME[$i]}"
-                remove_admin "${A_USERNAME[$i]}"
-            fi
+
         fi
     done
 }
