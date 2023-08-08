@@ -146,8 +146,7 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_sh_svcs}" 
             echo "'systemctl --type=service' To show services use "
             echo "Look for services like apache, ftpd"
-            echo "'systemctl --type=service | egrep -i 'running'' Use grep to filter output  "
-            echo ""
+            echo "'systemctl --type=service | egrep -i 'running'' Use grep to filter output."
             echo "'systemctl status ufw' to see the status of a service like ufw"
             recon_get_services
             echo "Check here for output: ${recon_services_path}"
@@ -349,17 +348,18 @@ function print_menu(){
     # Logo
     print_logo
     echo "USAGE:"
-    echo "1. Options that make changes will prmpt for permission."
-    echo "2. Look for log files in the same directory this scripot was run from."
-    echo "3. Config files are backed up before change nexct to their original location. Check ${logpath} for records."
+    echo "1. Options that make changes will prompt for permission."
+    echo "2. Look for log files in the same directory this script was run from."
+    echo "3. Config files are backed up before change next to their original location. Check ${logpath} for records."
     echo "4. Option run count updates only on a menu refresh."
     echo ""
+    echo "OPTIONS:"
     #  Show options like
     # 1) "Option"
     for i in "${!A_OPTIONS[@]}"; do
         col1="${i})"
-        col2="${A_OPTIONS[${i}]}"
-        col3="(Runs: ${a_option_runs[${i}]})"
+        col3="${A_OPTIONS[${i}]}"
+        col2="(Runs: ${a_option_runs[${i}]})"
         #printf "${i}) ${A_OPTIONS[${i}]}\t\t\t(Run count: ${a_option_runs[${i}]})\n"
         #paste <(printf %s "${col1}") <(printf %s "${col3}")
         printf "${col1} ${col2}  ${col3}\n"

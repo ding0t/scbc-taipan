@@ -125,8 +125,8 @@ function audit_users(){
             if [[ $make_changes == 'true' ]]; then 
                 # remove user
                 # confirm?
-                write_log_entry "${logpath}" "Removing user and all of their files: $j"
-                deluser $j --remove-all-files >> "${logpath}"
+                write_log_entry "${logpath}" "Removing user and their home directory: ${j}"
+                deluser "${j}"  --remove-home >> "${logpath}"
             fi
         fi
     done
