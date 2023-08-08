@@ -56,8 +56,8 @@ function build_options_menu(){
     opt_find_media_files="FORENSICS: Find media files"
     opt_delete_media_files="FORENSICS: DELETE media files"
     # protect
-    opt_protect_install_av="PROTECT: Install clamAV"
-    opt_protect_run_av="PROTECT: Install clamAV and update signatures"
+    opt_protect_install_av="PROTECT: Install clamAV and update signatures"
+    opt_protect_run_av="PROTECT: Run clamav"
     opt_protect_install_firewall="PROTECT: Install Firewall and enable"
     opt_protect_conf_firewall="PROTECT: Configure Firewall"
     # script operations

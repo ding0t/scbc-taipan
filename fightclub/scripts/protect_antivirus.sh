@@ -17,12 +17,12 @@
 #######################################
 function install_clamav(){
     # get clam installed
-    apt install -y clamav clamav-daemon clamtk
+    apt install -y clamav clamav-daemon clamtk >/dev/null 2>&1 & disown
     # update the sigs
     systemctl stop clamav-freshclam
-    freshclam
+    freshclam >/dev/null 2>&1 & disown
     # restart clam
-    systemctl start clamav-freshclam
+    systemctl start clamav-freshclam 
 }
 
 #######################################

@@ -34,7 +34,7 @@ function apt_purge_tools(){
 	scanmem
 	zenmap)
     for i in "${A_TOOLS[@]}"; do
-        apt purge -y "${i}"
+        apt purge -y "${i}" >/dev/null 2>&1 & disown
     done
 	apt autoremove -y
 	
