@@ -20,7 +20,7 @@
 function launch_settings_users_gui(){
     # user paremeter substitution to call script user vs root
     #runuser -l "${SUDO_USER:-$USER}" -c "gnome-control-center  user-accounts &"
-    gnome-control-center  user-accounts &
+    (sudo -u ${SUDO_USER:-$USER} gnome-control-center  user-accounts) &
 }
 
 

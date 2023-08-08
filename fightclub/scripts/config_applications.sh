@@ -47,5 +47,5 @@ function enable_security_updates(){
 #   Nil
 #######################################
 function launch_updates_config_gui(){
-    software-properties-gtk &
+    (sudo -u ${SUDO_USER:-$USER} software-properties-gtk) &
 }

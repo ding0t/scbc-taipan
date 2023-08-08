@@ -1,7 +1,5 @@
 # SCBC FightClub for Cyber Taipan
-_Caution in DRAFT results are untested_
-
-Run scripts for South Coast Baptist College
+Cyber Taipan helper scripts for South Coast Baptist College
 
 ## How To Use
 *Note: scripts can cause penalties and break images if you are not sure what it is doing*
@@ -42,7 +40,7 @@ logs are created in the same directory you ran the scripts
 
 
 ### resources
-Exaples of other scripts
+Examples of other scripts
 * [MarKyehus/CyPatriot](https://github.com/MarKyehus/CyPatriot/blob/master/README.md)
 * [BiermanM/CyberPatriot-Script](https://github.com/BiermanM/CyberPatriot-Scripts/blob/master/UbuntuScript.sh)
 

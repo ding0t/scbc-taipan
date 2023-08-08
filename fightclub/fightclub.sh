@@ -84,12 +84,15 @@ source "$(dirname "${0}")/scripts/protect_firewall.sh"
 source "$(dirname "${0}")/scripts/forensics.sh"
 
 # lets get going...
+build_options_menu
 write_log_entry "${logpath}" "=== STARTING SCBC FIGHTCLUB ==="
+# make sure we can read the log if we lose sudo
+chown "${SUDO_USER:-$USER}":"${SUDO_USER:-$USER}" "${logpath}"
 print_menu
 # Show menu and execute options in forever loop
 while :;do
-  # User instructions
-	# ask user
+	# ask user for an option to action
+  # options are set up in fc_menu.sh
   read -p "Enter action 0 to $((num_options-1)): "
 	# asess reply
   if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then

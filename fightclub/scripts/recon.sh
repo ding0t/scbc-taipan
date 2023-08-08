@@ -34,10 +34,11 @@ function get_system_recon(){
 #   Nil
 #######################################
 function recon_get_processes(){
-    write_log_entry "${reconpath}" "====== running processestree view\n"
-    pstree -p >> "${reconpath}"
-    write_log_entry "${reconpath}" "====== running processes\n "
-    ps -aux >> "${reconpath}"
+
+    write_log_entry "${recon_processes_path}" "====== running processestree view\n"
+    pstree -p >> "${recon_processes_path}"
+    write_log_entry "${recon_processes_path}" "====== running processes\n "
+    ps -aux >> "${recon_processes_path}"
     
 }
 
@@ -51,8 +52,9 @@ function recon_get_processes(){
 #   Nil
 #######################################
 function recon_get_services(){
-    write_log_entry "${reconpath}" "====== services"
-    systemctl --type=service >> "${reconpath}"
+
+    write_log_entry "${recon_services_path}" "#====== services\n look for things like ftp, apache"
+    systemctl --type=service >> "${recon_services_path}"
     # TODO analyse against a list
 }
 
@@ -66,8 +68,9 @@ function recon_get_services(){
 #   Nil
 #######################################
 function recon_get_listening(){
-    write_log_entry "${reconpath}" "====== listening services; look here for anything that should not be running\n"
-    ss -tlpn | egrep --color=always -i '^|sshd|systemd-resolve|cupsd' | tee -a "${reconpath}"
+    write_log_entry "${reconpath}" "#====== listening services; look here for anything that should not be running\n"
+    echo""
+    ss -tlpn | egrep --color=always -i '^|sshd|systemd-resolve|cupsd' | tee -a "${recon_listening_path}"
 }
 
 #######################################
@@ -95,9 +98,7 @@ function analyse_recondata(){
 #   Nil
 #######################################
 function check_for_admins(){
-    A_GROUPS=('sambashare', 'sudo', 'adm')
-    egrep -i 'sudo' /etc/group | cut -d: -f4
-    egrep -i 'adm' /etc/group | cut -d: -f4
+    egrep -i 'sudo|adm' /etc/group | cut -d: -f4
     
 }
 
@@ -111,9 +112,9 @@ function check_for_admins(){
 #   Nil
 #######################################
 function check_recently_installed(){
-    write_log_entry "${reconpath}" "====== recently installed apps\n"
+    write_log_entry "${recon_install_path}" "====== recently installed apps\n# look for a known bad app and what installed around it"
     #use apt search <appname>
-    grep -i 'install\s' /var/log/dpkg.log* >> "${reconpath}"
-    zgrep -i 'install\s' /var/log/dpkg.log.*.gz >> "${reconpath}"
+    grep -i 'install\s' /var/log/dpkg.log* >> "${recon_install_path}"
+    zgrep -i 'install\s' /var/log/dpkg.log.*.gz >> "${recon_install_path}"
     
 }
