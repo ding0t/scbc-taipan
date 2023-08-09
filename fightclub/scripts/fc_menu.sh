@@ -165,6 +165,7 @@ function execute_option(){
                 printf "1. For this to work, you must edit the file: \n"
                 printf "2. reccomend doing a dry run before autofix!\n"
                 printf "3. after the dry run, check if the unauthorised user has files or evidence for forensics questions\n"
+                printf "NOTE:\n1. You may need to update the password for a user with insecure password by using 'sudp paswd <username>'"
             fi
             read -p "Do you want to autofix the users? (Y, default is no, dry run only): "
             if [[ ${REPLY} =~ 'y' ]]; then 
