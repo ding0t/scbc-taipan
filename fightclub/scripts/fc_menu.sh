@@ -160,13 +160,13 @@ function execute_option(){
             write_log_entry "${logpath}" "Executed: ${opt_audit_users}"
             global_menu_reply_state="${REPLY}"
             # 
-            if [[ ${a_option_runs[${global_menu_reply_state}]} == 0 ]]; then
+            #if [[ ${a_option_runs[${global_menu_reply_state}]} -eq 0 ]]; then
                 printf "USAGE:\n"
-                printf "1. For this to work, you must edit the file: \n"
-                printf "2. reccomend doing a dry run before autofix!\n"
+                printf "1. For this to work, you must edit the file: ${users_csv_file}\n"
+                printf "2. reccomend doing a audit run before autofix!\n"
                 printf "3. after the dry run, check if the unauthorised user has files or evidence for forensics questions\n"
                 printf "NOTE:\n1. You may need to update the password for a user with insecure password by using 'sudp paswd <username>'\n"
-            fi
+            #fi
             read -p "Do you want to autofix the users? ('y', default is no; audit only): "
             if [[ ${REPLY} =~ 'y' ]]; then 
                 audit_users "$(dirname "${0}")/users.conf" 'true'
@@ -174,6 +174,7 @@ function execute_option(){
                 write_log_entry "${user_audit_path}" "#=== START of user audit ==="
                 audit_users "$(dirname "${0}")/users.conf" 'false'
                 write_log_entry "${user_audit_path}" "#=== END of user audit ==="
+                echo "User audit writtent to: ${user_audit_path}"
             fi
             REPLY="${global_menu_reply_state}"
             ;;
