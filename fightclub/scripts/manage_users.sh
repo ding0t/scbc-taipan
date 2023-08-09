@@ -164,18 +164,19 @@ function audit_users(){
         # should they be admin
         # sorry nested ifs follow
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
-            # if yes, add them
-            #"
-            echo "Add admin for user: ${A_USERNAME[$i]}"
-            
-            if [[ $make_changes == 'true' ]]; then 
+            # if yes, test if admin and add if not
+            if ! [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
+                echo "User requires admin: ${A_USERNAME[$i]}"
+                if [[ $make_changes == 'true' ]]; then 
                 # 
                 write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
                 add_admin "${A_USERNAME[$i]}"
             else
                 write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
             fi
-        # if no test if admin and remove them
+            fi
+            
+        # if not meant to be admin test if admin and remove them
         else 
             # testing, but not needed if user is not admin anyway
             if [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then

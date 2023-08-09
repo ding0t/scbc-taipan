@@ -16,6 +16,16 @@ git clone https://github.com/ding0t/scbc-taipan.git
 ### edit the users.conf file to enable the user audit
 _you will find the authorised users list in the competition image readme_
 
+NOTE: 
+1. do not include spaces around the username or password
+1. finish the file with a blank line
+
+use something like:
+```sh
+cd ~/scbc-taipan/fightclub
+gedit users.conf
+```
+
 ```sh
 # copy the list of users here in format
 # lines with # are ignored
@@ -27,6 +37,7 @@ _you will find the authorised users list in the competition image readme_
 #USERNAME,ADMIN,PASSWORD
 adam_a,y,ayozai%me1Ah
 lilly,n,di4Ohc#o0ohr
+#
 ```
 
 

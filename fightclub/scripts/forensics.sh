@@ -65,6 +65,7 @@ function find_media_files_by_type(){
 
 function delete_media_by_extension(){
 	search="*."
-	find "${2}" -iname "${search}${1}" -type f -delete 
+	local default_dir="/home/"
+	find "${2:-${default_dir}}" -iname "${search}${1}" -type f -delete 
 	# | tee -a "${logpath}"
 }
