@@ -80,7 +80,7 @@ function apt_purge_servcies(){
 #######################################
 function apt_purge_games(){
 	A_TOOLS=(freeciv)
-	for i in "${A_SERVICES[@]}"; do
+	for i in "${A_GAMES[@]}"; do
  	   apt purge -y "${i}"
     done
 	apt autoremove -y

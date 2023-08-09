@@ -93,6 +93,7 @@ print_menu
 while :;do
 	# ask user for an option to action
   # options are set up in fc_menu.sh
+  printf "\n"
   read -p "Enter action 0 to $((num_options-1)): "
 	# asess reply
   if (( "${REPLY}" >= 0 &&  "${REPLY}" <= num_options )); then

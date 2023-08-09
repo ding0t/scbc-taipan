@@ -201,10 +201,14 @@ function execute_option(){
             ;;
         "${opt_rm_snap}")
             write_log_entry "${logpath}" "Executed: ${opt_rm_snap}"
-            #snap_remove_named_tools
-            snap_remove_all_installed
-            #remove_snapd
-            #snap_prevent_reinstall
+            global_menu_reply_state="${REPLY}"
+            read -p "Do you really want to remove the snap manager? (y, default is no, list snaps only): "
+            if [[ ${REPLY} =~ 'y' ]]; then 
+                snap_remove_all_installed
+            else
+                (snap list)
+            fi            
+            REPLY="${global_menu_reply_state}"
             ;;
         ### secure config
         "${opt_set_ssh}")
@@ -284,7 +288,7 @@ function execute_option(){
             ;;
         "${opt_protect_conf_firewall}")
             write_log_entry "${logpath}" "Executed: ${opt_protect_conf_firewall}"
-            printf ""
+            gufw &
             ;;
         ## fightclub specific
         "${opt_clean_menu}")
