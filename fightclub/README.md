@@ -12,6 +12,24 @@ sudo apt install git -y
 cd ~
 git clone https://github.com/ding0t/scbc-taipan.git
 ``` 
+
+### edit the users.conf file to enable the user audit
+_you will find the authorised users list in the competition image readme_
+
+```sh
+# copy the list of users here in format
+# lines with # are ignored
+# use 'y' to specify a user as admin, use 'n' for otherwise
+# password is the new account password
+# sudo apt install pwgen
+# pwgen -y 12 5 # will make 5 passwords lengthe 12 with special chars
+# file must end with newline
+#USERNAME,ADMIN,PASSWORD
+adam_a,y,ayozai%me1Ah
+lilly,n,di4Ohc#o0ohr
+```
+
+
 ### run the scripts like:
 ```sh
 cd ~/scbc-taipan/fightclub

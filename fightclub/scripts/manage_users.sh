@@ -146,14 +146,19 @@ function audit_users(){
         # do they exist, if not make them
         if ! [[ $(grep -i "${A_USERNAME[$i]}" /etc/passwd) ]]; then
             #
-            echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}"
-             
+            echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}" 
             if [[ $make_changes == 'true' ]]; then 
                 # 
                 write_log_entry "${logpath}" "Adding authorised user: ${A_USERNAME[$i]}"
                 add_user "${A_USERNAME[$i]}" "${A_PASSWORD[$i]}"
             else
                 write_log_entry "${user_audit_path}" echo "Authorised user does not exist, add user: ${A_USERNAME[$i]}"
+            fi
+        # otherwise they exist, do we need to change their password
+        else
+            # password not blank
+            if [[ -z "${A_PASSWORD[$i]}" ]]; then
+                echo "${A_USERNAME[$i]}:${A_PASSWORD[$i]}" | chpasswd
             fi
         fi
         # should they be admin
