@@ -158,6 +158,7 @@ function audit_users(){
         else
             # password not blank
             if [[ -z "${A_PASSWORD[$i]}" ]]; then
+                echo "Changing password for user: ${A_USERNAME[$i]}"
                 echo "${A_USERNAME[$i]}:${A_PASSWORD[$i]}" | chpasswd
             fi
         fi
@@ -165,21 +166,21 @@ function audit_users(){
         # sorry nested ifs follow
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
             # if yes, test if admin and add if not
-            if ! [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
+            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -cw "sudo|adm") == 0 ]]; then
                 echo "User requires admin: ${A_USERNAME[$i]}"
                 if [[ $make_changes == 'true' ]]; then 
                 # 
-                write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
-                add_admin "${A_USERNAME[$i]}"
-            else
-                write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
-            fi
+                    write_log_entry "${logpath}" "Adding admin privilige to user: ${A_USERNAME[$i]}"
+                    add_admin "${A_USERNAME[$i]}"
+                else
+                    write_log_entry "${user_audit_path}" "Add admin for user: ${A_USERNAME[$i]}"
+                fi
             fi
             
         # if not meant to be admin test if admin and remove them
         else 
             # testing, but not needed if user is not admin anyway
-            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -qiw "sudo|adm") ]]; then
+            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -ciw "sudo|adm") > 0 ]]; then
                  echo "WARNING! Remove admin for standard user: ${A_USERNAME[$i]}"
                 if [[ $make_changes == 'true' ]]; then 
                     # 
