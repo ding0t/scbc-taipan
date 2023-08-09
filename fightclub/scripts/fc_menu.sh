@@ -171,7 +171,9 @@ function execute_option(){
             if [[ ${REPLY} =~ 'y' ]]; then 
                 audit_users "$(dirname "${0}")/users.conf" 'true'
             else
+                write_log_entry "${user_audit_path}" "#=== START of user audit ==="
                 audit_users "$(dirname "${0}")/users.conf" 'false'
+                write_log_entry "${user_audit_path}" "#=== END of user audit ==="
             fi
             REPLY="${global_menu_reply_state}"
             ;;
