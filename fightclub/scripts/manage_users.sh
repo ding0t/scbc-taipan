@@ -166,7 +166,7 @@ function audit_users(){
         # sorry nested ifs follow
         if [[ "${A_ISADMIN[$i]}"  =~ "y" ]]; then
             # if yes, test if admin and add if not
-            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -cw "sudo|adm") -eq 0 ]]; then
+            if [[ $(id -nG ${A_USERNAME[$i]} | egrep -cw "sudo") -eq 0 ]]; then
                 echo "User requires admin: ${A_USERNAME[$i]}"
                 if [[ $make_changes == 'true' ]]; then 
                 # 
