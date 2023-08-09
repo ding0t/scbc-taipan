@@ -34,7 +34,6 @@ function get_system_recon(){
 #   Nil
 #######################################
 function recon_get_processes(){
-
     write_log_entry "${recon_processes_path}" "====== running processestree view\n"
     pstree -p >> "${recon_processes_path}"
     write_log_entry "${recon_processes_path}" "====== running processes\n "
@@ -68,7 +67,7 @@ function recon_get_services(){
 #   Nil
 #######################################
 function recon_get_listening(){
-    write_log_entry "${reconpath}" "#====== listening services; look here for anything that should not be running\n"
+    write_log_entry "${recon_listening_path}" "#====== listening services; look here for anything that should not be running\n"
     echo""
     ss -tlpn | egrep --color=always -i '^|sshd|systemd-resolve|cupsd' | tee -a "${recon_listening_path}"
 }
