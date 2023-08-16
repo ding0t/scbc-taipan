@@ -32,6 +32,7 @@ function apt_purge_tools(){
 	ophcrack
 	sl
 	scanmem
+	manaplus
 	zenmap)
     for i in "${A_TOOLS[@]}"; do
         apt purge -y "${i}" >/dev/null 2>&1 & disown

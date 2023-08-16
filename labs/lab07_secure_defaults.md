@@ -6,6 +6,30 @@ As always; uninstall any unnecesary appl;ication vs trying to secure them.
 # Requirements
 * Ubuntu 22.04 virtual machine
 
+# Permissions
+Permissions are for:
+1. owner - the main user account that owns a file
+1. group - the group that the file belongs to; eg if is a user is a member of the group, they have these permissions.
+1. others - any other user on the system
+
+Permissions are:
+1. read (r) - can view the content of the file
+1. write (w) - can modify, inlcuding delete
+1. execute (x) - can run the program/script
+
+## Examples 
+`
+-rw-r----- 1 shadow 1190 Jun 20 16:38 /etc/shadow
+`
+
+## set user and group id
+set user id (suid) and set group id (sgid) is a way of forcing a file executed by others to execute as the owner. What if `root` owns the file?
+
+1. Finding suid  for root `find / -user root -perm -4000 -exec ls -ldb {} \; > suid.txt`
+1. Finding sgid for root `find / -user root -perm -2000 -exec ls -ldb {} \; > sgid.txt`
+
+_Note there are legitimate suid and sgid applications, the ones to look out for are custom ones_
+
 # Scheduled jobs
 Sometimes tasks need to happen at regular intervals on a computer. These 'scheduled jobs' can be used to malicious intent, and there may be unwanted jobs on the ystem.
 

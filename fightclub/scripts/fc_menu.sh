@@ -39,6 +39,7 @@ function build_options_menu(){
     # users
     opt_launch_users_gui="USERS: Launch user setup gui"
     opt_audit_users="USERS: Audit users against config file"
+    opt_lock_root="USERS: Lock root"
     # applications
     opt_update="APPS: Update system and applications"
     opt_purge_tools="APPS: Purge hacker tools"
@@ -65,18 +66,22 @@ function build_options_menu(){
     opt_quit="FightClub: Quit"
     opt_show_functions="FightClub: Show available functions"
     opt_clean_menu="FightClub: Redisplay  menu"
+   
 
     # 2
     # order of array will set order of options
     # Place them in reccomended order of execution
+    #
+    # UNUSED
+    #     "${opt_sh_installed}"
+    #     "${opt_sh_process}" 
+    #    "${opt_sh_svcs}"
     A_OPTIONS=("${opt_quit}"
         "${opt_sh_tips}"
-        "${opt_sh_installed}"
-        "${opt_sh_listen}" 
-        "${opt_sh_process}" 
-        "${opt_sh_svcs}"
+        "${opt_sh_listen}"
         "${opt_launch_users_gui}"
         "${opt_audit_users}"
+        "${opt_lock_root}"
         "${opt_launch_updates_config_gui}"
         "${opt_purge_tools}"
         "${opt_purge_services}"
@@ -177,6 +182,10 @@ function execute_option(){
                 echo "User audit writtent to: ${user_audit_path}"
             fi
             REPLY="${global_menu_reply_state}"
+            ;;
+        "${opt_lock_root}")
+            write_log_entry "${logpath}" "Executed: ${opt_lock_root}"
+            lock_root
             ;;
         #### applications
         "${opt_launch_updates_config_gui}")

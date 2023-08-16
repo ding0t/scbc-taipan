@@ -53,7 +53,7 @@ May need to find particular files
 1. Can use gui search or `man find`
 1. `find . -name '*.pdf' -type f` what will this do?
 
-# Resoruces
+# Resources
 * [auditd](https://infosecwriteups.com/building-a-siem-centralized-logging-of-all-linux-commands-with-elk-auditd-3f2e70503933)
 * [threat hunting on linux - good write up with sysmon included](https://pberba.github.io/security/2021/11/22/linux-threat-hunting-for-persistence-sysmon-auditd-webshell/)
 
