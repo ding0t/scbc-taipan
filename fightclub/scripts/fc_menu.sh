@@ -86,7 +86,6 @@ function build_options_menu(){
         "${opt_lock_root}"
         "${opt_set_ssh}"
         "${opt_set_banners}" 
-        "${opt_set_account_policies}"
         "${opt_set_audit}"
         "${opt_set_kernel}" 
         "${opt_set_shm}"
@@ -98,7 +97,8 @@ function build_options_menu(){
         "${opt_purge_tools}"
         "${opt_purge_services}"
         "${opt_update}"
-        "${opt_rm_snap}" 
+        "${opt_set_account_policies}"
+        "${opt_rm_snap}"
         "${opt_clean_menu}"
         "${opt_show_functions}" 
         )

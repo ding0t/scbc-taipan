@@ -1,12 +1,10 @@
 # SCBC FightClub for Cyber Taipan
 Cyber Taipan helper scripts for South Coast Baptist College
 
-# TODO
-* sudoers check and fix
-* audit as per lab
-* find sed uid files
-
 # Challenge run sheet and checklist
+There is allot here, but it will give you pretty good coverage. 
+
+OPtionally, use the fightclub script to save time. Follow the instruction [how to use](#how-to-use)
 
 ## get your admin sorted
 - [ ] assign roles to each person (these can change but let others in the team know what you are doing)
@@ -33,6 +31,7 @@ Cyber Taipan helper scripts for South Coast Baptist College
 - [ ] RECON - know your system [lab04](../labs/lab04_execution.md)
     - [ ] Check what is listening `sudo ss -tlpn | egrep --color=always -i '^|sshd|systemd-resolve|cupsd'` look at anything not in red. Fightclub option `RECON: listening connections`
     - [ ] Record the name any software listening that is not authorised, we will remove it later.
+            look for smbd, postgres, ftp, apache2 
     - [ ] Optional advanced recon includes: 
         * `sudo crontab -l` list scheduled jobs, look for any that seem suspect
         * `systemctl --type=service` to list services
@@ -46,10 +45,9 @@ Cyber Taipan helper scripts for South Coast Baptist College
     - [ ] If using fightclub, select optioon `USERS: Audit users against config file` run an audit first, then apply the changes  by selecting 'y', then run an audit again to check it is ok
     - [ ] For users with weak passwords manually set their password using `sudo passwd <USERNAME>`
     - [ ] Lock the root account `sudo passwd -l root` or fightclub option `USERS: Lock root`
-    - [ ] 
 - [ ] CONFIG - set secure configs [lab07](../labs/lab07_secure_defaults.md)
     - [ ] If manual - Use the labs and research
-    - [ ] Fightclub run all options starting with `CONFIG: `
+    - [ ] Fightclub run all options starting with `CONFIG: ` except for `"CONFIG: set password and account policies" ` do that last
     - [ ] If there is a custom service you need like a web server, with php or mysql. You will need to research secure configs for them and edit their config.
     - [ ] To edit a file manually use `sudo nano <FILENAME>` , back it up first! `sudo cp <FILENAME> <FILENAME.bak>`
     - [ ] Is sudoers misconfigured. Look for the line ``
@@ -62,6 +60,7 @@ Cyber Taipan helper scripts for South Coast Baptist College
     - [ ] Install and enable the anti-virus software clam av, use the lab, or fightclub option `PROTECT: Install clamAV and update signatures`
     - [ ] Run an AV scan. Use the lab or fightclub option `PROTECT: Run clamav`. Remember the gui `clamtk` takes time and may lock up, but does show results well
     - [ ] Are there any suspect cron jobs
+    - [ ] If a web server is requred; check and scan the `/var/www/html/` directory for malware
 - [ ] APPLICATIONS - uninstall what is not needed, update the rest (good for points) [lab04](../labs/lab04_execution.md)
     - [ ] Remove any unauthorised services listening in recon use `sudo apt purge <SERVICE NAME>` if that did not work try `apt search <SERVICE NAME>` and copy a likely looking package name and try again using that name
     - [ ] Open the start menu (windows key, click on the nine dots). Identify unwanted applications. We will remove it later. WARNING; try not to run the software!
@@ -70,6 +69,18 @@ Cyber Taipan helper scripts for South Coast Baptist College
     - [ ] Run fightclub option `APPS: Purge hacker tools`
     - [ ] Check the update settings gui `software & updates` to ensure security updates are appleid. Run fightclub option `APPS: launch 'Software & Updates' GUI`
     - [ ] Lastly, run an update of all `sudo apt update && sudo apt upgrade -y` or fightclub option `APPS: Update system and applications`
+- [ ] RISKIER operations last
+    - [ ] Set the user password and account policies   `"CONFIG: set password and account policies" ` just in case it locks you out
+- [ ] EXTRAS
+    - [ ] Check the sudoers file for all users can sudo with no pasword `sudo egrep -i 'ALL\s+ALL\s*=\s*NOPASSWD\s*:\s*ALL' > /etc/sudoers` if a result returns you will need to use `sudo visudo` and edit the file (this opens the `etc/sudoers` file in nano for editing)
+    - [ ] Check permissions on `ls -lah /etc/shadow /etc/passwd /etc/group` should be:
+        ```
+        -rw-r--r-- 1 root root   /etc/group
+        -rw-r--r-- 1 root root    /etc/passwd
+        -rw-r----- 1 root shadow  /etc/shadow
+        ```
+    - [ ] If ownership is wrong use `sudo chown <USER>:<GROUP> <FILE> ` like `sudo chown root:root /etc/group /etc/paswd`
+    - [ ] If permissions are wrong use `sudo chmod `  like `sudo chmod 0640 /etc/shadow` and `sudo chmod 0644 /etc/group /etc/passwd`
 - [ ] HELP! - when things go wrong
     - [ ] `dpkg` is locked - you will have to wait for a software update to complete. At worst and you have aited a while:
         * `sudo lsof /var/lib/dpkg/lock` what has the lock
@@ -100,11 +111,10 @@ Cyber Taipan helper scripts for South Coast Baptist College
 
 
 
-1. Test out the fightclub script to save time
-    1. Follow the instruction [how to use](#how-to-use)
-
 # How To Use the fightclub scripts
-You can dowload the script as a zip archive or by using git
+You can dowload the script as a zip and extract using `unzip`  from [https://github.com/ding0t/scbc-taipan/archive/refs/heads/main.zip](https://github.com/ding0t/scbc-taipan/archive/refs/heads/main.zip)
+
+or by using git:
 
 ## installing
 ```sh
@@ -155,6 +165,7 @@ logs are created in the same directory you ran the scripts
  
 ### resources
 Examples of other scripts
+* [cyberpatriot-checklist-ubuntu](https://github.com/Abdelgawadg/cyberpatriot-checklist-ubuntu)
 * [MarKyehus/CyPatriot](https://github.com/MarKyehus/CyPatriot/blob/master/README.md)
 * [BiermanM/CyberPatriot-Script](https://github.com/BiermanM/CyberPatriot-Scripts/blob/master/UbuntuScript.sh)
 
