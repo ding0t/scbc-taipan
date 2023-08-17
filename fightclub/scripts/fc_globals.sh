@@ -4,7 +4,7 @@
 # These functions remove applications
 # 
 # PROVIDES
-script_version="2023_08_08a"
+script_version="2023_08_17a"
 script_dir="$(dirname "${0}")"
 # log files
 logfile="/logfight.log"
